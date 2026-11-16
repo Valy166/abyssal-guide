@@ -10,7 +10,7 @@ A lightweight Windows companion app for **Genshin Impact** and **Honkai: Star Ra
 
 <blockquote>
 <details>
-<summary><h3>&#10022; &nbsp;View All 6 Other Genshin Impact Tabs &nbsp;&middot;&nbsp; <sub>Tier List &middot; Collection &middot; Redeem Codes &middot; Bag Scanner &middot; Wish Pity &middot; UID Sync</sub></h3></summary>
+<summary><strong>&#10022; &nbsp;View All 6 Other Genshin Impact Tabs</strong> &nbsp;&middot;&nbsp; <sub>Tier List &middot; Collection &middot; Redeem Codes &middot; Bag Scanner &middot; Wish Pity &middot; UID Sync</sub></summary>
 
 <br>
 
@@ -49,7 +49,7 @@ A lightweight Windows companion app for **Genshin Impact** and **Honkai: Star Ra
 
 <blockquote>
 <details>
-<summary><h3>&#10022; &nbsp;View All 5 Other Honkai: Star Rail Tabs &nbsp;&middot;&nbsp; <sub>Meta Tier List &middot; Collection &middot; Redeem Codes &middot; Warp &amp; Pity &middot; UID Sync</sub></h3></summary>
+<summary><strong>&#10022; &nbsp;View All 5 Other Honkai: Star Rail Tabs</strong> &nbsp;&middot;&nbsp; <sub>Meta Tier List &middot; Collection &middot; Redeem Codes &middot; Warp &amp; Pity &middot; UID Sync</sub></summary>
 
 <br>
 

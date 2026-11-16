@@ -1,26 +1,72 @@
-# abyssal guide
+# Abyssal Guide
 
-lightweight windows desktop companion app for genshin impact and honkai: star rail. keeps character builds, team comps, tier lists, wish/warp pity tracking, redeem codes, and an optional in-game overlay in one window (~16 mb ram in tray).
+A lightweight Windows companion app for **Genshin Impact** and **Honkai: Star Rail** so you don't need 10 browser tabs open while playing. Everything stays in one window, swaps between both games in one click, and sits quietly in your system tray when closed.
 
-![genshin tier list](screenshots/genshin-tierlist.png)
-![honkai star rail builds](screenshots/hsr-builds.png)
+---
 
-### download & setup
-1. download the latest zip from [**Releases**](https://github.com/Valy166/abyssal-guide/releases/latest) (direct download: [**AbyssalGuide-v1.0.0.zip**](https://github.com/Valy166/abyssal-guide/releases/download/v1.0.0/AbyssalGuide-v1.0.0.zip))
-2. extract the folder anywhere on your pc (no installer needed)
-3. run `AbyssalGuide.exe`
+### Genshin Impact Tabs
+*(scroll sideways to see all tabs — click any picture to view full size)*
 
-*(requires windows 10/11 with microsoft edge webview2 runtime, which is already built into almost every windows pc)*
+<table>
+  <tr>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Character Builds&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Tier List&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Collection&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Redeem Codes&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Bag Scanner&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Wish Pity &amp; Banners&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;UID Sync&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="screenshots/gi-1-builds.png" width="680" alt="Genshin Character Builds"></td>
+    <td align="center"><img src="screenshots/gi-2-tierlist.png" width="680" alt="Genshin Tier List"></td>
+    <td align="center"><img src="screenshots/gi-3-collection.png" width="680" alt="Genshin Collection"></td>
+    <td align="center"><img src="screenshots/gi-4-codes.png" width="680" alt="Genshin Redeem Codes"></td>
+    <td align="center"><img src="screenshots/gi-5-scanner.png" width="680" alt="Genshin Bag Scanner"></td>
+    <td align="center"><img src="screenshots/gi-6-pity.png" width="680" alt="Genshin Wish Pity and Banners"></td>
+    <td align="center"><img src="screenshots/gi-7-uid.png" width="680" alt="Genshin UID Sync"></td>
+  </tr>
+</table>
 
-### safety & verification
-- since i don't have a paid $200/yr code-signing certificate for a free project, windows smartscreen will show **"unknown publisher"** on first launch — click **More info -> Run anyway**.
-- the full app source code (`Program.cs`, `app.manifest`, `public/index.html`, `public/style.css`, `public/app.js`) is open in this repository so you can verify everything the app does.
-- every release zip is scanned with windows defender (`0` threats), and the in-app updater verifies release host pinning (`github.com`) + `sha256` checksums before extracting any update.
-- `AbyssalGuide.exe` sha256: `2e9b2574363d61a252c13d80578330a25e81cc392a24b897bf68d77822af2788`
-- `AbyssalGuide-v1.0.0.zip` sha256: `41c5836be7167742aa995678d3ee1be0124b8b43557d576dca18e8b58883a201`
+### Honkai: Star Rail Tabs
+*(scroll sideways to see all tabs — click any picture to view full size)*
 
-### disclaimer & credits
-- this is a **free, non-commercial fan project** — not affiliated with, endorsed by, or sponsored by **HoYoverse / COGNOSPHERE PTE. LTD.**
-- all genshin impact and honkai: star rail names, character portraits, icons, and trademarks belong to HoYoverse / COGNOSPHERE.
-- community theorycrafting, tier lists, and API data credited to [Prydwen.gg](https://www.prydwen.gg/), [KeqingMains](https://keqingmains.com/), [Enka.Network](https://enka.network/), [Project Amber (gi.yatta.moe)](https://gi.yatta.moe/), and [Paimon.moe](https://paimon.moe/).
-- the MIT license in `LICENSE` applies only to this app's own code and UI layout.
+<table>
+  <tr>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Character Builds&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Meta Tier List&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Collection&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Redeem Codes&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Warp &amp; Pity&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+    <th align="center">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;UID Sync&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="screenshots/hsr-1-builds.png" width="680" alt="Star Rail Character Builds"></td>
+    <td align="center"><img src="screenshots/hsr-2-tierlist.png" width="680" alt="Star Rail Meta Tier List"></td>
+    <td align="center"><img src="screenshots/hsr-3-collection.png" width="680" alt="Star Rail Collection"></td>
+    <td align="center"><img src="screenshots/hsr-4-codes.png" width="680" alt="Star Rail Redeem Codes"></td>
+    <td align="center"><img src="screenshots/hsr-5-pity.png" width="680" alt="Star Rail Warp and Pity"></td>
+    <td align="center"><img src="screenshots/hsr-6-uid.png" width="680" alt="Star Rail UID Sync"></td>
+  </tr>
+</table>
+
+---
+
+### What's Inside
+- **Character Builds & Teams** — weapons/light cones, artifacts/relics, main stats, substat priority, and team comps.
+- **Tier Lists** — live rankings across all endgame modes.
+- **Redeem Codes** — active Primogem and Stellar Jade codes with one-click copy and claim tracking.
+- **Banners & Pity Tracker** — current/upcoming banners and automatic in-game Wish/Warp history tracking.
+- **Bag Scanner & In-Game Overlay** — scan your Genshin inventory (`Alt+I`) or toggle the in-game materials overlay (`Alt+1`).
+- **Collection & UID Sync** — track your finished characters or import your public showcase straight from your UID.
+
+### Download & Run
+1. Download [**AbyssalGuide-v1.0.0.zip**](https://github.com/Valy166/abyssal-guide/releases/download/v1.0.0/AbyssalGuide-v1.0.0.zip) from [**Releases**](https://github.com/Valy166/abyssal-guide/releases).
+2. Extract the folder anywhere on your PC.
+3. Open `AbyssalGuide.exe` (when a new update comes out, an **Update** button shows up in the sidebar).
+
+*(If Windows shows a blue "Windows protected your PC" popup on first launch, click **More info** -> **Run anyway**.)*
+
+---
+
+<sub>Fan-made companion app, not affiliated with HoYoverse. Build and tier data from Prydwen, KeqingMains, and Enka.Network.</sub>

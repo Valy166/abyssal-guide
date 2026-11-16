@@ -31,8 +31,8 @@ using System.Management;
 [assembly: AssemblyCompany("Valy166")]
 [assembly: AssemblyProduct("Abyssal Guide")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Valy166")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 
 namespace GenshinCompanionApp {
 
@@ -88,7 +88,7 @@ namespace GenshinCompanionApp {
     }
 
     public static class Program {
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.1";
         public static int PORT = 48931;
         public static bool IsDevMode = false;
         public const string WINDOW_TITLE = "Abyssal Guide";

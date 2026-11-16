@@ -5261,6 +5261,43 @@ window.renderHsrTeams = renderHsrTeams;
     window.open(url, "_blank");
   }
 
+  const GENSHIN_REWARD_ICON_URLS = {
+    primo: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_201.png"),
+    mora: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_202.png"),
+    herosWit: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_104003.png"),
+    advExp: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_104002.png"),
+    mysticOre: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_104013.png"),
+    fineOre: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_104012.png"),
+    bag: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_220008.png"),
+    waypoint: "pin_icons/3.png",
+    clock: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/reliquary/UI_RelicIcon_15001_5.png")
+  };
+
+  function getGenshinRewardIconUrl(reward) {
+    if (!reward) return GENSHIN_REWARD_ICON_URLS.bag;
+    const t = String(reward.type || "").toLowerCase();
+    const n = String(reward.name || "").toLowerCase();
+    if (t === "primo" || n.includes("primogem")) return GENSHIN_REWARD_ICON_URLS.primo;
+    if (t === "mora" || n.includes("mora")) return GENSHIN_REWARD_ICON_URLS.mora;
+    if (t === "ore" || n.includes("ore")) {
+      return n.includes("mystic") ? GENSHIN_REWARD_ICON_URLS.mysticOre : GENSHIN_REWARD_ICON_URLS.fineOre;
+    }
+    if (t === "xp" || n.includes("wit") || n.includes("experience")) {
+      return n.includes("adventurer") ? GENSHIN_REWARD_ICON_URLS.advExp : GENSHIN_REWARD_ICON_URLS.herosWit;
+    }
+    return GENSHIN_REWARD_ICON_URLS.bag;
+  }
+
+  function renderGenshinRewardIconHtml(reward, sizePx = 18) {
+    const url = getGenshinRewardIconUrl(reward);
+    const alt = escHsrHtml((reward && reward.name) || "");
+    const cls = sizePx <= 20 ? " class=\"gc-inline-game-icon\"" : "";
+    const style = sizePx <= 20
+      ? ""
+      : ` style="width:${sizePx}px; height:${sizePx}px; object-fit:contain; flex-shrink:0; filter:drop-shadow(0 1px 3px rgba(0,0,0,0.75));"`;
+    return `<img${cls} src="${url}" alt="${alt}"${style} />`;
+  }
+
   function updateCodesStats() {
     const claimed = state.claimedCodes || {};
     const activeList = GENSHIN_PROMO_CODES.filter(c => c.status !== "expired");
@@ -5277,8 +5314,12 @@ window.renderHsrTeams = renderHsrTeams;
       freeXp += c.xpCount || 0;
     });
 
-    const elPrimos = document.getElementById("stat-free-primos");
-    if (elPrimos) elPrimos.textContent = freePrimos + " \uD83D\uDC8E";
+    const elPrimosVal = document.getElementById("stat-free-primos-val");
+    if (elPrimosVal) elPrimosVal.textContent = String(freePrimos);
+    else {
+      const elPrimos = document.getElementById("stat-free-primos");
+      if (elPrimos) elPrimos.textContent = freePrimos + " Primogems";
+    }
     
     const elActive = document.getElementById("stat-active-codes-count");
     if (elActive) elActive.textContent = activeList.length + " Active";
@@ -5286,11 +5327,19 @@ window.renderHsrTeams = renderHsrTeams;
     const elUnclaimed = document.getElementById("stat-unclaimed-codes-count");
     if (elUnclaimed) elUnclaimed.textContent = unclaimedActive.length + " Unclaimed";
 
-    const elMora = document.getElementById("stat-free-mora");
-    if (elMora) elMora.textContent = freeMora.toLocaleString() + " \uD83E\uDE99";
+    const elMoraVal = document.getElementById("stat-free-mora-val");
+    if (elMoraVal) elMoraVal.textContent = freeMora.toLocaleString();
+    else {
+      const elMora = document.getElementById("stat-free-mora");
+      if (elMora) elMora.textContent = freeMora.toLocaleString() + " Mora";
+    }
 
-    const elXp = document.getElementById("stat-free-xp");
-    if (elXp) elXp.textContent = freeXp + "+ Items \uD83D\uDCDA";
+    const elXpVal = document.getElementById("stat-free-xp-val");
+    if (elXpVal) elXpVal.textContent = freeXp + "+ Items";
+    else {
+      const elXp = document.getElementById("stat-free-xp");
+      if (elXp) elXp.textContent = freeXp + "+ Items";
+    }
 
     // Navigation Tab Badge Pill
     const navPill = document.getElementById("nav-active-codes-count");
@@ -5394,20 +5443,19 @@ window.renderHsrTeams = renderHsrTeams;
       const dotClass = c.confidence === "verified" ? "dot-verified" : (c.confidence === "caution" ? "dot-caution" : "dot-expired");
       const dotTitle = c.confidence === "verified" ? "Confirmed 100% Valid" : (c.confidence === "caution" ? "Caution / Periodic / Collab" : "Expired");
 
-      // Split Hero Panel data (Style 4 Remix)
+      // Split Hero Panel data (direct native game icons — zero emoji flash)
       let heroHtml = "";
       if (c.primos && c.primos > 0) {
-        // Primogems Hero Left
         const otherRewards = c.rewards.filter(r => r.type !== "primo");
         const rightHtml = otherRewards.map(r => {
           const countStr = typeof r.count === 'number' ? (r.count > 999 ? r.count.toLocaleString() : r.count) : r.count;
-          return `<span>${r.icon} ${countStr} ${r.name}</span>`;
+          return `<span style="display:inline-flex; align-items:center; gap:5px;">${renderGenshinRewardIconHtml(r, 17)} ${countStr} ${escHsrHtml(r.name)}</span>`;
         }).join("");
 
         heroHtml = `
           <div class="code-split-hero-panel">
             <div class="code-hero-left">
-              <span style="font-size: 1.45rem;">\uD83D\uDC8E</span>
+              ${renderGenshinRewardIconHtml({ type: "primo", name: "Primogem" }, 28)}
               <div>
                 <div class="code-hero-val">${c.primos}</div>
                 <div class="code-hero-lbl">PRIMOGEMS</div>
@@ -5419,22 +5467,21 @@ window.renderHsrTeams = renderHsrTeams;
           </div>
         `;
       } else {
-        // Material Hero (e.g. Mora or Exp or Web Item)
-        const primaryReward = c.rewards[0] || { name: "Resource", count: 1, icon: "\uD83C\uDF81" };
+        const primaryReward = c.rewards[0] || { name: "Resource", count: 1, type: "bag" };
         const otherRewards = c.rewards.slice(1);
         const countStr = typeof primaryReward.count === 'number' ? (primaryReward.count > 999 ? primaryReward.count.toLocaleString() : primaryReward.count) : primaryReward.count;
         const rightHtml = otherRewards.map(r => {
           const cStr = typeof r.count === 'number' ? (r.count > 999 ? r.count.toLocaleString() : r.count) : r.count;
-          return `<span>${r.icon} ${cStr} ${r.name}</span>`;
+          return `<span style="display:inline-flex; align-items:center; gap:5px;">${renderGenshinRewardIconHtml(r, 17)} ${cStr} ${escHsrHtml(r.name)}</span>`;
         }).join("");
 
         heroHtml = `
           <div class="code-split-hero-panel">
             <div class="code-hero-left">
-              <span style="font-size: 1.45rem;">${primaryReward.icon}</span>
+              ${renderGenshinRewardIconHtml(primaryReward, 28)}
               <div>
                 <div class="code-hero-val" style="font-size:1.35rem;">${countStr}</div>
-                <div class="code-hero-lbl">${primaryReward.name.toUpperCase()}</div>
+                <div class="code-hero-lbl">${escHsrHtml(primaryReward.name).toUpperCase()}</div>
               </div>
             </div>
             <div class="code-hero-right">
@@ -5472,11 +5519,11 @@ window.renderHsrTeams = renderHsrTeams;
           </button>
           ${!isExpired ? `
             <button class="btn btn-sm btn-outline btn-redeem-direct" data-code="${c.code}" title="Opens official HoYoverse redemption site with code pre-filled">
-              <span>\uD83D\uDE80</span> <span>Direct Redeem</span>
+              <img class="gc-inline-game-icon" src="${GENSHIN_REWARD_ICON_URLS.waypoint}" alt="" /> <span>Direct Redeem</span>
             </button>
           ` : `
             <button class="btn btn-sm btn-outline btn-redeem-direct" disabled style="opacity:0.4; cursor:not-allowed;">
-              <span>\u23F0</span> <span>Expired Code</span>
+              <img class="gc-inline-game-icon" src="${GENSHIN_REWARD_ICON_URLS.clock}" alt="" /> <span>Expired Code</span>
             </button>
           `}
         </div>
@@ -16392,8 +16439,8 @@ function renderEnkaCharacterDetail(av) {
       { pat: /\u2699\uFE0F|\u2699|\uD83C\uDFA8|\uD83D\uDD04/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_220021.png"), title: "Parametric Transformer" },
       { pat: /\uD83C\uDFFA|\uD83C\uDF38|\uD83C\uDF3A/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/reliquary/UI_RelicIcon_15001_4.png"), title: "Flower of Life" },
       { pat: /\uD83E\uDEB6/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/reliquary/UI_RelicIcon_15001_2.png"), title: "Plume of Death" },
-      { pat: /\u23F3|\u231B|\u23F0/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/reliquary/UI_RelicIcon_15001_5.png"), title: "&#9203; Sands of Eon" },
-      { pat: /\uD83C\uDF77/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/reliquary/UI_RelicIcon_15001_1.png"), title: "&#127863; Goblet of Eonothem" },
+      { pat: /\u23F3|\u231B|\u23F0/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/reliquary/UI_RelicIcon_15001_5.png"), title: "Sands of Eon" },
+      { pat: /\uD83C\uDF77/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/reliquary/UI_RelicIcon_15001_1.png"), title: "Goblet of Eonothem" },
       { pat: /\uD83D\uDCDC|\uD83D\uDCD5|\uD83D\uDCCA|\uD83D\uDCD6|\uD83D\uDCCB/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_104303.png"), title: "Talent Book" },
       { pat: /\uD83D\uDCDA/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_104003.png"), title: "Hero's Wit" },
       { pat: /\uD83D\uDCC8/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_105003.png"), title: "Sanctifying Unction" },
@@ -16403,46 +16450,50 @@ function renderEnkaCharacterDetail(av) {
       { pat: /\uD83C\uDFAD|\uD83D\uDD0A|\uD83D\uDD14|\uD83C\uDF19/g, url: "/api/img?u=" + encodeURIComponent("https://gi.yatta.moe/assets/UI/UI_ItemIcon_106.png"), title: "Original Resin" },
       { pat: /\u2328\uFE0F|\u2328|\uD83D\uDCD0|\uD83D\uDD0D/g, url: "pin_icons/600.png", title: "Emblem" }
     ];
+    let _emojiMutating = false;
     window.replaceAllEmojisInDom = function(root) {
-      const navColIcon = document.querySelector('#main-nav [data-tab="collection"] .tab-icon');
-      if (navColIcon && !navColIcon.querySelector('img')) {
-        navColIcon.innerHTML = `<img class="gc-inline-game-icon gc-nav-game-icon" src="/api/img?u=${encodeURIComponent('https://gi.yatta.moe/assets/UI/UI_ItemIcon_221.png')}" alt="" />`;
-      }
-      const walker = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT, {
-        acceptNode(node) {
-          if (!node.parentElement) return NodeFilter.FILTER_REJECT;
-          if (node.parentElement.closest(".app-tabs-row") || node.parentElement.closest("#panel-hsr-planner") || node.parentElement.closest("#panel-hsr-collection") || node.parentElement.closest("#panel-hsr-pity") || node.parentElement.closest("#panel-hsr-codes") || node.parentElement.closest("#hsr-lc-modal")) return NodeFilter.FILTER_REJECT;
-          const tag = node.parentElement.tagName;
-          if (tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT" || tag === "OPTION") {
-            return NodeFilter.FILTER_REJECT;
+      if (_emojiMutating) return;
+      _emojiMutating = true;
+      try {
+        const walker = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            if (!node.parentElement) return NodeFilter.FILTER_REJECT;
+            // Skip sidebar tabs and ALL Honkai: Star Rail panels/modals so Genshin icons never leak onto HSR
+            if (node.parentElement.closest('.app-tabs-row, [id^="panel-hsr-"], #hsr-lc-modal')) return NodeFilter.FILTER_REJECT;
+            const tag = node.parentElement.tagName;
+            if (tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT" || tag === "OPTION") {
+              return NodeFilter.FILTER_REJECT;
+            }
+            for (const m of window.GC_ICON_MAP) {
+              m.pat.lastIndex = 0;
+              if (m.pat.test(node.nodeValue)) return NodeFilter.FILTER_ACCEPT;
+            }
+            return NodeFilter.FILTER_SKIP;
           }
+        });
+        const nodes = [];
+        let n;
+        while ((n = walker.nextNode())) nodes.push(n);
+        nodes.forEach(textNode => {
+          let html = textNode.nodeValue.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          let changed = false;
           for (const m of window.GC_ICON_MAP) {
             m.pat.lastIndex = 0;
-            if (m.pat.test(node.nodeValue)) return NodeFilter.FILTER_ACCEPT;
+            if (m.pat.test(html)) {
+              changed = true;
+              html = html.replace(m.pat, `<img class="gc-inline-game-icon" src="${m.url}" alt="" />`);
+            }
           }
-          return NodeFilter.FILTER_SKIP;
-        }
-      });
-      const nodes = [];
-      let n;
-      while ((n = walker.nextNode())) nodes.push(n);
-      nodes.forEach(textNode => {
-        let html = textNode.nodeValue.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        let changed = false;
-        for (const m of window.GC_ICON_MAP) {
-          m.pat.lastIndex = 0;
-          if (m.pat.test(html)) {
-            changed = true;
-            html = html.replace(m.pat, `<img class="gc-inline-game-icon" src="${m.url}" alt="" />`);
+          if (changed && textNode.parentNode) {
+            const span = document.createElement("span");
+            span.className = "gc-icon-text-wrap";
+            span.innerHTML = html;
+            textNode.parentNode.replaceChild(span, textNode);
           }
-        }
-        if (changed && textNode.parentNode) {
-          const span = document.createElement("span");
-          span.className = "gc-icon-text-wrap";
-          span.innerHTML = html;
-          textNode.parentNode.replaceChild(span, textNode);
-        }
-      });
+        });
+      } finally {
+        _emojiMutating = false;
+      }
     };
     const backRosterBtn = document.getElementById("btn-back-to-roster");
     if (backRosterBtn) {
@@ -16472,14 +16523,16 @@ function renderEnkaCharacterDetail(av) {
       });
     }
     window.replaceAllEmojisInDom(document.body);
-    let _emojiObsTimer = null;
+    let _emojiObsQueued = false;
     const emojiObs = new MutationObserver(() => {
-      if (_emojiObsTimer) clearTimeout(_emojiObsTimer);
-      _emojiObsTimer = setTimeout(() => {
+      if (_emojiObsQueued || _emojiMutating) return;
+      _emojiObsQueued = true;
+      queueMicrotask(() => {
+        _emojiObsQueued = false;
         const activePanel = document.querySelector(".tab-panel.active");
         if (activePanel) window.replaceAllEmojisInDom(activePanel);
         document.querySelectorAll(".modal-overlay.active").forEach(m => window.replaceAllEmojisInDom(m));
-      }, 80);
+      });
     });
     emojiObs.observe(document.body, { childList: true, subtree: true });
 

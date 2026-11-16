@@ -61,7 +61,7 @@ A lightweight Windows companion app for **Genshin Impact** and **Honkai: Star Ra
 - **Collection & UID Sync** — track your finished characters or import your public showcase straight from your UID.
 
 ### Download & Run
-1. Download [**AbyssalGuide-v1.0.0.zip**](https://github.com/Valy166/abyssal-guide/releases/download/v1.0.0/AbyssalGuide-v1.0.0.zip) from [**Releases**](https://github.com/Valy166/abyssal-guide/releases).
+1. Download [**AbyssalGuide-v1.0.1.zip**](https://github.com/Valy166/abyssal-guide/releases/download/v1.0.1/AbyssalGuide-v1.0.1.zip) from [**Releases**](https://github.com/Valy166/abyssal-guide/releases).
 2. Extract the folder anywhere on your PC.
 3. Open `AbyssalGuide.exe` (when a new update comes out, an **Update** button shows up in the sidebar).
 

@@ -65,8 +65,6 @@ A lightweight Windows companion app for **Genshin Impact** and **Honkai: Star Ra
 2. Extract the folder anywhere on your PC.
 3. Open `AbyssalGuide.exe` (when a new update comes out, an **Update** button shows up in the sidebar).
 
-*(If Windows shows a blue "Windows protected your PC" popup on first launch, click **More info** -> **Run anyway**.)*
-
 ---
 
 <sub>Fan-made companion app, not affiliated with HoYoverse. Build and tier data from Prydwen, KeqingMains, and Enka.Network.</sub>

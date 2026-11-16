@@ -8,6 +8,3 @@ desktop companion app i put together for genshin impact and honkai: star rail. k
 3. run `AbyssalGuide.exe`
 
 *(if windows smartscreen pops up the first time, click **More info** -> **Run anyway**)*
-
-### updates
-whenever i push a new release, a green **Update** button will show up at the bottom-left of the sidebar right above the game swap button. clicking it downloads the new zip and restarts automatically without touching your saved characters or wish history.

@@ -1128,7 +1128,7 @@ namespace GenshinCompanionApp {
                 int endIdx = query.IndexOfAny(new[] { '\0', ' ', '"', '\'', '<', '>' });
                 if (endIdx > 0) query = query.Substring(0, endIdx);
 
-                string cleanQuery = Regex.Replace(query, @"(&|^)(gacha_type|size|page|end_id)=[^&]*", "");
+                string cleanQuery = Regex.Replace(query, @"(&|^)(gacha_type|default_gacha_type|size|page|end_id)=[^&]*", "").TrimStart('&');
                 string baseEndpoint = "https://public-operation-hk4e-sg.hoyoverse.com/gacha_info/api/getGachaLog";
                 if (lastUrl.Contains("getGachaLog")) {
                     baseEndpoint = lastUrl.Substring(0, qIdx);
@@ -1153,89 +1153,126 @@ namespace GenshinCompanionApp {
                     string key = gt[0], code = gt[1], bannerLabel = gt[2];
                     var allRows = new List<Dictionary<string, object>>();
                     string endId = "0";
+                    bool bannerReachedEnd = false;
 
-                    // Paginate up to 6 pages (120 pulls) per banner so true 5-star pity up to 90 is counted accurately!
-                    for (int page = 1; page <= 6; page++) {
+                    // Paginate up to 60 pages (1,200 pulls) per banner with automatic rate-limit retry
+                    for (int page = 1; page <= 60; page++) {
                         string api = baseEndpoint + "?" + cleanQuery + "&gacha_type=" + code + "&page=" + page + "&size=20&end_id=" + endId;
-                        try {
-                            int st; string ct;
-                            byte[] b = Http.GetEx(api, 8000, out st, out ct);
-                            var d = Program.Json.DeserializeObject(Encoding.UTF8.GetString(b)) as Dictionary<string, object>;
-                            if (d == null) break;
-                            int retcode = d.ContainsKey("retcode") ? Convert.ToInt32(d["retcode"]) : -1;
-                            if (retcode != 0) {
-                                lastApiMessage = d.ContainsKey("message") ? Convert.ToString(d["message"]) : ("retcode " + retcode);
-                                break;
-                            }
-                            anySuccess = true;
-                            var dataObj = Program.GetDict(d, "data");
-                            var listEnum = dataObj.ContainsKey("list") ? (dataObj["list"] as IEnumerable) : null;
-                            int pageCount = 0;
-                            if (listEnum != null) {
-                                foreach (var item in listEnum) {
-                                    var row = item as Dictionary<string, object>;
-                                    if (row == null) continue;
-                                    allRows.Add(row);
-                                    if (row.ContainsKey("id")) endId = Convert.ToString(row["id"]);
-                                    pageCount++;
+                        Dictionary<string, object> d = null;
+                        int retcode = -1;
+                        for (int attempt = 0; attempt < 4; attempt++) {
+                            if (page > 1 || attempt > 0) Thread.Sleep(attempt > 0 ? 1100 : 280);
+                            try {
+                                int st; string ct;
+                                byte[] b = Http.GetEx(api, 10000, out st, out ct);
+                                d = Program.Json.DeserializeObject(Encoding.UTF8.GetString(b)) as Dictionary<string, object>;
+                                if (d != null) {
+                                    retcode = d.ContainsKey("retcode") ? Convert.ToInt32(d["retcode"]) : -1;
+                                    if (retcode == -110) continue; // HoYoverse rate-limit ("visit too frequently") -> wait & retry
                                 }
+                                break;
+                            } catch {
+                                d = null;
                             }
-                            if (pageCount < 20) break;
-                            Thread.Sleep(180);
-                        } catch {
+                        }
+                        if (d == null) break;
+                        if (retcode != 0) {
+                            lastApiMessage = d.ContainsKey("message") ? Convert.ToString(d["message"]) : ("retcode " + retcode);
+                            break;
+                        }
+                        anySuccess = true;
+                        var dataObj = Program.GetDict(d, "data");
+                        var listEnum = dataObj.ContainsKey("list") ? (dataObj["list"] as IEnumerable) : null;
+                        int pageCount = 0;
+                        if (listEnum != null) {
+                            foreach (var item in listEnum) {
+                                var row = item as Dictionary<string, object>;
+                                if (row == null) continue;
+                                allRows.Add(row);
+                                if (row.ContainsKey("id")) endId = Convert.ToString(row["id"]);
+                                pageCount++;
+                            }
+                        }
+                        if (pageCount < 20) {
+                            bannerReachedEnd = true;
                             break;
                         }
                     }
+                    Thread.Sleep(250);
 
-                    if (allRows.Count > 0 || anySuccess) {
-                        int pity5 = 0, pity4 = 0;
-                        bool found5 = false, found4 = false;
-                        string last5Name = "";
-                        bool nextGuaranteed = false;
+                    if (allRows.Count > 0 || bannerReachedEnd) {
+                        int curPity5 = 0, curPity4 = 0;
+                        string last5Name = "", last4Name = "";
+                        bool guar5 = false;
+                        var processed = new Dictionary<string, object>[allRows.Count];
 
-                        for (int i = 0; i < allRows.Count; i++) {
+                        // Walk oldest -> newest so every 5★, 4★, and 3★ pull gets its exact sequential pity & 50/50 outcome
+                        for (int i = allRows.Count - 1; i >= 0; i--) {
                             var row = allRows[i];
                             string rank = row.ContainsKey("rank_type") ? Convert.ToString(row["rank_type"]) : "3";
                             string itemName = row.ContainsKey("name") ? Convert.ToString(row["name"]) : "Unknown";
+                            string itemType = row.ContainsKey("item_type") ? Convert.ToString(row["item_type"]) : (rank == "3" ? "Weapon" : "Item");
                             string itemTime = row.ContainsKey("time") ? Convert.ToString(row["time"]) : "";
 
+                            curPity5++;
+                            curPity4++;
+                            int dropPity = curPity5;
+                            string outc = "";
+
                             if (rank == "5") {
-                                // Calculate how many pulls it took for this 5-star by looking ahead in allRows
-                                int pullsForThis5 = 1;
-                                for (int j = i + 1; j < allRows.Count; j++) {
-                                    string rj = allRows[j].ContainsKey("rank_type") ? Convert.ToString(allRows[j]["rank_type"]) : "3";
-                                    if (rj == "5") break;
-                                    pullsForThis5++;
-                                }
+                                dropPity = curPity5;
+                                curPity5 = 0;
+                                curPity4 = 0;
+                                last5Name = itemName;
                                 bool isStd = key != "standard" && StandardFiveStars.Contains(itemName);
-                                if (!found5) {
-                                    found5 = true;
-                                    last5Name = itemName;
-                                    nextGuaranteed = isStd;
+                                if (key == "standard") {
+                                    outc = "Standard 5★ " + itemType;
+                                } else if (key == "weapon") {
+                                    outc = isStd ? "Off-Banner 5★ Weapon" : "Won Featured 5★ Weapon";
+                                } else {
+                                    if (isStd) {
+                                        outc = "Lost 50/50 → Next Guaranteed";
+                                        guar5 = true;
+                                    } else if (guar5) {
+                                        outc = "Guaranteed Featured 5★";
+                                        guar5 = false;
+                                    } else {
+                                        outc = "Won 50/50";
+                                        guar5 = false;
+                                    }
                                 }
-                                historyList.Add(new Dictionary<string, object> {
-                                    { "banner", bannerLabel },
-                                    { "item", itemName },
-                                    { "pity", pullsForThis5 },
-                                    { "outcome", key == "standard" ? "Standard 5★" : (isStd ? "Lost 50/50 → Guaranteed" : "Won Featured 5★") },
-                                    { "time", itemTime }
-                                });
-                            } else if (!found5) {
-                                pity5++;
+                            } else if (rank == "4") {
+                                dropPity = curPity4;
+                                curPity4 = 0;
+                                last4Name = itemName;
+                                outc = "4★ " + itemType;
+                            } else {
+                                dropPity = curPity5;
+                                outc = "3★ " + itemType;
                             }
 
-                            if (rank == "4" || rank == "5") {
-                                if (!found4) found4 = true;
-                            } else if (!found4) {
-                                pity4++;
-                            }
+                            processed[i] = new Dictionary<string, object> {
+                                { "bannerKey", key },
+                                { "banner", bannerLabel },
+                                { "item", itemName },
+                                { "itemType", itemType },
+                                { "rank", rank },
+                                { "pity", dropPity },
+                                { "outcome", outc },
+                                { "time", itemTime }
+                            };
+                        }
+
+                        for (int i = 0; i < processed.Length; i++) {
+                            historyList.Add(processed[i]);
                         }
 
                         banners[key] = new Dictionary<string, object> {
-                            { "pity5", pity5 },
-                            { "pity4", pity4 },
+                            { "pity5", curPity5 },
+                            { "pity4", curPity4 },
                             { "last5", last5Name },
-                            { "guaranteed", nextGuaranteed },
+                            { "last4", last4Name },
+                            { "guaranteed", guar5 },
                             { "totalScanned", allRows.Count }
                         };
                     }
@@ -1362,128 +1399,114 @@ namespace GenshinCompanionApp {
                     var allRows = new List<Dictionary<string, object>>();
                     string endId = "0";
 
-                    for (int page = 1; page <= 10; page++) {
+                    for (int page = 1; page <= 60; page++) {
                         string api = baseEndpoint + "?" + cleanQuery + "&gacha_type=" + code + "&page=" + page + "&size=20&end_id=" + endId;
-                        try {
-                            int st; string ct;
-                            byte[] b = Http.GetEx(api, 8000, out st, out ct);
-                            var d = Program.Json.DeserializeObject(Encoding.UTF8.GetString(b)) as Dictionary<string, object>;
-                            if (d == null) break;
-                            int retcode = d.ContainsKey("retcode") ? Convert.ToInt32(d["retcode"]) : -1;
-                            if (retcode != 0) {
-                                lastApiMessage = d.ContainsKey("message") ? Convert.ToString(d["message"]) : ("retcode " + retcode);
-                                break;
-                            }
-                            anySuccess = true;
-                            var dataObj = Program.GetDict(d, "data");
-                            var listEnum = dataObj.ContainsKey("list") ? (dataObj["list"] as IEnumerable) : null;
-                            int pageCount = 0;
-                            if (listEnum != null) {
-                                foreach (var item in listEnum) {
-                                    var row = item as Dictionary<string, object>;
-                                    if (row == null) continue;
-                                    allRows.Add(row);
-                                    if (row.ContainsKey("id")) endId = Convert.ToString(row["id"]);
-                                    pageCount++;
+                        Dictionary<string, object> d = null;
+                        int retcode = -1;
+                        for (int attempt = 0; attempt < 4; attempt++) {
+                            if (page > 1 || attempt > 0) Thread.Sleep(attempt > 0 ? 1100 : 280);
+                            try {
+                                int st; string ct;
+                                byte[] b = Http.GetEx(api, 10000, out st, out ct);
+                                d = Program.Json.DeserializeObject(Encoding.UTF8.GetString(b)) as Dictionary<string, object>;
+                                if (d != null) {
+                                    retcode = d.ContainsKey("retcode") ? Convert.ToInt32(d["retcode"]) : -1;
+                                    if (retcode == -110) continue;
                                 }
+                                break;
+                            } catch {
+                                d = null;
                             }
-                            if (pageCount < 20) break;
-                            Thread.Sleep(160);
-                        } catch {
+                        }
+                        if (d == null) break;
+                        if (retcode != 0) {
+                            lastApiMessage = d.ContainsKey("message") ? Convert.ToString(d["message"]) : ("retcode " + retcode);
                             break;
                         }
+                        anySuccess = true;
+                        var dataObj = Program.GetDict(d, "data");
+                        var listEnum = dataObj.ContainsKey("list") ? (dataObj["list"] as IEnumerable) : null;
+                        int pageCount = 0;
+                        if (listEnum != null) {
+                            foreach (var item in listEnum) {
+                                var row = item as Dictionary<string, object>;
+                                if (row == null) continue;
+                                allRows.Add(row);
+                                if (row.ContainsKey("id")) endId = Convert.ToString(row["id"]);
+                                pageCount++;
+                            }
+                        }
+                        if (pageCount < 20) break;
                     }
+                    Thread.Sleep(250);
 
                     if (allRows.Count > 0 || anySuccess) {
-                        int pity5 = 0, pity4 = 0, added3ForBanner = 0;
-                        bool found5 = false, found4 = false;
-                        string last5Name = "";
-                        bool nextGuaranteed = false;
+                        int curPity5 = 0, curPity4 = 0;
+                        string last5Name = "", last4Name = "";
+                        bool guar5 = false;
+                        var processed = new Dictionary<string, object>[allRows.Count];
 
-                        for (int i = 0; i < allRows.Count; i++) {
+                        for (int i = allRows.Count - 1; i >= 0; i--) {
                             var row = allRows[i];
                             string rank = row.ContainsKey("rank_type") ? Convert.ToString(row["rank_type"]) : "3";
                             string itemName = row.ContainsKey("name") ? Convert.ToString(row["name"]) : "Unknown";
                             string itemType = row.ContainsKey("item_type") ? Convert.ToString(row["item_type"]) : (rank == "3" ? "Light Cone" : "Item");
                             string itemTime = row.ContainsKey("time") ? Convert.ToString(row["time"]) : "";
 
-                            int pullsForThis5 = 1;
-                            for (int j = i + 1; j < allRows.Count; j++) {
-                                string rj = allRows[j].ContainsKey("rank_type") ? Convert.ToString(allRows[j]["rank_type"]) : "3";
-                                if (rj == "5") break;
-                                pullsForThis5++;
-                            }
-                            int pullsForThis4 = 1;
-                            for (int j = i + 1; j < allRows.Count; j++) {
-                                string rj = allRows[j].ContainsKey("rank_type") ? Convert.ToString(allRows[j]["rank_type"]) : "3";
-                                if (rj == "4" || rj == "5") break;
-                                pullsForThis4++;
-                            }
+                            curPity5++;
+                            curPity4++;
+                            int dropPity = curPity5;
+                            string outc = "";
 
                             if (rank == "5") {
+                                dropPity = curPity5;
+                                curPity5 = 0;
+                                curPity4 = 0;
+                                last5Name = itemName;
                                 bool isStd = key != "standard" && HsrStandardFiveStars.Contains(itemName);
-                                if (!found5) {
-                                    found5 = true;
-                                    last5Name = itemName;
-                                    nextGuaranteed = isStd;
+                                if (key == "standard") {
+                                    outc = "Standard 5★ " + itemType;
+                                } else if (key == "lightcone") {
+                                    if (isStd) { outc = "Lost 75/25 → Guaranteed"; guar5 = true; }
+                                    else if (guar5) { outc = "Guaranteed 5★ Light Cone"; guar5 = false; }
+                                    else { outc = "Won 75/25"; guar5 = false; }
+                                } else {
+                                    if (isStd) { outc = "Lost 50/50 → Guaranteed"; guar5 = true; }
+                                    else if (guar5) { outc = "Guaranteed Featured 5★"; guar5 = false; }
+                                    else { outc = "Won 50/50"; guar5 = false; }
                                 }
-                                string outc = key == "standard"
-                                    ? ("Standard 5★ " + itemType)
-                                    : (key == "lightcone"
-                                        ? (isStd ? "Lost 75/25 → Guaranteed" : "Won 75/25")
-                                        : (isStd ? "Lost 50/50 → Guaranteed" : "Won 50/50"));
-                                historyList.Add(new Dictionary<string, object> {
-                                    { "bannerKey", key },
-                                    { "banner", bannerLabel },
-                                    { "item", itemName },
-                                    { "itemType", itemType },
-                                    { "rank", "5" },
-                                    { "pity", pullsForThis5 },
-                                    { "outcome", outc },
-                                    { "time", itemTime }
-                                });
-                            } else if (!found5) {
-                                pity5++;
+                            } else if (rank == "4") {
+                                dropPity = curPity4;
+                                curPity4 = 0;
+                                last4Name = itemName;
+                                outc = "4★ " + itemType;
+                            } else {
+                                dropPity = curPity5;
+                                outc = "3★ " + itemType;
                             }
 
-                            if (rank == "4") {
-                                if (!found4) found4 = true;
-                                historyList.Add(new Dictionary<string, object> {
-                                    { "bannerKey", key },
-                                    { "banner", bannerLabel },
-                                    { "item", itemName },
-                                    { "itemType", itemType },
-                                    { "rank", "4" },
-                                    { "pity", pullsForThis4 },
-                                    { "outcome", "4★ " + itemType },
-                                    { "time", itemTime }
-                                });
-                            } else if (rank == "5") {
-                                if (!found4) found4 = true;
-                            } else if (!found4) {
-                                pity4++;
-                            }
+                            processed[i] = new Dictionary<string, object> {
+                                { "bannerKey", key },
+                                { "banner", bannerLabel },
+                                { "item", itemName },
+                                { "itemType", itemType },
+                                { "rank", rank },
+                                { "pity", dropPity },
+                                { "outcome", outc },
+                                { "time", itemTime }
+                            };
+                        }
 
-                            if (rank == "3" && added3ForBanner < 100) {
-                                added3ForBanner++;
-                                historyList.Add(new Dictionary<string, object> {
-                                    { "bannerKey", key },
-                                    { "banner", bannerLabel },
-                                    { "item", itemName },
-                                    { "itemType", itemType },
-                                    { "rank", "3" },
-                                    { "pity", pullsForThis5 },
-                                    { "outcome", "" },
-                                    { "time", itemTime }
-                                });
-                            }
+                        for (int i = 0; i < processed.Length; i++) {
+                            historyList.Add(processed[i]);
                         }
 
                         banners[key] = new Dictionary<string, object> {
-                            { "pity5", pity5 },
-                            { "pity4", pity4 },
+                            { "pity5", curPity5 },
+                            { "pity4", curPity4 },
                             { "last5", last5Name },
-                            { "guaranteed", nextGuaranteed },
+                            { "last4", last4Name },
+                            { "guaranteed", guar5 },
                             { "totalScanned", allRows.Count }
                         };
                     }

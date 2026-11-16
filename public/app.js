@@ -49,76 +49,28 @@
   window.GC_REF.hotkeys.forEach(h => { defaultSettings.hotkeys[h.id] = h.def; });
 
   const defaultPityState = {
-    primos: 3200,
-    fates: 10,
+    primos: 0,
+    fates: 0,
     extraPulls: 0,
     banners: {
-      character: { name: "Character Event Wish (1 & 2)", icon: "🌠", hardPity: 90, softPity: 73, pity5: 42, pity4: 6, guaranteed: true, radianceStreak: 0, guaranteed4: true, totalPulls: 124 },
-      weapon: { name: "Weapon Event Wish (Epitome Invocation)", icon: "⚔", hardPity: 80, softPity: 63, pity5: 35, pity4: 4, guaranteed: false, fatePoints: 0, guaranteed4: false, totalPulls: 85 },
+      character: { name: "Character Event Wish (1 & 2)", icon: "🌠", hardPity: 90, softPity: 73, pity5: 0, pity4: 0, guaranteed: false, radianceStreak: 0, guaranteed4: false, totalPulls: 0 },
+      weapon: { name: "Weapon Event Wish (Epitome Invocation)", icon: "⚔", hardPity: 80, softPity: 63, pity5: 0, pity4: 0, guaranteed: false, fatePoints: 0, guaranteed4: false, totalPulls: 0 },
       chronicled: { name: "Chronicled Wish Banner", icon: "🌌", hardPity: 90, softPity: 73, pity5: 0, pity4: 0, guaranteed: false, fatePoints: 0, guaranteed4: false, totalPulls: 0 },
-      standard: { name: "Wanderlust Invocation (Standard)", icon: "🌟", hardPity: 90, softPity: 73, pity5: 28, pity4: 3, guaranteed: false, guaranteed4: false, totalPulls: 96 }
+      standard: { name: "Wanderlust Invocation (Standard)", icon: "🌟", hardPity: 90, softPity: 73, pity5: 0, pity4: 0, guaranteed: false, guaranteed4: false, totalPulls: 0 }
     },
-    history: [
-      // Character Banner
-      { bannerKey: "character", banner: "Character Event Wish", item: "Mitya", rank: "5", pity: 74, outcome: "Won 50/50", time: "2026-11-04 18:30:12", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Debate Club", rank: "3", pity: 1, outcome: "3★ Weapon", time: "2026-11-04 18:29:40", itemType: "Weapon" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Favonius Sword", rank: "4", pity: 9, outcome: "Off-Banner 4★ Weapon", time: "2026-11-04 18:28:10", itemType: "Weapon" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Cool Steel", rank: "3", pity: 1, outcome: "3★ Weapon", time: "2026-11-04 18:27:00", itemType: "Weapon" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Bennett", rank: "4", pity: 8, outcome: "Featured 4★ Character", time: "2026-11-04 18:26:15", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Diluc", rank: "5", pity: 78, outcome: "Lost 50/50 → Next Guaranteed!", time: "2026-10-22 14:15:02", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Xingqiu", rank: "4", pity: 7, outcome: "Featured 4★ Character", time: "2026-10-22 14:10:45", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Black Tassel", rank: "3", pity: 1, outcome: "3★ Weapon", time: "2026-10-22 14:08:20", itemType: "Weapon" },
-      { bannerKey: "character", banner: "Character Event Wish", item: "Furina", rank: "5", pity: 68, outcome: "Won 50/50", time: "2026-09-18 20:45:10", itemType: "Character" },
-
-      // Weapon Banner
-      { bannerKey: "weapon", banner: "Weapon Event Wish", item: "Starsealed Edict", rank: "5", pity: 66, outcome: "Won Epitomized Path", time: "2026-11-04 18:45:00", itemType: "Weapon" },
-      { bannerKey: "weapon", banner: "Weapon Event Wish", item: "The Widsith", rank: "4", pity: 8, outcome: "Featured 4★ Weapon", time: "2026-11-04 18:42:10", itemType: "Weapon" },
-      { bannerKey: "weapon", banner: "Weapon Event Wish", item: "Magic Guide", rank: "3", pity: 1, outcome: "3★ Weapon", time: "2026-11-04 18:40:05", itemType: "Weapon" },
-      { bannerKey: "weapon", banner: "Weapon Event Wish", item: "Favonius Codex", rank: "4", pity: 7, outcome: "4★ Weapon", time: "2026-10-20 16:12:00", itemType: "Weapon" },
-      { bannerKey: "weapon", banner: "Weapon Event Wish", item: "Splendor of Tranquil Waters", rank: "5", pity: 64, outcome: "Won Epitomized Path", time: "2026-09-18 21:10:00", itemType: "Weapon" },
-
-      // Standard Banner
-      { bannerKey: "standard", banner: "Wanderlust Invocation", item: "Skyward Harp", rank: "5", pity: 72, outcome: "Standard 5★ Weapon", time: "2026-10-15 11:30:00", itemType: "Weapon" },
-      { bannerKey: "standard", banner: "Wanderlust Invocation", item: "Xiangling", rank: "4", pity: 8, outcome: "4★ Character", time: "2026-10-15 11:25:00", itemType: "Character" },
-      { bannerKey: "standard", banner: "Wanderlust Invocation", item: "Sacrificial Bow", rank: "4", pity: 6, outcome: "4★ Weapon", time: "2026-10-01 19:40:00", itemType: "Weapon" },
-      { bannerKey: "standard", banner: "Wanderlust Invocation", item: "Keqing", rank: "5", pity: 76, outcome: "Standard 5★ Character", time: "2026-08-12 15:20:00", itemType: "Character" }
-    ]
+    history: []
   };
 
   const defaultHsrPityState = {
-    jades: 3200,
-    passes: 10,
+    jades: 0,
+    passes: 0,
     extraPulls: 0,
     banners: {
-      character: { name: "Character Event Warp (1 & 2)", icon: "hsr_assets/items/102.png", hardPity: 90, softPity: 74, pity5: 42, pity4: 6, guaranteed: true, guaranteed4: true, totalPulls: 124 },
-      lightcone: { name: "Light Cone Event Warp", icon: "hsr_assets/items/102.png", hardPity: 80, softPity: 65, pity5: 35, pity4: 4, guaranteed: false, guaranteed4: false, totalPulls: 85 },
-      standard: { name: "Stellar Warp (Standard)", icon: "hsr_assets/items/101.png", hardPity: 90, softPity: 74, pity5: 28, pity4: 3, guaranteed: false, guaranteed4: false, selectorCount: 185, totalPulls: 96 }
+      character: { name: "Character Event Warp (1 & 2)", icon: "hsr_assets/items/102.png", hardPity: 90, softPity: 74, pity5: 0, pity4: 0, guaranteed: false, guaranteed4: false, totalPulls: 0 },
+      lightcone: { name: "Light Cone Event Warp", icon: "hsr_assets/items/102.png", hardPity: 80, softPity: 65, pity5: 0, pity4: 0, guaranteed: false, guaranteed4: false, totalPulls: 0 },
+      standard: { name: "Stellar Warp (Standard)", icon: "hsr_assets/items/101.png", hardPity: 90, softPity: 74, pity5: 0, pity4: 0, guaranteed: false, guaranteed4: false, selectorCount: 0, totalPulls: 0 }
     },
-    history: [
-      // Character Event Warp
-      { bannerKey: "character", banner: "Character Event Warp", item: "Aventurine (Waveflair)", rank: "5", pity: 74, outcome: "Won 50/50", time: "2026-11-04 18:30:12", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Arrows", rank: "3", pity: 1, outcome: "3\u2605 Light Cone", time: "2026-11-04 18:29:40", itemType: "Light Cone" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Memories of the Past", rank: "4", pity: 9, outcome: "Off-Banner 4\u2605 Light Cone", time: "2026-11-04 18:28:10", itemType: "Light Cone" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Cornucopia", rank: "3", pity: 1, outcome: "3\u2605 Light Cone", time: "2026-11-04 18:27:00", itemType: "Light Cone" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Tingyun", rank: "4", pity: 8, outcome: "Featured 4\u2605 Character", time: "2026-11-04 18:26:15", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Bronya", rank: "5", pity: 78, outcome: "Lost 50/50 \u2192 Next Guaranteed!", time: "2026-10-22 14:15:02", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Pela", rank: "4", pity: 7, outcome: "Featured 4\u2605 Character", time: "2026-10-22 14:10:45", itemType: "Character" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Collapsing Sky", rank: "3", pity: 1, outcome: "3\u2605 Light Cone", time: "2026-10-22 14:08:20", itemType: "Light Cone" },
-      { bannerKey: "character", banner: "Character Event Warp", item: "Robin (Summeretto)", rank: "5", pity: 68, outcome: "Won 50/50", time: "2026-09-18 20:45:10", itemType: "Character" },
-
-      // Light Cone Event Warp
-      { bannerKey: "lightcone", banner: "Light Cone Event Warp", item: "Summer Rides the Surf", rank: "5", pity: 66, outcome: "Won 75/25", time: "2026-11-04 18:45:00", itemType: "Light Cone" },
-      { bannerKey: "lightcone", banner: "Light Cone Event Warp", item: "Dance! Dance! Dance!", rank: "4", pity: 8, outcome: "Featured 4\u2605 Light Cone", time: "2026-11-04 18:42:10", itemType: "Light Cone" },
-      { bannerKey: "lightcone", banner: "Light Cone Event Warp", item: "Amber", rank: "3", pity: 1, outcome: "3\u2605 Light Cone", time: "2026-11-04 18:40:05", itemType: "Light Cone" },
-      { bannerKey: "lightcone", banner: "Light Cone Event Warp", item: "Good Night and Sleep Well", rank: "4", pity: 7, outcome: "4\u2605 Light Cone", time: "2026-10-20 16:12:00", itemType: "Light Cone" },
-      { bannerKey: "lightcone", banner: "Light Cone Event Warp", item: "Rise and Sing", rank: "5", pity: 64, outcome: "Won 75/25", time: "2026-09-18 21:10:00", itemType: "Light Cone" },
-
-      // Stellar Warp (Standard)
-      { bannerKey: "standard", banner: "Stellar Warp", item: "Night on the Milky Way", rank: "5", pity: 72, outcome: "Standard 5\u2605 Light Cone", time: "2026-10-15 11:30:00", itemType: "Light Cone" },
-      { bannerKey: "standard", banner: "Stellar Warp", item: "Gallagher", rank: "4", pity: 8, outcome: "4\u2605 Character", time: "2026-10-15 11:25:00", itemType: "Character" },
-      { bannerKey: "standard", banner: "Stellar Warp", item: "Resolution Shines As Pearls of Sweat", rank: "4", pity: 6, outcome: "4\u2605 Light Cone", time: "2026-10-01 19:40:00", itemType: "Light Cone" },
-      { bannerKey: "standard", banner: "Stellar Warp", item: "Welt", rank: "5", pity: 76, outcome: "Standard 5\u2605 Character", time: "2026-08-12 15:20:00", itemType: "Character" }
-    ]
+    history: []
   };
 
   const state = {
@@ -11605,11 +11557,14 @@ function renderEnkaCharacterDetail(av) {
                   if (typeof bData.guaranteed4 === "boolean") p.banners[bKey].guaranteed4 = bData.guaranteed4;
                   if (bData.last5) p.banners[bKey].last5 = bData.last5;
                   if (bData.last4) p.banners[bKey].last4 = bData.last4;
-                  if (typeof bData.totalScanned === "number") p.banners[bKey].totalScanned = bData.totalScanned;
+                  if (typeof bData.totalScanned === "number") {
+                    p.banners[bKey].totalScanned = bData.totalScanned;
+                    p.banners[bKey].totalPulls = bData.totalScanned;
+                  }
                 }
               });
             }
-            if (res.history && Array.isArray(res.history) && res.history.length > 0) {
+            if (res.history && Array.isArray(res.history)) {
               p.history = res.history;
             }
             if (res.summary) {
@@ -11677,11 +11632,14 @@ function renderEnkaCharacterDetail(av) {
                   if (typeof bData.guaranteed4 === "boolean") p.banners[bKey].guaranteed4 = bData.guaranteed4;
                   if (bData.last5) p.banners[bKey].last5 = bData.last5;
                   if (bData.last4) p.banners[bKey].last4 = bData.last4;
-                  if (typeof bData.totalScanned === "number") p.banners[bKey].totalScanned = bData.totalScanned;
+                  if (typeof bData.totalScanned === "number") {
+                    p.banners[bKey].totalScanned = bData.totalScanned;
+                    p.banners[bKey].totalPulls = bData.totalScanned;
+                  }
                 }
               });
             }
-            if (res.history && Array.isArray(res.history) && res.history.length > 0) {
+            if (res.history && Array.isArray(res.history)) {
               p.history = res.history;
             }
             if (res.summary) {
@@ -11803,11 +11761,6 @@ function renderEnkaCharacterDetail(av) {
       return false;
     });
 
-    // If this banner has no logged wishes yet, fallback to authentic demo wishes from defaultPityState!
-    if (bannerPulls.length === 0 && defaultPityState.history) {
-      bannerPulls = defaultPityState.history.filter(h => h.bannerKey === bKey);
-    }
-
     // Compute sequential 5★ pity cycle numbers (counts 1, 2, 3... until a 5★ drops, then restarts from 1)
     let cycleCounter = 0;
     for (let i = bannerPulls.length - 1; i >= 0; i--) {
@@ -11824,9 +11777,7 @@ function renderEnkaCharacterDetail(av) {
     } else if (filter === "5") {
       displayPulls = bannerPulls.filter(h => String(h.rank) === "5" || !h.rank);
     } else if (filter === "45") {
-      const fives = bannerPulls.filter(h => String(h.rank) === "5" || (!h.rank && String(h.rank) !== "3" && String(h.rank) !== "4"));
-      const fours = bannerPulls.filter(h => String(h.rank) === "4");
-      displayPulls = [...fives, ...fours];
+      displayPulls = bannerPulls.filter(h => String(h.rank) === "5" || String(h.rank) === "4" || !h.rank);
     }
 
     const countBadge = card.querySelector('.pity-hist-count-badge[data-bkey="' + bKey + '"]');
@@ -12840,10 +12791,6 @@ function renderEnkaCharacterDetail(av) {
       return false;
     });
 
-    if (bannerPulls.length === 0 && !p.historyCleared && defaultHsrPityState.history) {
-      bannerPulls = defaultHsrPityState.history.filter(h => h.bannerKey === bKey);
-    }
-
     let cycleCounter = 0;
     for (let i = bannerPulls.length - 1; i >= 0; i--) {
       cycleCounter++;
@@ -12857,9 +12804,7 @@ function renderEnkaCharacterDetail(av) {
     } else if (filter === "5") {
       displayPulls = bannerPulls.filter(h => String(h.rank) === "5" || !h.rank);
     } else if (filter === "45") {
-      const fives = bannerPulls.filter(h => String(h.rank) === "5" || (!h.rank && String(h.rank) !== "3" && String(h.rank) !== "4"));
-      const fours = bannerPulls.filter(h => String(h.rank) === "4");
-      displayPulls = [...fives, ...fours];
+      displayPulls = bannerPulls.filter(h => String(h.rank) === "5" || String(h.rank) === "4" || !h.rank);
     }
 
     const countBadge = card.querySelector('.pity-hist-count-badge[data-bkey="' + bKey + '"]');

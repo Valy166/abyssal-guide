@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="54" viewBox="0 0 760 54" role="img" aria-label="View All 7 Genshin Impact Tabs">
+  <defs>
+    <linearGradient id="bgGi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2c143d"/>
+      <stop offset="55%" stop-color="#1b0e28"/>
+      <stop offset="100%" stop-color="#12091b"/>
+    </linearGradient>
+    <linearGradient id="borderGi" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0d492" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#c96a84" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#f0d492" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="758" height="52" rx="10" fill="url(#bgGi)" stroke="url(#borderGi)" stroke-width="1.5"/>
+  <rect x="2" y="2" width="4" height="50" rx="2" fill="#f0d492"/>
+  <text x="22" y="33" fill="#f0d492" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">&#10022;</text>
+  <text x="44" y="32" fill="#f0d492" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">View All 7 Genshin Impact Tabs</text>
+  <text x="292" y="32" fill="#cbd5e1" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="500">Tier List  ·  Collection  ·  Codes  ·  Bag Scanner  ·  Wish Pity  ·  UID</text>
+  <text x="726" y="33" fill="#f0d492" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">&#8594;</text>
+</svg>

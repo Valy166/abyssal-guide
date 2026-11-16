@@ -8,36 +8,7 @@ A lightweight Windows companion app for **Genshin Impact** and **Honkai: Star Ra
 
 <img src="screenshots/gi-1-builds.png" alt="Genshin Impact Character Builds">
 
-<details>
-<summary><strong><kbd>&#128248; &nbsp;Click to view all 6 other Genshin Impact tabs</kbd></strong> &nbsp;·&nbsp; <sub>Tier List, Collection, Redeem Codes, Bag Scanner, Wish Pity &amp; UID Sync</sub></summary>
-
-<br>
-
-#### Tier List
-
-<img src="screenshots/gi-2-tierlist.png" alt="Genshin Impact Tier List">
-
-#### Collection
-
-<img src="screenshots/gi-3-collection.png" alt="Genshin Impact Collection">
-
-#### Redeem Codes
-
-<img src="screenshots/gi-4-codes.png" alt="Genshin Impact Redeem Codes">
-
-#### Bag Scanner
-
-<img src="screenshots/gi-5-scanner.png" alt="Genshin Impact Bag Scanner">
-
-#### Wish Pity &amp; Banners
-
-<img src="screenshots/gi-6-pity.png" alt="Genshin Impact Wish Pity and Banners">
-
-#### UID Sync
-
-<img src="screenshots/gi-7-uid.png" alt="Genshin Impact UID Sync">
-
-</details>
+<a href="docs/genshin-tabs.md"><img src="screenshots/btn-genshin-tabs.svg" alt="View All 7 Genshin Impact Tabs"></a>
 
 ---
 
@@ -45,32 +16,7 @@ A lightweight Windows companion app for **Genshin Impact** and **Honkai: Star Ra
 
 <img src="screenshots/hsr-1-builds.png" alt="Honkai: Star Rail Character Builds">
 
-<details>
-<summary><strong><kbd>&#128248; &nbsp;Click to view all 5 other Honkai: Star Rail tabs</kbd></strong> &nbsp;·&nbsp; <sub>Meta Tier List, Collection, Redeem Codes, Warp &amp; Pity, UID Sync</sub></summary>
-
-<br>
-
-#### Meta Tier List
-
-<img src="screenshots/hsr-2-tierlist.png" alt="Honkai: Star Rail Meta Tier List">
-
-#### Collection
-
-<img src="screenshots/hsr-3-collection.png" alt="Honkai: Star Rail Collection">
-
-#### Redeem Codes
-
-<img src="screenshots/hsr-4-codes.png" alt="Honkai: Star Rail Redeem Codes">
-
-#### Warp &amp; Pity
-
-<img src="screenshots/hsr-5-pity.png" alt="Honkai: Star Rail Warp and Pity">
-
-#### UID Sync
-
-<img src="screenshots/hsr-6-uid.png" alt="Honkai: Star Rail UID Sync">
-
-</details>
+<a href="docs/hsr-tabs.md"><img src="screenshots/btn-hsr-tabs.svg" alt="View All 6 Honkai: Star Rail Tabs"></a>
 
 ---
 

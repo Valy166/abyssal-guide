@@ -9,6 +9,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -16,6 +17,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using Microsoft.Win32;
@@ -77,6 +79,10 @@ namespace GenshinCompanionApp {
                 } catch { }
                 return null;
             };
+            if (args != null && args.Length >= 4 && args[0] == "--apply-update") {
+                AppUpdater.RunSelfApply(args);
+                return;
+            }
             Program.RunMain(args);
         }
     }
@@ -1851,76 +1857,119 @@ namespace GenshinCompanionApp {
     public static class Ocr {
         static readonly object gate = new object();
 
+        static Type WinRtType(string name) {
+            return Type.GetType(name + ", Windows, ContentType=WindowsRuntime");
+        }
+
+        static object AwaitWinRtOp(object op, Type resType) {
+            var wrt = typeof(System.WindowsRuntimeSystemExtensions);
+            var m = wrt.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .First(x => x.Name == "AsTask" && x.IsGenericMethod && x.GetParameters().Length == 1
+                    && x.GetParameters()[0].ParameterType.Name.StartsWith("IAsyncOperation", StringComparison.Ordinal));
+            var task = (Task)m.MakeGenericMethod(resType).Invoke(null, new[] { op });
+            task.GetAwaiter().GetResult();
+            return task.GetType().GetProperty("Result").GetValue(task, null);
+        }
+
+        static void RunWinRtOcr(Bitmap bmp, double up, List<Dictionary<string, object>> lines, List<Dictionary<string, object>> words) {
+            using (var ms = new MemoryStream()) {
+                bmp.Save(ms, ImageFormat.Png);
+                ms.Position = 0;
+
+                var asRas = typeof(System.IO.WindowsRuntimeStreamExtensions).GetMethod("AsRandomAccessStream", new[] { typeof(Stream) });
+                object ras = asRas.Invoke(null, new object[] { ms });
+                try {
+                    Type decType = WinRtType("Windows.Graphics.Imaging.BitmapDecoder");
+                    Type swBmpType = WinRtType("Windows.Graphics.Imaging.SoftwareBitmap");
+                    Type ocrType = WinRtType("Windows.Media.Ocr.OcrEngine");
+                    Type ocrResType = WinRtType("Windows.Media.Ocr.OcrResult");
+                    if (decType == null || swBmpType == null || ocrType == null || ocrResType == null) {
+                        throw new Exception("Windows OCR runtime is unavailable on this system.");
+                    }
+
+                    MethodInfo createDec = decType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                        .First(m => m.Name == "CreateAsync" && m.GetParameters().Length == 1);
+                    object dec = AwaitWinRtOp(createDec.Invoke(null, new[] { ras }), decType);
+
+                    MethodInfo getSw = decType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                        .First(m => m.Name == "GetSoftwareBitmapAsync" && m.GetParameters().Length == 0);
+                    object swBmp = AwaitWinRtOp(getSw.Invoke(dec, null), swBmpType);
+
+                    object eng = ocrType.InvokeMember("TryCreateFromUserProfileLanguages",
+                        BindingFlags.Public | BindingFlags.Static | BindingFlags.InvokeMethod, null, null, null);
+                    if (eng == null) {
+                        Type langType = WinRtType("Windows.Globalization.Language");
+                        object lang = Activator.CreateInstance(langType, new object[] { "en-US" });
+                        eng = ocrType.GetMethod("TryCreateFromLanguage").Invoke(null, new[] { lang });
+                    }
+                    if (eng == null) {
+                        throw new Exception("No Windows OCR language pack could be initialized.");
+                    }
+
+                    object ocrRes = AwaitWinRtOp(ocrType.GetMethod("RecognizeAsync").Invoke(eng, new[] { swBmp }), ocrResType);
+                    IEnumerable rawLines = (IEnumerable)ocrResType.GetProperty("Lines").GetValue(ocrRes, null);
+                    foreach (object line in rawLines) {
+                        Type lineType = line.GetType();
+                        string lineText = (string)lineType.GetProperty("Text").GetValue(line, null);
+                        IEnumerable rawWords = (IEnumerable)lineType.GetProperty("Words").GetValue(line, null);
+                        double minX = 99999, minY = 99999, maxX = 0, maxY = 0;
+                        bool anyWord = false;
+                        foreach (object w in rawWords) {
+                            anyWord = true;
+                            Type wType = w.GetType();
+                            string wText = (string)wType.GetProperty("Text").GetValue(w, null);
+                            object rect = wType.GetProperty("BoundingRect").GetValue(w, null);
+                            Type rType = rect.GetType();
+                            double rx = Convert.ToDouble(rType.GetProperty("X").GetValue(rect, null));
+                            double ry = Convert.ToDouble(rType.GetProperty("Y").GetValue(rect, null));
+                            double rw = Convert.ToDouble(rType.GetProperty("Width").GetValue(rect, null));
+                            double rh = Convert.ToDouble(rType.GetProperty("Height").GetValue(rect, null));
+                            if (rx < minX) minX = rx;
+                            if (ry < minY) minY = ry;
+                            if (rx + rw > maxX) maxX = rx + rw;
+                            if (ry + rh > maxY) maxY = ry + rh;
+
+                            var wd = new Dictionary<string, object>();
+                            wd["text"] = wText;
+                            wd["x"] = (int)Math.Round(rx / up);
+                            wd["y"] = (int)Math.Round(ry / up);
+                            wd["w"] = (int)Math.Round(rw / up);
+                            wd["h"] = (int)Math.Round(rh / up);
+                            words.Add(wd);
+                        }
+                        if (!anyWord) { minX = 0; minY = 0; maxX = 0; maxY = 0; }
+                        var ld = new Dictionary<string, object>();
+                        ld["text"] = lineText;
+                        ld["x"] = (int)Math.Round(minX / up);
+                        ld["y"] = (int)Math.Round(minY / up);
+                        ld["w"] = (int)Math.Round(Math.Max(0, maxX - minX) / up);
+                        ld["h"] = (int)Math.Round(Math.Max(0, maxY - minY) / up);
+                        lines.Add(ld);
+                    }
+                    var dispBmp = swBmp as IDisposable;
+                    if (dispBmp != null) dispBmp.Dispose();
+                } finally {
+                    var dispRas = ras as IDisposable;
+                    if (dispRas != null) dispRas.Dispose();
+                }
+            }
+        }
+
         public static Dictionary<string, object> Run(Bitmap provided, bool hideDashboardBriefly) {
             lock (gate) {
                 string source = "Uploaded Image";
                 Bitmap shot = provided ?? Program.CaptureGameOrScreen(hideDashboardBriefly, out source);
                 try {
                     double up = shot.Width < 2200 ? 1.6 : 1.0;
-                    string tmp = Path.Combine(Path.GetTempPath(), "gc_ocr_" + Process.GetCurrentProcess().Id + ".png");
+                    var lines = new List<Dictionary<string, object>>();
+                    var words = new List<Dictionary<string, object>>();
                     using (var big = new Bitmap((int)(shot.Width * up), (int)(shot.Height * up))) {
                         using (var g = Graphics.FromImage(big)) {
                             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                             g.DrawImage(shot, 0, 0, big.Width, big.Height);
                         }
-                        big.Save(tmp, ImageFormat.Png);
+                        RunWinRtOcr(big, up, lines, words);
                     }
-                    string script = Path.Combine(Program.AppDir, "ocr.ps1");
-                    var psi = new ProcessStartInfo(Path.Combine(Environment.SystemDirectory, @"WindowsPowerShell\v1.0\powershell.exe"),
-                        "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"" + script + "\" -ImagePath \"" + tmp + "\"");
-                    psi.UseShellExecute = false; psi.CreateNoWindow = true;
-                    psi.RedirectStandardOutput = true; psi.RedirectStandardError = true;
-                    psi.StandardOutputEncoding = Encoding.UTF8;
-                    string output, err;
-                    using (var p = Process.Start(psi)) {
-                        output = p.StandardOutput.ReadToEnd();
-                        err = p.StandardError.ReadToEnd();
-                        p.WaitForExit(30000);
-                    }
-                    try { File.Delete(tmp); } catch { }
-
-                    // FIXED: Use IEnumerable instead of ArrayList so JavaScriptSerializer object[] works!
-                    var lines = new List<Dictionary<string, object>>();
-                    var words = new List<Dictionary<string, object>>();
-                    output = (output ?? "").Trim();
-                    if (output.StartsWith("{")) {
-                        var doc = Program.Json.DeserializeObject(output) as Dictionary<string, object>;
-                        if (doc != null && doc.ContainsKey("lines")) {
-                            var rawLines = doc["lines"] as IEnumerable;
-                            if (rawLines != null) {
-                                foreach (var o in rawLines) {
-                                    var d = o as Dictionary<string, object>;
-                                    if (d == null) continue;
-                                    foreach (var k in new[] { "x", "y", "w", "h" }) d[k] = (int)Math.Round(Convert.ToDouble(d[k]) / up);
-                                    lines.Add(d);
-                                }
-                            }
-                            if (doc.ContainsKey("words")) {
-                                var rawWords = doc["words"] as IEnumerable;
-                                if (rawWords != null) {
-                                    foreach (var o in rawWords) {
-                                        var d = o as Dictionary<string, object>;
-                                        if (d == null) continue;
-                                        foreach (var k in new[] { "x", "y", "w", "h" }) d[k] = (int)Math.Round(Convert.ToDouble(d[k]) / up);
-                                        words.Add(d);
-                                    }
-                                }
-                            }
-                        } else if (doc != null) {
-                            foreach (var k in new[] { "x", "y", "w", "h" }) doc[k] = (int)Math.Round(Convert.ToDouble(doc[k]) / up);
-                            lines.Add(doc);
-                        }
-                    } else if (output.StartsWith("[")) {
-                        var rawArr = Program.Json.DeserializeObject(output) as IEnumerable;
-                        if (rawArr != null) {
-                            foreach (var o in rawArr) {
-                                var d = o as Dictionary<string, object>;
-                                if (d == null) continue;
-                                foreach (var k in new[] { "x", "y", "w", "h" }) d[k] = (int)Math.Round(Convert.ToDouble(d[k]) / up);
-                                lines.Add(d);
-                            }
-                        }
-                    } else if (err.Length > 0) throw new Exception("OCR failed: " + err.Split('\n')[0]);
 
                     double ps = Math.Min(1.0, 1600.0 / shot.Width);
                     string b64;
@@ -4043,8 +4092,14 @@ namespace GenshinCompanionApp {
             return h == "github.com" || h.EndsWith(".github.com") || h == "githubusercontent.com" || h.EndsWith(".githubusercontent.com");
         }
 
+        static string StageBaseDir {
+            get {
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AbyssalGuide", "UpdateStage");
+            }
+        }
+
         static void RunInstallWorker(string dlUrl) {
-            string stageDir = Path.Combine(Path.GetTempPath(), "AbyssalGuideUpdate_" + Process.GetCurrentProcess().Id);
+            string stageDir = Path.Combine(StageBaseDir, "upd_" + Process.GetCurrentProcess().Id);
             try {
                 if (Directory.Exists(stageDir)) Directory.Delete(stageDir, true);
                 Directory.CreateDirectory(stageDir);
@@ -4082,45 +4137,20 @@ namespace GenshinCompanionApp {
                 }
 
                 string appRoot = (Program.AppDir ?? AppDomain.CurrentDomain.BaseDirectory).TrimEnd('\\');
-                string devArg = Program.IsDevMode ? "--dev" : "";
-                string batPath = Path.Combine(Path.GetTempPath(), "apply_ag_upd_" + Process.GetCurrentProcess().Id + ".bat");
-                var sb = new StringBuilder();
-                sb.AppendLine("@echo off");
-                sb.AppendLine("cd /d \"%TEMP%\"");
-                sb.AppendLine("set \"TARGET_PID=" + Process.GetCurrentProcess().Id + "\"");
-                sb.AppendLine("set \"SRC=" + srcRoot.TrimEnd('\\') + "\"");
-                sb.AppendLine("set \"DST=" + appRoot + "\"");
-                sb.AppendLine("set \"STAGE=" + stageDir.TrimEnd('\\') + "\"");
-                sb.AppendLine("set \"ARGS=" + devArg + "\"");
-                sb.AppendLine("set /a RETRIES=0");
-                sb.AppendLine(":waitLoop");
-                sb.AppendLine("tasklist /FI \"PID eq %TARGET_PID%\" 2>NUL | find \"%TARGET_PID%\" >NUL");
-                sb.AppendLine("if errorlevel 1 goto doCopy");
-                sb.AppendLine("set /a RETRIES+=1");
-                sb.AppendLine("if %RETRIES% GEQ 40 goto doCopy");
-                sb.AppendLine("ping -n 2 127.0.0.1 >NUL");
-                sb.AppendLine("goto waitLoop");
-                sb.AppendLine(":doCopy");
-                sb.AppendLine("robocopy \"%SRC%\\public\" \"%DST%\\public\" /MIR /R:6 /W:1 /NFL /NDL /NJH /NJS /NP");
-                sb.AppendLine("robocopy \"%SRC%\" \"%DST%\" /LEV:1 /IS /IT /XF dev_mode.flag /R:6 /W:1 /NFL /NDL /NJH /NJS /NP");
-                sb.AppendLine("del /f /q \"%DST%\\AbyssalGuide-v*.zip\" 2>NUL");
-                sb.AppendLine("start \"\" \"%DST%\\AbyssalGuide.exe\" %ARGS%");
-                sb.AppendLine("ping -n 2 127.0.0.1 >NUL");
-                sb.AppendLine("rd /s /q \"%STAGE%\" 2>NUL");
-                sb.AppendLine("del /f /q \"%~f0\" 2>NUL");
-                sb.AppendLine("exit /b 0");
-                File.WriteAllText(batPath, sb.ToString(), new UTF8Encoding(false));
+                string stagedExe = Path.Combine(srcRoot, "AbyssalGuide.exe");
+                string argsStr = "--apply-update " + Process.GetCurrentProcess().Id +
+                    " \"" + srcRoot.TrimEnd('\\') + "\" \"" + appRoot + "\"" +
+                    (Program.IsDevMode ? " --dev" : "");
 
                 Process.Start(new ProcessStartInfo {
-                    FileName = "cmd.exe",
-                    Arguments = "/c call \"" + batPath + "\"",
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden
+                    FileName = stagedExe,
+                    Arguments = argsStr,
+                    WorkingDirectory = srcRoot,
+                    UseShellExecute = false
                 });
 
                 ThreadPool.QueueUserWorkItem(delegate {
-                    Thread.Sleep(350);
+                    Thread.Sleep(300);
                     Program.ShutdownAll();
                 });
             } catch (Exception ex) {
@@ -4129,6 +4159,90 @@ namespace GenshinCompanionApp {
                     state = "error";
                     progressPct = 0;
                     statusMessage = "Update failed: " + ex.Message;
+                }
+            }
+        }
+
+        public static void RunSelfApply(string[] args) {
+            try {
+                int targetPid = 0;
+                int.TryParse(args[1], out targetPid);
+                string srcRoot = args[2].TrimEnd('\\');
+                string dstRoot = args[3].TrimEnd('\\');
+                bool devMode = Array.IndexOf(args, "--dev") >= 0;
+
+                if (targetPid > 0) {
+                    try {
+                        using (var proc = Process.GetProcessById(targetPid)) {
+                            proc.WaitForExit(15000);
+                        }
+                    } catch { }
+                }
+
+                string dstExe = Path.Combine(dstRoot, "AbyssalGuide.exe");
+                for (int i = 0; i < 20; i++) {
+                    if (!File.Exists(dstExe)) break;
+                    try {
+                        using (var fs = File.Open(dstExe, FileMode.Open, FileAccess.ReadWrite, FileShare.None)) { break; }
+                    } catch {
+                        Thread.Sleep(250);
+                    }
+                }
+
+                string srcPub = Path.Combine(srcRoot, "public");
+                string dstPub = Path.Combine(dstRoot, "public");
+                if (Directory.Exists(srcPub)) MirrorDirectory(srcPub, dstPub);
+
+                foreach (string srcFile in Directory.GetFiles(srcRoot)) {
+                    string name = Path.GetFileName(srcFile);
+                    if (string.Equals(name, "dev_mode.flag", StringComparison.OrdinalIgnoreCase)) continue;
+                    string dstFile = Path.Combine(dstRoot, name);
+                    File.Copy(srcFile, dstFile, true);
+                }
+
+                foreach (string oldZip in Directory.GetFiles(dstRoot, "AbyssalGuide-v*.zip")) {
+                    try { File.Delete(oldZip); } catch { }
+                }
+
+                Process.Start(new ProcessStartInfo {
+                    FileName = dstExe,
+                    Arguments = devMode ? "--dev" : "",
+                    WorkingDirectory = dstRoot,
+                    UseShellExecute = false
+                });
+            } catch (Exception ex) {
+                try {
+                    string log = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AbyssalGuide", "update_error.txt");
+                    Directory.CreateDirectory(Path.GetDirectoryName(log));
+                    File.WriteAllText(log, ex.ToString());
+                } catch { }
+            }
+        }
+
+        static void MirrorDirectory(string srcDir, string dstDir) {
+            Directory.CreateDirectory(dstDir);
+            var expectedFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string srcFile in Directory.GetFiles(srcDir)) {
+                string name = Path.GetFileName(srcFile);
+                expectedFiles.Add(name);
+                File.Copy(srcFile, Path.Combine(dstDir, name), true);
+            }
+            var expectedDirs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string subDir in Directory.GetDirectories(srcDir)) {
+                string name = Path.GetFileName(subDir);
+                expectedDirs.Add(name);
+                MirrorDirectory(subDir, Path.Combine(dstDir, name));
+            }
+            foreach (string dstFile in Directory.GetFiles(dstDir)) {
+                string name = Path.GetFileName(dstFile);
+                if (!expectedFiles.Contains(name)) {
+                    try { File.Delete(dstFile); } catch { }
+                }
+            }
+            foreach (string dstSub in Directory.GetDirectories(dstDir)) {
+                string name = Path.GetFileName(dstSub);
+                if (!expectedDirs.Contains(name)) {
+                    try { Directory.Delete(dstSub, true); } catch { }
                 }
             }
         }
@@ -4205,15 +4319,16 @@ namespace GenshinCompanionApp {
 
         public static void CleanupResidualZips() {
             try {
-                string tmp = Path.GetTempPath();
-                int myPid = Process.GetCurrentProcess().Id;
-                foreach (string d in Directory.GetDirectories(tmp, "AbyssalGuideUpdate_*")) {
-                    if (d.EndsWith("_" + myPid, StringComparison.OrdinalIgnoreCase)) continue;
-                    try { Directory.Delete(d, true); } catch { }
+                if (Directory.Exists(StageBaseDir)) {
+                    foreach (string d in Directory.GetDirectories(StageBaseDir)) {
+                        try { Directory.Delete(d, true); } catch { }
+                    }
                 }
-                foreach (string b in Directory.GetFiles(tmp, "apply_ag_upd_*.bat")) {
-                    if (b.EndsWith("_" + myPid + ".bat", StringComparison.OrdinalIgnoreCase)) continue;
-                    try { File.Delete(b); } catch { }
+            } catch { }
+            try {
+                string tmp = Path.GetTempPath();
+                foreach (string d in Directory.GetDirectories(tmp, "AbyssalGuideUpdate_*")) {
+                    try { Directory.Delete(d, true); } catch { }
                 }
             } catch { }
             try {
@@ -4369,25 +4484,6 @@ namespace GenshinCompanionApp {
                             }
                         } catch { }
                     }
-                    try {
-                        string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "auto_guide_sync.ps1");
-                        if (File.Exists(scriptPath)) {
-                            var psi = new System.Diagnostics.ProcessStartInfo {
-                                FileName = "powershell.exe",
-                                Arguments = "-ExecutionPolicy Bypass -NoProfile -File \"" + scriptPath + "\"",
-                                UseShellExecute = false,
-                                CreateNoWindow = true,
-                                RedirectStandardOutput = true,
-                                RedirectStandardError = true
-                            };
-                            using (var proc = System.Diagnostics.Process.Start(psi)) {
-                                proc.WaitForExit(15000);
-                            }
-                        }
-                    } catch (Exception ex) {
-                        Console.WriteLine("[Sync] Process error: " + ex.Message);
-                    }
-
                     Dictionary<string, object> hsrSyncRes = null;
                     Dictionary<string, object> hsrBannerRes = null;
                     Dictionary<string, object> hsrCodesRes = null;

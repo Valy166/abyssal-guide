@@ -14,7 +14,7 @@ lightweight windows desktop companion app for genshin impact and honkai: star ra
 
 ### safety & verification
 - since i don't have a paid $200/yr code-signing certificate for a free project, windows smartscreen will show **"unknown publisher"** on first launch — click **More info -> Run anyway**.
-- the full app source code (`Program.cs`, `ocr.ps1`, `public/index.html`, `public/style.css`, `public/app.js`) is open in this repository so you can verify everything the app does.
+- the full app source code (`Program.cs`, `app.manifest`, `public/index.html`, `public/style.css`, `public/app.js`) is open in this repository so you can verify everything the app does.
 - every release zip is scanned with windows defender (`0` threats), and the in-app updater verifies release host pinning (`github.com`) + `sha256` checksums before extracting any update.
 - `AbyssalGuide.exe` sha256: `2e9b2574363d61a252c13d80578330a25e81cc392a24b897bf68d77822af2788`
 - `AbyssalGuide-v1.0.0.zip` sha256: `41c5836be7167742aa995678d3ee1be0124b8b43557d576dca18e8b58883a201`

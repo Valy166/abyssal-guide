@@ -1,0 +1,24 @@
+# Binaries & build outputs
+*.exe
+*.dll
+*.zip
+*.pdb
+dist/
+
+# User data & logs
+Genshin Companion - Saves/
+dev_mode.flag
+crash.txt
+*.bak
+
+# Extracted HoYoverse visual assets & bundled fonts (distributed in Release ZIPs)
+public/hsr_assets/
+public/elements/
+public/pin_icons/
+public/stat_icons/
+public/weapon_types/
+public/*.png
+public/*.ico
+public/*.ttf
+public/*.json
+*.ico

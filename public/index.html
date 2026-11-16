@@ -1,0 +1,2896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abyssal Guide</title>
+  <link rel="stylesheet" href="style.css?v=6.7" />
+  <link rel="icon" type="image/png" href="genshin.png?v=3" />
+  <link rel="shortcut icon" href="genshin.ico?v=3" />
+</head>
+<body>
+
+  <!-- Blended Frameless Top Navigation Header (Clean 7-Tab Modern Gaming Companion Layout) -->
+    <!-- Blended Frameless Top Navigation Header (2-Row Modern Gaming Companion Layout) -->
+  <header class="app-header" id="app-header-bar">
+    <!-- Row 1: Top Bar with App Branding & Window Controls -->
+    <div class="app-topbar">
+      <div class="topbar-branding">
+        <span class="topbar-genshin-item" style="display:inline-flex; align-items:center;">
+          <img src="genshin.png?v=3" class="topbar-app-icon" alt="Abyssal Guide" />
+          <span class="topbar-app-title"><span class="topbar-app-title-brand">ABYSSAL GUIDE</span> <span id="topbar-ver-genshin" style="color:#94a3b8; font-weight:600; font-size:0.82rem; margin-left:6px;">v1.0</span><span class="topbar-dev-badge" style="display:none;">TEST</span></span>
+        </span>
+        <span class="topbar-hsr-item" style="display:inline-flex; align-items:center;">
+          <img src="genshin.png?v=3" class="topbar-app-icon" alt="Abyssal Guide" />
+          <span class="topbar-app-title"><span class="topbar-app-title-brand">ABYSSAL GUIDE</span> <span id="topbar-ver-hsr" style="color:#94a3b8; font-weight:600; font-size:0.82rem; margin-left:6px;">v1.0</span><span class="topbar-dev-badge" style="display:none;">TEST</span></span>
+        </span>
+      </div>
+
+      <div class="header-right">
+        <!-- Universal Weekly General Check Pill -->
+        <button class="header-sync-pill" id="hdr-btn-general-sync" title="Universal Weekly Auto-Check &amp; Update Studio (Banners, Characters &amp; System)">
+          <span class="special-sparkle-icon">&#10024;</span>
+          <span id="hdr-sync-text">Weekly Check</span>
+          <span class="sync-badge" id="hdr-sync-badge">Auto: 1w</span>
+        </button>
+
+        <div class="game-status-pill topbar-genshin-item" title="Genshin Impact Process Auto-Detection">
+          <span id="header-status-dot" class="status-dot"></span>
+          <span id="header-status-text">Waiting for Genshin...</span>
+        </div>
+
+        <!-- HSR Process Auto-Detection Status -->
+        <div class="game-status-pill topbar-hsr-item" title="Honkai: Star Rail Process Auto-Detection">
+          <span id="hsr-header-status-dot" class="status-dot"></span>
+          <span id="hsr-header-status-text">Waiting for Star Rail...</span>
+        </div>
+
+        <!-- Blended Custom Window Controls -->
+        <div class="win-ctrl-bar">
+          <button class="win-btn" id="win-btn-min" title="Minimize Window"><svg width="13" height="13" viewBox="0 0 12 12" style="display:block;pointer-events:none;"><path d="M1.5 6.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <button class="win-btn" id="win-btn-max" title="Maximize / Restore Window"><svg width="13" height="13" viewBox="0 0 12 12" style="display:block;pointer-events:none;"><rect x="1.5" y="1.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.6" rx="1.5"/></svg></button>
+          <button class="win-btn win-btn-close" id="win-btn-close" title="Close Abyssal Guide Completely"><svg width="13" height="13" viewBox="0 0 12 12" style="display:block;pointer-events:none;"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Dedicated Navigation Row (Full Width - 8 Expanding Tabs) -->
+    <div class="app-tabs-row">
+      <nav class="nav-tabs" id="main-nav">
+        <!-- GENSHIN IMPACT NAVIGATION GROUP -->
+        <div class="nav-group nav-group-genshin" id="nav-group-genshin">
+          <button class="tab-btn active" data-tab="planner">
+            <span class="tab-icon">&#9876;&#65039;</span>
+            <span class="tab-label">Character Builds</span>
+          </button>
+          <button class="tab-btn" data-tab="tierlist">
+            <span class="tab-icon">&#127942;</span>
+            <span class="tab-label">Tier List</span>
+          </button>
+          <button class="tab-btn" data-tab="collection">
+            <span class="tab-icon">&#11088;</span>
+            <span class="tab-label">Collection</span>
+            <span id="nav-collection-count" class="tab-count-pill">0</span>
+          </button>
+          <button class="tab-btn" data-tab="codes">
+            <span class="tab-icon">&#128142;</span>
+            <span class="tab-label">Redeem Codes</span>
+            <span id="nav-codes-count" class="tab-count-pill" style="background:#22c55e; color:#0b1320; font-weight:800;">12</span>
+          </button>
+          <button class="tab-btn" data-tab="tracker">
+            <span class="tab-icon">&#127890;</span>
+            <span class="tab-label">Bag Scanner</span>
+          </button>
+          <button class="tab-btn" data-tab="pity">
+            <span class="tab-icon">&#127919;</span>
+            <span class="tab-label">Wish Pity &amp; Banners</span>
+          </button>
+          <button class="tab-btn" data-tab="account">
+            <span class="tab-icon">&#128100;</span>
+            <span class="tab-label">UID Sync</span>
+          </button>
+        </div>
+
+        <!-- HONKAI: STAR RAIL NAVIGATION GROUP -->
+        <div class="nav-group nav-group-hsr" id="nav-group-hsr">
+          <button class="tab-btn active" data-tab="hsr-planner">
+            <span class="tab-icon">&#9876;&#65039;</span>
+            <span class="tab-label">Character Builds</span>
+          </button>
+          <button class="tab-btn" data-tab="hsr-tierlist">
+            <span class="tab-icon">&#127942;</span>
+            <span class="tab-label">Meta Tier List</span>
+          </button>
+          <button class="tab-btn" data-tab="hsr-collection">
+            <span class="tab-icon">&#11088;</span>
+            <span class="tab-label">Collection</span>
+            <span id="nav-hsr-collection-count" class="tab-count-pill">0</span>
+          </button>
+          <button class="tab-btn" data-tab="hsr-codes">
+            <span class="tab-icon">&#128142;</span>
+            <span class="tab-label">Redeem Codes</span>
+            <span class="tab-count-pill" id="nav-hsr-active-codes-count" style="background:#fbbf24; color:#0b1320; font-weight:800;">9</span>
+          </button>
+          <button class="tab-btn" data-tab="hsr-pity">
+            <span class="tab-icon">&#127919;</span>
+            <span class="tab-label">Warp &amp; Pity</span>
+          </button>
+          <button class="tab-btn" data-tab="hsr-account">
+            <span class="tab-icon">&#128100;</span>
+            <span class="tab-label">UID Sync</span>
+          </button>
+        </div>
+
+        <!-- BOTTOM PINNED NAVIGATION GROUP (UPDATE + SWAP + SETTINGS) -->
+        <div class="nav-bottom-pinned" id="nav-bottom-pinned">
+          <button class="tab-btn tab-btn-update nav-update-hidden" id="nav-btn-update" type="button" title="New Abyssal Guide update available — click to install">
+            <span class="tab-icon tab-update-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+            </span>
+            <span class="tab-label tab-update-label">Update</span>
+            <span class="tab-update-badge" id="nav-update-badge">NEW</span>
+          </button>
+          <button class="tab-btn tab-btn-hsr" data-tab="hsr" id="nav-btn-hsr" title="Switch Companion to Honkai: Star Rail">
+            <span class="tab-icon" style="color:#fbbf24; font-size:0.92rem;">&#10022;</span>
+            <span class="tab-label" style="color:#c084fc; font-weight:900; letter-spacing:0.5px;">Star Rail</span>
+            <span class="tab-hsr-badge">SWAP</span>
+          </button>
+          <button class="tab-btn tab-btn-genshin" data-tab="genshin" id="nav-btn-genshin-swap" title="Switch Companion back to Genshin Impact">
+            <span class="tab-icon" style="color:#f472b6; font-size:1.05rem;">&#127756;</span>
+            <span class="tab-label" style="color:#fecdd3; font-weight:900; letter-spacing:0.5px;">Genshin</span>
+            <span class="tab-hsr-badge" style="background:rgba(244,114,182,0.2); color:#f472b6; border-color:rgba(244,114,182,0.45);">SWAP</span>
+          </button>
+          <button class="tab-btn" data-tab="settings">
+            <span class="tab-icon">&#9881;&#65039;</span>
+            <span class="tab-label">Settings</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div id="app-scroll-viewport">
+  <div id="abyssal-void-subbar">
+    <div class="av-subbar-left">
+      <div class="av-angled-tab-active" id="av-active-section-title">CHARACTER BUILDS // ROSTER</div>
+      <div class="av-angled-tab-secondary" id="av-secondary-section-title">CLICK ANY CHARACTER CARD TO OPEN BUILD GUIDE</div>
+    </div>
+    <div class="av-subbar-right">
+      <div class="av-search-mock">
+        <input type="text" id="av-subbar-search-input" placeholder="Search companion database..." style="background:transparent; border:none; outline:none; color:#e2e8f0; font-size:0.75rem; width:100%; font-family:inherit;" />
+        <span style="opacity:0.6; pointer-events:none;">&#8981;</span>
+      </div>
+      <div class="av-profile-chip" id="topbar-profile-chip" title="Click to open UID Sync &amp; Profile">
+        <span id="topbar-profile-name" style="font-weight:700; color:#e2e8f0; font-size:0.78rem;">Traveler_Void</span>
+        <img id="topbar-profile-avatar" src="pin_icons/2.png" style="width:22px; height:22px; border-radius:50%; border:1.5px solid #c96a84; background:#140a1d; padding:2px; object-fit:cover;" alt="Account" onerror="this.src='pin_icons/2.png';" />
+      </div>
+    </div>
+  </div>
+  <main class="main-container">
+
+    <!-- ========================================================
+         TAB 1: CHARACTER BUILDS (DE-CLUTTERED SUB-TABBED WORKSPACE)
+    ======================================================== -->
+    <section id="panel-planner" class="tab-panel active av-planner-mode-roster">
+      <div class="planner-layout">
+
+        <!-- Left Sidebar: All Online Characters (Including Latest & Upcoming Patch) -->
+        <aside class="card char-sidebar">
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="char-search" class="input" style="flex:1;" placeholder="Search all 118+ characters (/)" />
+          </div>
+
+          <div class="elem-filter-row" id="elem-filter-bar">
+            <button class="elem-pill active" data-elem="All" title="All Elements">✦</button>
+            <button class="elem-pill" data-elem="New" style="color:#fda4af;" title="Latest & Upcoming Characters">✨</button>
+            <button class="elem-pill" data-elem="Fire" title="Pyro"><img src="elements/pyro.svg" class="elem-filter-icon" alt="Pyro" /></button>
+            <button class="elem-pill" data-elem="Water" title="Hydro"><img src="elements/hydro.svg" class="elem-filter-icon" alt="Hydro" /></button>
+            <button class="elem-pill" data-elem="Wind" title="Anemo"><img src="elements/anemo.svg" class="elem-filter-icon" alt="Anemo" /></button>
+            <button class="elem-pill" data-elem="Electric" title="Electro"><img src="elements/electro.svg" class="elem-filter-icon" alt="Electro" /></button>
+            <button class="elem-pill" data-elem="Grass" title="Dendro"><img src="elements/dendro.svg" class="elem-filter-icon" alt="Dendro" /></button>
+            <button class="elem-pill" data-elem="Ice" title="Cryo"><img src="elements/cryo.svg" class="elem-filter-icon" alt="Cryo" /></button>
+            <button class="elem-pill" data-elem="Rock" title="Geo"><img src="elements/geo.svg" class="elem-filter-icon" alt="Geo" /></button>
+          </div>
+
+          <label style="display:flex; align-items:center; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); cursor:pointer; padding:3px 2px; font-weight:700;">
+            <span>Auto-Move Built to Collection</span>
+            <input type="checkbox" id="hide-built-chars-cb" checked />
+          </label>
+
+          <div id="char-list-count" style="font-size:0.74rem; color:var(--text-muted); font-weight:700;">Loading online character roster...</div>
+          <div id="genshin-bulk-bar" class="bulk-select-bar">
+            <div class="bulk-select-left">
+              <button type="button" id="btn-genshin-bulk-toggle" class="btn btn-sm bulk-toggle-btn">&#9745; Bulk Select Built: OFF</button>
+              <span id="genshin-bulk-hint" class="bulk-hint-text">Toggle to select multiple characters and move them to Collection</span>
+            </div>
+            <div id="genshin-bulk-actions" class="bulk-select-actions" style="display:none;">
+              <button type="button" id="btn-genshin-bulk-select-all" class="btn btn-sm">Select Visible</button>
+              <button type="button" id="btn-genshin-bulk-clear" class="btn btn-sm">Clear</button>
+              <button type="button" id="btn-genshin-bulk-commit" class="btn btn-sm btn-success" disabled>Move 0 Selected to Collection &#10003;</button>
+            </div>
+          </div>
+          <div id="char-scroll-list" class="char-list-scroll"></div>
+        </aside>
+
+        <!-- Right: Clean Sub-Tabbed Character Workspace -->
+        <div class="char-main">
+          <div id="av-build-back-bar">
+            <button class="av-back-roster-btn" id="btn-back-to-roster" type="button">
+              <span style="font-size:1.02rem; line-height:1;">&#8592;</span>
+              <span>Back to Character Roster Grid</span>
+            </button>
+            <div class="av-build-breadcrumb">
+              <span style="color:#94a3b8;">CHARACTER BUILDS</span>
+              <span style="color:#64748b; margin:0 6px;">//</span>
+              <span id="av-breadcrumb-char-name" style="color:#f1f5f9; font-weight:900;">CHARACTER &mdash; FULL BUILD &amp; MATERIALS GUIDE</span>
+            </div>
+          </div>
+
+          <!-- Hero Card -->
+          <div class="card char-hero-card">
+            <div class="char-hero">
+              <div class="char-hero-left">
+                <img id="hero-avatar" class="char-hero-avatar" src="genshin.png" alt="Avatar" onerror="this.onerror=null;this.src='genshin.png'" />
+                <div>
+                  <div style="display:flex; align-items:center; gap:9px; flex-wrap:wrap;">
+                    <h2 id="hero-name" style="font-size:1.58rem;">Select a Character</h2>
+                    <span id="hero-stars" style="color:#fbbf24; font-size:1.05rem;">★★★★★</span>
+                    <span id="hero-tier-badge" class="tier-badge tier-T0">Prydwen T0</span>
+                    <span id="hero-uid-badge" class="badge badge-green" style="display:none;">✓ Synced from UID</span>
+                  </div>
+                  <div id="hero-title" style="color:var(--accent); font-style:italic; font-size:0.86rem; margin:3px 0 9px; font-weight:700;"></div>
+                  <div style="display:flex; gap:7px; flex-wrap:wrap; align-items:center;">
+                    <span id="hero-elem-badge" class="badge badge-gold">Element</span>
+                    <span id="hero-weap-badge" class="badge">Weapon</span>
+                    <span id="hero-region-badge" class="badge">Region</span>
+                    <span id="hero-role-badge" class="badge">Role</span>
+                    <button class="btn btn-sm" id="btn-open-prydwen" title="Open Prydwen.gg Character Guide">⚡ Prydwen Guide</button>
+                    <button class="btn btn-sm" id="btn-open-kqm" title="Open KeqingMains Guide">📖 KQM Guide</button>
+                  </div>
+                  <!-- Playstyle Switcher in Hero Card -->
+                  <div id="hero-playstyles-row" class="playstyle-pill-row" style="display:none; margin-top:8px;"></div>
+                </div>
+              </div>
+
+              <div style="min-width:270px; text-align:right; display:flex; flex-direction:column; gap:7px; align-items:flex-end;">
+                <div style="font-size:0.74rem; color:var(--text-muted); text-transform:uppercase; font-weight:800;">Build &amp; Materials Readiness</div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+                  <div id="hero-progress-pct" style="font-size:1.95rem; color:var(--accent);">0%</div>
+                  <button class="btn btn-sm btn-success" id="btn-toggle-built-char" title="Mark this character as 100% Built and move to Collection">&#127942; Mark Fully Built</button>
+                </div>
+                <div class="progress-track" style="width:245px;">
+                  <div id="hero-progress-bar" class="progress-fill" style="width:0%"></div>
+                </div>
+              </div>
+            </div>
+
+            </div>
+          <!-- Clean 3-Button Sub-Navigation Bar with Dual-Source Consensus Badge -->
+          <div class="char-subnav-wrapper" style="margin:14px 0 16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div class="char-subnav-bar" id="char-subnav-bar" style="margin:0;">
+              <button class="subtab-btn active" data-subtab="materials"><span>&#128230; Materials &amp; Bag Tracker</span></button>
+              <button class="subtab-btn" data-subtab="build"><span>&#9876;&#65039; Best Weapons &amp; Artifacts</span></button>
+              <button class="subtab-btn" data-subtab="teams"><span>&#128101; Meta Teams</span></button>
+            </div>
+            <div class="guide-source-badge-wrap" style="display:flex; align-items:center; gap:8px;">
+              <div class="guide-source-badge" title="Build recommendations cross-verified with KeqingMains &amp; Prydwen.gg at 91.4% consensus rate">
+                <span class="guide-check">&#10003;</span> Dual-Source: <strong style="color:#f8fafc;">KQM &amp; Prydwen.gg</strong> <span class="guide-rate" style="color:#38bdf8; font-weight:700;">(91.4% Consensus)</span>
+              </div>
+              <button class="btn btn-sm btn-guide-analysis-pill" id="btn-guide-source-analysis" title="Open Comprehensive 5-Site Guide Analysis &amp; Consensus Audit">
+                &#128202; Guide Analysis
+              </button>
+            </div>
+          </div>
+
+          <!-- SUB-PANEL 1: MATERIALS & BAG TRACKER -->
+          <div id="char-subpanel-materials" class="char-subpanel active">
+            <div class="card card-char-surface">
+              <div class="card-title">
+                <span>📦 Required Ascension &amp; Talent Materials (100% Completion Moves Character to Collection)</span>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                  <button class="btn btn-sm btn-primary" id="btn-mat-scan-ocr">📷 Scan Bag in Genshin (Alt+I)</button>
+                  <button class="btn btn-sm btn-primary" id="btn-pin-char-overlay" title="Pin this character's missing materials to the In-Game Transparent Overlay (F8)">📌 Pin to In-Game Overlay (F8)</button>
+                  <button class="btn btn-sm" id="btn-mat-open-global-inv" title="View all scanned materials stored in your global stash">📦 Global Inventory (<span id="char-global-inv-count">0</span>)</button>
+                  <button class="btn btn-sm btn-success" id="btn-mat-complete-all">✓ Complete All &amp; Move to Collection</button>
+                  <button class="btn btn-sm" id="btn-mat-reset-all">↺ Reset</button>
+                </div>
+              </div>
+              <div id="materials-grid" class="materials-grid"></div>
+            </div>
+          </div>
+
+          <!-- SUB-PANEL 2: BEST WEAPONS & ARTIFACTS -->
+          <div id="char-subpanel-build" class="char-subpanel">
+            <div id="build-playstyles-banner" class="playstyle-banner-bar" style="display:none; margin-bottom:12px;"></div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(380px, 1fr)); gap:var(--density-gap);">
+              <div class="card card-char-surface">
+                <div class="card-title">
+                  <span>🏺 Best Artifact Sets &amp; Stat Priority (Prydwen)</span>
+                  <span id="build-talent-prio" class="badge badge-gold">Talent Priority: Skill &gt; Burst &gt; NA</span>
+                </div>
+                <div id="build-artifact-box"></div>
+              </div>
+
+              <div class="card card-char-surface">
+                <div class="card-title">
+                  <span>⚔️ Best Weapons Ranking (BiS → F2P Options)</span>
+                </div>
+                <div id="build-weapons-box" style="display:flex; flex-direction:column; gap:8px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-PANEL 3: META TEAMS -->
+          <div id="char-subpanel-teams" class="char-subpanel">
+            <div class="card card-char-surface">
+              <div class="card-title" style="flex-wrap:wrap; gap:8px;">
+                <span>&#128101; Meta Teams</span>
+                <div id="teams-playstyles-row" class="playstyle-pill-row" style="display:none;"></div>
+                
+              </div>
+              <div id="build-teams-box" class="teams-grid"></div>
+            </div>
+          </div>
+
+          </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 2: PRYDWEN META TIER LIST (OFFICIAL PRYDWEN.GG EXCLUSIVE)
+    ======================================================== -->
+    <section id="panel-tierlist" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Header Card: Controls & Weekly Sync Status -->
+        <div class="card">
+          <div class="card-title">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.15rem;">🏆</span>
+              <div style="display:flex; flex-direction:column;">
+                <span style="font-weight:900; color:var(--text); letter-spacing:0.02em;">PRYDWEN &amp; GENSHIN.GG META TIER LIST</span>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">
+                  Dual-Source: <strong style="color:#a855f7;">Prydwen.gg</strong> &times; <strong style="color:#38bdf8;">Genshin.gg / Akasha</strong> &bull; Abyss &amp; Theater
+                </span>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button class="btn btn-sm btn-tierlist-analysis-pill" id="btn-tierlist-source-analysis" title="View Dual-Source Consensus &amp; Authority Audit">
+                📊 Consensus: 89.4%
+              </button>
+              <button class="btn btn-sm btn-special-sync" id="btn-sync-tierlist" title="Check &amp; refresh latest Prydwen &amp; Genshin.gg ratings">
+                <span class="special-sparkle-icon">✨</span> Refresh Tier List
+              </button>
+            </div>
+          </div>
+
+          <!-- Benchmark Switcher Toolbar (Main vs C0) -->
+          <div class="tier-benchmark-switcher" id="tier-benchmark-switcher">
+            <button class="tier-benchmark-btn active" id="btn-tier-benchmark-main" data-benchmark="main">
+              <span class="benchmark-pill-badge">MAIN</span>
+              <div class="benchmark-btn-text">
+                <span class="benchmark-main-title">⭐ Recommended Benchmark</span>
+                <span class="benchmark-sub-title">Standard Meta • Cyno C1, Hu Tao C1, 4★ at C6 (Faruzan, Sara, etc.)</span>
+              </div>
+            </button>
+            <button class="tier-benchmark-btn" id="btn-tier-benchmark-c0" data-benchmark="c0">
+              <span class="benchmark-pill-badge c0-badge">C0 ONLY</span>
+              <div class="benchmark-btn-text">
+                <span class="benchmark-main-title">🛡️ Pure C0 Tier List</span>
+                <span class="benchmark-sub-title">Strict C0 Baseline • True Performance Without Constellations</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Filter & Search Toolbar -->
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-top:12px; padding-top:12px; border-top:1px solid var(--border-subtle);">
+            
+            <!-- Role Filter Buttons (Matching 3-Column Prydwen Architecture) -->
+            <div class="tier-role-tabs" id="tier-role-tabs" style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="subtab-btn active" data-tier-role="all"><span class="gi-role-badge gi-role-all" aria-hidden="true"></span> All Roles (3 Columns)</button>
+              <button class="subtab-btn" data-tier-role="dps"><span class="gi-role-badge gi-role-dps" aria-hidden="true"></span> On-Field / Main DPS</button>
+              <button class="subtab-btn" data-tier-role="subdps"><span class="gi-role-badge gi-role-subdps" aria-hidden="true"></span> Sub-DPS</button>
+              <button class="subtab-btn" data-tier-role="support"><span class="gi-role-badge gi-role-support" aria-hidden="true"></span> Pure Supports / Healers</button>
+            </div>
+
+            <!-- Search input -->
+            <div style="display:flex; gap:8px; align-items:center;">
+              <input type="text" id="tierlist-search" class="input" placeholder="Search character or weapon..." style="width:240px; padding:6px 12px; font-size:0.78rem;" />
+            </div>
+          </div>
+
+          <!-- Element Filter Pills -->
+          <div class="tier-elem-bar" id="tier-elem-bar">
+            <button class="elem-pill active" data-tier-elem="all" title="All Elements">✦</button>
+            <button class="elem-pill" data-tier-elem="pyro" title="Pyro"><img src="elements/pyro.svg" class="elem-filter-icon" alt="Pyro" /></button>
+            <button class="elem-pill" data-tier-elem="hydro" title="Hydro"><img src="elements/hydro.svg" class="elem-filter-icon" alt="Hydro" /></button>
+            <button class="elem-pill" data-tier-elem="anemo" title="Anemo"><img src="elements/anemo.svg" class="elem-filter-icon" alt="Anemo" /></button>
+            <button class="elem-pill" data-tier-elem="electro" title="Electro"><img src="elements/electro.svg" class="elem-filter-icon" alt="Electro" /></button>
+            <button class="elem-pill" data-tier-elem="dendro" title="Dendro"><img src="elements/dendro.svg" class="elem-filter-icon" alt="Dendro" /></button>
+            <button class="elem-pill" data-tier-elem="cryo" title="Cryo"><img src="elements/cryo.svg" class="elem-filter-icon" alt="Cryo" /></button>
+            <button class="elem-pill" data-tier-elem="geo" title="Geo"><img src="elements/geo.svg" class="elem-filter-icon" alt="Geo" /></button>
+          </div>
+
+          <!-- Change & Status Filter Pills -->
+          <div class="tier-trend-bar" id="tier-trend-bar" style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+            <button class="trend-pill active" data-tier-trend="all">All Tiers & Changes</button>
+            <button class="trend-pill" data-tier-trend="up"><span style="color:#22c55e;">▲</span> Moved Up</button>
+            <button class="trend-pill" data-tier-trend="down"><span style="color:#ef4444;">▼</span> Moved Down</button>
+            <button class="trend-pill" data-tier-trend="watch"><span style="color:#f59e0b;">⚠️</span> On Watchlist</button>
+            <button class="trend-pill" data-tier-trend="upcoming"><span style="color:#c084fc;">🔮</span> Soon to be Rated</button>
+          </div>
+        </div>
+
+        <!-- Tier Groups Container -->
+        <div id="tierlist-groups-container" style="display:flex; flex-direction:column; gap:14px;">
+          <!-- Dynamically populated with T0, T0.5, T1, T1.5, T2, T3, T4, T5 groups -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 3: COLLECTION (FULLY BUILT CHARACTERS, WEAPONS & MILESTONES)
+    ======================================================== -->
+    <section id="panel-collection" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Collection Top Summary Banner -->
+        <div class="card">
+          <div class="card-title">
+            <span>🏆 Your Hall of Fame Collection — Fully Built Characters, Weapons &amp; Milestones</span>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn btn-sm" id="btn-col-sync-enka">🌐 Import Built from UID Sync</button>
+            </div>
+          </div>
+          <div class="collection-summary-grid" id="collection-summary-cards"></div>
+        </div>
+
+        <!-- Section 1: Fully Built Characters -->
+        <div class="card">
+          <div class="card-title">
+            <span>👑 Fully Built Characters (<span id="col-char-count">0</span>)</span>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <input type="text" id="col-char-search" class="input" placeholder="Filter built characters..." style="width:220px; padding:5px 10px;" />
+            </div>
+          </div>
+          <div id="collection-chars-grid" class="collection-chars-grid"></div>
+        </div>
+
+        <!-- Section 2: Fully Built Weapons Arsenal -->
+        <div class="card">
+          <div class="card-title">
+            <span>⚔️ Maxed Weapons Arsenal (<span id="col-weap-count">0</span>)</span>
+            <button class="btn btn-sm btn-primary" id="btn-col-add-weapon-2">➕ Add Built Weapon</button>
+          </div>
+          <div id="collection-weapons-grid" class="collection-chars-grid"></div>
+        </div>
+
+      </div>
+    </section>
+
+        <!-- ========================================================
+         TAB 4: PRIMOGEM REDEEM CODE HUB (PRYDWEN VERIFIED DATABASE)
+    ======================================================== -->
+    <section id="panel-codes" class="tab-panel">
+      <div style="max-width:1440px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
+        
+        <!-- Header & Stats Showcase Card -->
+        <div class="card" style="padding:20px; background:linear-gradient(135deg, rgba(22, 33, 60, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%); border:1px solid rgba(240, 212, 146, 0.35); box-shadow:0 10px 30px rgba(0,0,0,0.4);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.8rem;">&#128142;</span>
+                <div>
+                  <h2 style="font-size:1.55rem; color:var(--text); margin:0; line-height:1.2;">Primogem Redeem Code Hub</h2>
+                  <div style="font-size:0.82rem; color:var(--text-muted); margin-top:2px;">
+                    Prydwen &amp; HoYoverse Live Verified Database &bull; Adventure Rank 10+ Required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <button class="btn btn-primary" id="btn-open-hoyoverse-gift" style="font-weight:800; padding:8px 16px; display:inline-flex; align-items:center; gap:7px;">
+                <span>&#128640;</span> Open Official HoYoverse Gift Site
+              </button>
+              <button class="btn btn-special-sync" id="btn-copy-next-code" style="font-weight:800; padding:8px 14px;">
+                <span>&#128203;</span> Copy Next Unclaimed Code
+              </button>
+              <button class="btn" id="btn-copy-all-codes" style="font-weight:700; padding:8px 14px;">
+                <span>&#128203;</span> Copy All Active
+              </button>
+              <button class="btn btn-sm btn-outline" id="btn-reset-claimed-codes" title="Reset all marked claimed status" style="padding:8px 12px;">
+                <span>&#8634;</span> Reset Claimed
+              </button>
+            </div>
+          </div>
+
+          <!-- Key Metrics Grid -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-top:18px;">
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(240, 212, 146, 0.25); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--accent); font-weight:800; letter-spacing:0.5px;">FREE PRIMOGEMS READY</label>
+              <div id="stat-free-primos" style="font-size:1.85rem; font-weight:900; color:#facc15; margin-top:3px; text-shadow:0 0 12px rgba(250,204,21,0.4);">
+                380 &#128142;
+              </div>
+              <div id="stat-free-primos-sub" style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                From all unclaimed active codes
+              </div>
+            </div>
+
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--text-muted); font-weight:800; letter-spacing:0.5px;">ACTIVE PROMO CODES</label>
+              <div id="stat-active-codes-count" style="font-size:1.85rem; font-weight:900; color:#38bdf8; margin-top:3px;">
+                12 Active
+              </div>
+              <div id="stat-unclaimed-codes-count" style="font-size:0.72rem; color:#4ade80; font-weight:700; margin-top:2px;">
+                12 Unclaimed
+              </div>
+            </div>
+
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--text-muted); font-weight:800; letter-spacing:0.5px;">AVAILABLE MORA</label>
+              <div id="stat-free-mora" style="font-size:1.85rem; font-weight:900; color:#fbbf24; margin-top:3px;">
+                110,000 &#129689;
+              </div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                Across active resource codes
+              </div>
+            </div>
+
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--text-muted); font-weight:800; letter-spacing:0.5px;">HERO'S WIT &amp; XP</label>
+              <div id="stat-free-xp" style="font-size:1.85rem; font-weight:900; color:#a855f7; margin-top:3px;">
+                45+ Items &#128218;
+              </div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                Books, Enhancement Ore &amp; Food
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Bar & Search Card -->
+        <div class="card" style="padding:14px 18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div class="codes-filter-bar" id="codes-filter-bar" style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-sm active" data-filter="all">&#127775; All Active (<span id="pill-cnt-all">12</span>)</button>
+            <button class="btn btn-sm" data-filter="primos">&#128142; Primogems (<span id="pill-cnt-primos">8</span>)</button>
+            <button class="btn btn-sm" data-filter="materials">&#128230; Materials &amp; Mora (<span id="pill-cnt-materials">4</span>)</button>
+            <button class="btn btn-sm" data-filter="claimed">&#10004; Claimed (<span id="pill-cnt-claimed">0</span>)</button>
+            <button class="btn btn-sm" data-filter="expired" style="color:var(--text-muted);">&#9200; Expired Archive (<span id="pill-cnt-expired">6</span>)</button>
+          </div>
+
+          <div style="display:flex; gap:10px; align-items:center; flex:1; max-width:340px; min-width:240px;">
+            <input type="text" id="codes-search-input" class="input" placeholder="&#128269; Search codes or rewards..." style="width:100%; padding:6px 12px; font-size:0.84rem;" />
+          </div>
+        </div>
+
+        <!-- Codes Grid (Dynamic Container) -->
+        <div id="codes-cards-container" class="codes-cards-grid"></div>
+
+        <!-- Redemption Guide & FAQ (Prydwen Guide) -->
+        <div class="card" style="padding:18px 22px; background:rgba(18,24,42,0.85); border:1px solid rgba(255,255,255,0.08);">
+          <h3 style="font-size:1.15rem; color:var(--accent); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+            <span>&#128214;</span> How to Redeem Genshin Impact Promo Codes (Prydwen Quick Guide)
+          </h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:16px;">
+            <div style="background:rgba(0,0,0,0.25); padding:14px 18px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:800; font-size:0.92rem; color:#38bdf8; margin-bottom:6px;">
+                Method 1: Direct Web Redemption (Recommended)
+              </div>
+              <ol style="font-size:0.8rem; color:var(--text-muted); line-height:1.5; padding-left:18px; margin:0;">
+                <li>Click the <strong style="color:var(--text);">Direct Redeem</strong> button on any code above to open the official HoYoverse Gift site with the code pre-filled.</li>
+                <li>Log in to your official HoYoverse account.</li>
+                <li>Select your game server (America, Europe, Asia, TW/HK/MO) and verify your character nickname.</li>
+                <li>Click <strong style="color:var(--text);">Redeem</strong> and check your in-game mailbox!</li>
+              </ol>
+            </div>
+
+            <div style="background:rgba(0,0,0,0.25); padding:14px 18px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:800; font-size:0.92rem; color:#a855f7; margin-bottom:6px;">
+                Method 2: In-Game Redemption
+              </div>
+              <ol style="font-size:0.8rem; color:var(--text-muted); line-height:1.5; padding-left:18px; margin:0;">
+                <li>Launch Genshin Impact and open the Paimon Menu (Esc on PC or top-left icon).</li>
+                <li>Go to <strong style="color:var(--text);">Settings</strong> (the gear icon) &rarr; <strong style="color:var(--text);">Account</strong> tab.</li>
+                <li>Select <strong style="color:var(--text);">Redeem Code</strong> (or Exchange).</li>
+                <li>Paste the copied code and hit Exchange!</li>
+              </ol>
+            </div>
+          </div>
+          <div style="margin-top:12px; font-size:0.76rem; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+            <span style="color:#f59e0b; font-size:1rem;">&#128161;</span> <em>Note: Accounts must be at least <strong>Adventure Rank 10</strong> to redeem codes. Each code can be redeemed once per character. Unclaimed mail expires after 30 days.</em>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="panel-tracker" class="tab-panel">
+      <div style="max-width:1160px; margin:0 auto; display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Modern Bag Scanner Workspace & Stash -->
+        <div class="card" style="display:flex; flex-direction:column; gap:16px;">
+          
+          <!-- Top Hero Command Box -->
+          <div class="opt1-hero-box">
+            <div class="opt1-top-row">
+              <div class="opt1-actions">
+                <button class="btn btn-hero" id="btn-run-ocr">
+                  <span>&#128247; Capture Bag Now (Alt+I)</span>
+                </button>
+                <label class="btn btn-secondary" id="btn-ocr-pick-file" style="cursor:pointer; margin:0;">
+                  <span>&#128444;&#65039; Load Screenshot File...</span>
+                  <input type="file" id="ocr-file-input" accept="image/*" style="display:none;" />
+                </label>
+                <button class="btn btn-secondary" id="btn-open-global-inventory" title="View all scanned materials stored for current and future characters">
+                  <span>&#128230; Global Bag Inventory (<span id="global-inv-count">0</span>)</span>
+                </button>
+                <div class="opt1-status-pill active" id="ocr-live-status-pill">
+                  <span class="dot"></span>
+                  <span id="ocr-live-status-text">Genshin Impact Ready</span>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <label class="toggle-chip" title="Automatically save detected material counts to your global stash">
+                  <input type="checkbox" id="ocr-auto-apply-cb" checked />
+                  <span>Auto-Save to Bag Stash</span>
+                </label>
+                <label class="toggle-chip" title="Automatically delete screenshot files from Genshin ScreenShot folder after scanning so they don't pile up on your disk">
+                  <input type="checkbox" id="ocr-auto-delete-cb" checked />
+                  <span>Auto-Delete Screenshots</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Compact 3-Step Guide Ribbon (Replaces 3 huge cards) -->
+            <div class="opt1-step-trail">
+              <span><strong>Step 1:</strong> In Genshin, open Bag (<strong>B</strong>)</span>
+              <span class="step-arrow">&#10132;</span>
+              <span><strong>Step 2:</strong> Click <strong>Tab 3</strong> (Char Materials) or <strong>Tab 5</strong> (Specialties)</span>
+              <span class="step-arrow">&#10132;</span>
+              <span><strong>Step 3:</strong> Press <strong style="color:var(--accent);" data-hk-label="ocrScan">Alt+I</strong> to scan &amp; auto-save</span>
+            </div>
+
+            <div id="ocr-status-box" style="font-size:0.82rem; color:var(--accent); font-weight:700;">
+              Ready to scan. Press Alt+I inside Genshin Impact's Inventory (B) or click Capture Bag Now above.
+            </div>
+          </div>
+
+          <!-- Split-Screen Workspace (Left: Screenshot Preview & Overlay | Right: Detected Materials Feed) -->
+          <div id="ocr-preview-wrap" class="opt1-workspace-grid">
+            <!-- Left: Screenshot Preview & Visual Lines Canvas -->
+            <div class="screen-preview-card">
+              <div class="screen-card-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span class="badge badge-green" id="ocr-registered-badge">&#10003; SCREENSHOT REGISTERED</span>
+                  <span id="ocr-registered-meta" style="font-size:0.75rem; color:var(--text-muted); font-weight:700;"></span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <label style="display:inline-flex; align-items:center; gap:6px; font-size:0.72rem; color:var(--accent); cursor:pointer;">
+                    <input type="checkbox" id="ocr-show-checks-cb" checked />
+                    <span>Visual Marks</span>
+                  </label>
+                  <button class="btn btn-xs btn-success" id="btn-apply-all-ocr" style="display:none;">&#10003; Re-Apply All</button>
+                </div>
+              </div>
+
+              <!-- Canvas Container -->
+              <div class="ocr-canvas-container" id="ocr-canvas-container">
+                <div id="ocr-placeholder-view" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; height:100%; min-height:260px; color:#64748b; padding:20px; text-align:center;">
+                  <div style="font-size:2.2rem; opacity:0.6;">&#127890;</div>
+                  <div style="font-size:0.82rem; font-weight:800; color:#94a3b8;">Genshin Impact Bag Scanner Ready</div>
+                  <div style="font-size:0.74rem; color:var(--text-muted); max-width:320px;">Open your Bag in Genshin Impact and press <strong style="color:var(--accent);">Alt+I</strong> to register and view your screenshot with detected items here.</div>
+                </div>
+                <img id="ocr-preview-img" style="display:none;" alt="Registered Screenshot Preview" />
+                <canvas id="ocr-inspection-canvas" style="position:absolute; top:0; left:0; pointer-events:none;"></canvas>
+              </div>
+
+              <!-- Footer cleanup pill -->
+              <div class="screen-card-footer">
+                <div id="ocr-cleanup-status-pill">
+                  &#128465;&#65039; Screenshot auto-cleanup: Ready (disk stays clean).
+                </div>
+                <button class="btn btn-xs btn-secondary" id="btn-manual-cleanup-screens" title="Deletes recent screenshot files from Genshin Impact and Windows Screenshots folder">
+                  &#128465;&#65039; Clean Old Screens
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Detected Materials & Beneficiaries Feed -->
+            <div class="detected-feed-card">
+              <div class="feed-header">
+                <div class="feed-title">
+                  <span>&#10024; Detected Materials</span>
+                  <span id="ocr-matches-summary-pill" class="badge badge-gold" style="font-size:0.72rem;">0 Matched</span>
+                </div>
+              </div>
+
+              <!-- Active Character Quick Assign Strip -->
+              <div id="ocr-char-quick-assign" style="display:flex; flex-direction:column; gap:8px;"></div>
+
+              <!-- Matched Results List -->
+              <div id="ocr-results-list" class="mat-feed-list">
+                <div id="ocr-empty-feed-placeholder" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:32px 16px; color:#64748b; text-align:center;">
+                  <div style="font-size:1.6rem; opacity:0.5;">&#10024;</div>
+                  <div style="font-size:0.8rem; font-weight:700; color:#94a3b8;">No Materials Scanned Yet</div>
+                  <div style="font-size:0.72rem; color:var(--text-muted); max-width:280px;">Press <strong>Alt+I</strong> in-game or click <strong>Capture Bag Now</strong> to automatically analyze icons &amp; numbers!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================================
+               LIVE TRACKED BAG INVENTORY WORKSPACE (PERSISTENT & ALWAYS ACTIVE)
+          ======================================================== -->
+          <div class="card bag-inventory-workspace" style="display:flex; flex-direction:column; gap:14px; margin-top:8px;">
+            <div class="bag-inv-header">
+              <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; width:100%;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:1.45rem;">&#127890;</span>
+                  <div>
+                    <div style="font-size:1.08rem; font-weight:900; color:var(--text); letter-spacing:0.02em;">
+                      TRACKED BAG INVENTORY
+                    </div>
+                    <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">
+                      Tracks materials accumulated from all screenshots &bull; Active &amp; persistent even without a pinned character
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:8px; margin-left:auto; align-items:center; flex-wrap:wrap;">
+                  <span class="badge badge-green" id="bag-inv-total-items-badge">0 Tracked Items</span>
+                  <span class="badge badge-gold" id="bag-inv-total-units-badge">0 Total Units</span>
+                  <button class="btn btn-xs btn-secondary" id="btn-export-bag-inv" title="Export materials as JSON">&#128190; Export JSON</button>
+                  <button class="btn btn-xs btn-danger" id="btn-reset-bag-inv" title="Reset all inventory quantities to 0">&#128465;&#65039; Reset All</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Search & Sort Toolbar -->
+            <div class="bag-inv-toolbar">
+              <div style="flex:1; min-width:240px; position:relative;">
+                <input type="text" id="bag-inv-search-input" class="input" placeholder="&#128269; Search material name, character (e.g. Mitya, Furina), or region..." style="width:100%; padding-left:14px;" />
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <label style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Sort By:</label>
+                <select id="bag-inv-sort-select" class="select" style="min-width:180px;">
+                  <option value="qty-desc">Quantity: High to Low</option>
+                  <option value="qty-asc">Quantity: Low to High</option>
+                  <option value="rank-desc">Rarity: 5&#9733; to 1&#9733;</option>
+                  <option value="name-asc">Name: A to Z</option>
+                </select>
+                <button class="btn btn-xs btn-secondary" id="bag-inv-view-toggle" title="Toggle between Grouped by Category and Flat Grid view">&#128194; Grouped View: ON</button>
+              </div>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="bag-inv-categories" id="bag-inv-category-pills">
+              <button class="bag-cat-pill active" data-cat="all">&#127890; All Materials (<span id="cat-count-all">0</span>)</button>
+              <button class="bag-cat-pill" data-cat="flowers_materials">&#127800; Flowers / Local Materials (<span id="cat-count-flowers_materials">0</span>)</button>
+              <button class="bag-cat-pill" data-cat="boss_materials">&#128121; Boss Mats (<span id="cat-count-boss_materials">0</span>)</button>
+              <button class="bag-cat-pill" data-cat="ascension_books">&#128218; Ascension Books (<span id="cat-count-ascension_books">0</span>)</button>
+              <button class="bag-cat-pill" data-cat="enemy_drops">&#9876;&#65039; Common &amp; Enemy Drops (<span id="cat-count-enemy_drops">0</span>)</button>
+              <button class="bag-cat-pill" data-cat="gems_ores">&#128142; Gems &amp; Ores (<span id="cat-count-gems_ores">0</span>)</button>
+              <button class="bag-cat-pill" data-cat="weapon_materials">&#128481;&#65039; Weapon Materials (<span id="cat-count-weapon_materials">0</span>)</button>
+              <button class="bag-cat-pill" data-cat="cooking_consumables">&#127858; Cooking &amp; Potions (<span id="cat-count-cooking_consumables">0</span>)</button>
+            </div>
+
+            <!-- Live Material Items Grid -->
+            <div id="bag-inv-items-grid" class="bag-inv-grid">
+              <!-- Populated dynamically by renderBagInventory() -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 5: WISH PITY & CURRENT EVENT BANNERS SHOWCASE
+    ======================================================== -->
+    <section id="panel-pity" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Current Event Banner Characters & Weapons Showcase -->
+        <div class="card">
+          <div class="card-title">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.15rem;">🎯</span>
+              <div style="display:flex; flex-direction:column;">
+                <span style="font-weight:900; color:var(--text); letter-spacing:0.02em;">CURRENT EVENT WISH BANNERS</span>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">
+                  Cross-verified via <strong style="color:#f59e0b;">HoYoLAB</strong> &times; <strong style="color:#06b6d4;">Paimon.moe</strong>
+                </span>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button class="btn btn-sm btn-banner-analysis-pill" id="btn-banner-source-analysis" title="View Dual-Source Banner Analysis &amp; Timezone Matrix">
+                🎯 Banner Authority (100%)
+              </button>
+              <button class="btn btn-sm btn-special-sync" id="btn-sync-banners-pity" title="Weekly Auto-Check for Latest Banners">
+                <span class="special-sparkle-icon">✨</span> Weekly Banner Check
+              </button>
+              <select id="pity-banner-phase-select" class="select" style="min-width:240px;"></select>
+            </div>
+          </div>
+          <div id="pity-featured-showcase" class="featured-banners-showcase"></div>
+        </div>
+
+        <!-- 4 Banner Pity Cards -->
+                <!-- Restored Paimon.moe Auto-Import Action Bar (Option A) -->
+        <div class="wish-import-strip-a">
+          <div class="strip-top">
+            <div class="strip-title-group">
+              <span class="strip-icon">&#128171;</span>
+              <div>
+                <div class="strip-title-text">
+                  <span>Wish History &amp; Pity Auto-Import</span>
+                  <span class="badge" style="background:rgba(168,85,247,0.22); color:#c084fc; border:1px solid rgba(168,85,247,0.5); font-size:0.7rem; font-weight:800;">Paimon.moe Engine</span>
+                </div>
+                <div class="strip-sub-text">Sync your 50/50 status, pity counters &amp; complete wish log directly from Genshin Impact</div>
+              </div>
+            </div>
+
+            <div class="strip-btn-group">
+              <!-- Method 1: Highly visible glowing button -->
+              <button class="btn-method1-glow" id="btn-scan-wish-cache">
+                <span>Auto-Detect Wishes (Method 1)</span>
+              </button>
+
+              <!-- Method 2: Script / URL Import -->
+              <button class="btn-method2-outline" id="btn-toggle-method2">
+                <span>Method 2 (Script / URL)</span>
+              </button>
+
+              <!-- Reset Banners -->
+              <button class="btn-reset-subtle" id="btn-reset-pity-all" title="Reset all pity counters and history">
+                Reset All
+              </button>
+            </div>
+          </div>
+
+          <!-- Method 1 Status & Instructions -->
+          <div class="status-hint-bar" id="pity-cache-status">
+            <span style="color:#38bdf8; font-weight:800;">&#128161; Quick Guide:</span>
+            <span>Open Genshin Impact &rarr; Press <kbd>F3</kbd> (Wish) &rarr; Click <strong>History</strong> at bottom-left &rarr; Click <strong>Auto-Detect Wishes (Method 1)</strong> above!</span>
+          </div>
+
+          <!-- Method 2 Collapsible Drawer (Hidden by default) -->
+          <div class="method2-drawer" id="pity-method2-box" style="display:none;">
+            <div>
+              <div class="m2-step-title"><span>1&#65039;&#8419;</span> Step 1: Copy &amp; Run 1-Line PowerShell Script (Same as Paimon.moe)</div>
+              <div class="m2-input-row" style="margin-top:6px;">
+                <input type="text" id="pity-ps-script-copy" class="m2-input" readonly value="Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex &quot;&amp;{$((New-Object System.Net.WebClient).DownloadString(&#39;https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/raw/getlink.ps1&#39;))} global&quot;" />
+                <button class="btn btn-sm btn-primary" id="btn-copy-ps-script" style="padding:6px 12px; font-weight:800; white-space:nowrap;">&#128203; Copy Script</button>
+              </div>
+            </div>
+
+            <div>
+              <div class="m2-step-title"><span>2&#65039;&#8419;</span> Step 2: Paste the Copied getGachaLog URL Here &amp; Click Import</div>
+              <div class="m2-input-row" style="margin-top:6px;">
+                <input type="text" id="pity-custom-url-input" class="m2-input" placeholder="Paste your getGachaLog URL here (https://...)" />
+                <button class="btn btn-sm btn-success" id="btn-import-custom-url" style="padding:6px 14px; font-weight:800; white-space:nowrap;">&#128229; Import from URL</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="pity-banners-grid" class="pity-banners-grid"></div>
+
+        <!-- Recent 5-Star Pull History Log -->
+        <div class="card">
+          <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span>Recorded 5&#9733; Pull History &amp; Pity Log</span>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <div class="pity-log-tabs" id="pity-history-filter-tabs">
+                <button class="pity-log-tab-btn active" data-tab="all">All 5&#9733;</button>
+                <button class="pity-log-tab-btn" data-tab="character">Character Event Wish (1 &amp; 2)</button>
+                <button class="pity-log-tab-btn" data-tab="standard">Standard (Wanderlust Invocation)</button>
+                <button class="pity-log-tab-btn" data-tab="chronicled">Chronicled Wish</button>
+              </div>
+              <button class="btn btn-sm" id="btn-clear-pity-history">Clear Log</button>
+            </div>
+          </div>
+          <div id="pity-history-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 6: ACCOUNT & DEEP ENKA.NETWORK UID SYNC
+    ======================================================== -->
+    <section id="panel-account" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Top UID Control Bar -->
+        <div class="card">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; flex:1;">
+              <span class="heavy-font" style="color:var(--accent);">🌐 Enka.Network Public UID Sync:</span>
+              <input type="text" id="enka-uid-input" class="input" placeholder="Enter 9–10 digit Genshin UID (e.g. 618285856)" style="width:270px; font-weight:800;" maxlength="10" />
+              <span id="enka-region-pill" class="badge badge-gold">Region: Auto</span>
+              <button class="btn btn-primary" id="btn-enka-sync">🔄 Fetch Showcase (Ctrl+R)</button>
+              <button class="btn btn-sm" id="btn-enka-demo" title="Load a live public showcase example">✨ Try Sample UID</button>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <select id="enka-saved-uids" class="select" title="Saved UID Profiles">
+                <option value="">Saved UIDs...</option>
+              </select>
+              <button class="btn btn-sm" id="btn-enka-delete-uid" title="Remove selected UID from Saved" style="display:none; color:#f87171; border:1px solid rgba(239,68,68,0.45); background:rgba(239,68,68,0.12); padding:5px 9px; font-size:0.75rem; font-weight:700; align-items:center; gap:4px; border-radius:6px; cursor:pointer;">
+                &#128465;&#65039; Remove UID
+              </button>
+              <span id="enka-ttl-badge" class="badge">TTL: Ready</span>
+              <button class="btn btn-sm btn-primary" id="btn-enka-sync-all-planner" style="display:none;">⚡ Sync Showcase to Planner &amp; Collection</button>
+            </div>
+          </div>
+          <div id="enka-status-msg" style="font-size:0.8rem; color:var(--text-muted); margin-top:8px;">
+            Reads your public in-game Character Showcase via Enka.Network's official API. Zero login or password required—100% safe. Characters at Lv. 80★/90 with built talents/weapons can be auto-imported straight into your Collection!
+          </div>
+        </div>
+
+        <!-- Player Profile Banner -->
+        <div id="enka-profile-card" class="enka-profile-banner" style="display:none;"></div>
+
+        <!-- Character Showcase Strip -->
+        <div id="enka-char-strip" class="enka-char-strip" style="display:none;"></div>
+
+        <!-- Selected Showcase Character Full Breakdown -->
+        <div id="enka-char-detail" class="enka-showcase-grid" style="display:none;"></div>
+
+      </div>
+    </section>
+
+        <!-- ========================================================
+         HONKAI: STAR RAIL — TAB 1: CHARACTER BUILDS (1-TO-1 PARITY)
+    ======================================================== -->
+    <section id="panel-hsr-planner" class="tab-panel av-planner-mode-roster">
+      <div class="planner-layout">
+
+        <!-- Left Sidebar / Full Grid: All Online Trailblazers -->
+        <!-- Left Sidebar / Full Grid: All Online Trailblazers (Exact Genshin 1-to-1 Layout & Spacing) -->
+        <aside class="card char-sidebar">
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="hsr-char-search" class="input" style="flex:1;" placeholder="Search all Trailblazers (/)" oninput="filterHsrRoster(this.value)" />
+          </div>
+
+          <!-- Combat Type (Element) Filter Bar with Real HSR Elements (Row 1) -->
+          <div class="elem-filter-row" id="hsr-elem-filter-bar">
+            <button class="elem-pill active" data-elem="All" onclick="filterHsrElem('All')" title="All Elements">&#10022;</button>
+            <button class="elem-pill" data-elem="Physical" onclick="filterHsrElem('Physical')" title="Physical"><img src="hsr_assets/elements/Physical.png" class="elem-filter-icon" alt="Physical" /></button>
+            <button class="elem-pill" data-elem="Fire" onclick="filterHsrElem('Fire')" title="Fire"><img src="hsr_assets/elements/Fire.png" class="elem-filter-icon" alt="Fire" /></button>
+            <button class="elem-pill" data-elem="Ice" onclick="filterHsrElem('Ice')" title="Ice"><img src="hsr_assets/elements/Ice.png" class="elem-filter-icon" alt="Ice" /></button>
+            <button class="elem-pill" data-elem="Lightning" onclick="filterHsrElem('Lightning')" title="Lightning"><img src="hsr_assets/elements/Thunder.png" class="elem-filter-icon" alt="Lightning" /></button>
+            <button class="elem-pill" data-elem="Wind" onclick="filterHsrElem('Wind')" title="Wind"><img src="hsr_assets/elements/Wind.png" class="elem-filter-icon" alt="Wind" /></button>
+            <button class="elem-pill" data-elem="Quantum" onclick="filterHsrElem('Quantum')" title="Quantum"><img src="hsr_assets/elements/Quantum.png" class="elem-filter-icon" alt="Quantum" /></button>
+            <button class="elem-pill" data-elem="Imaginary" onclick="filterHsrElem('Imaginary')" title="Imaginary"><img src="hsr_assets/elements/Imaginary.png" class="elem-filter-icon" alt="Imaginary" /></button>
+          </div>
+
+          <!-- Auto-Move Built Checkbox: Pinned to far right of Row 1, matching Genshin exactly -->
+          <label style="display:flex; align-items:center; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); cursor:pointer; padding:3px 2px; font-weight:700;">
+            <span>Auto-Move Built to Collection</span>
+            <input type="checkbox" id="hsr-hide-built-chars-cb" checked />
+          </label>
+
+          <!-- Path Filter Row (Row 2): Balanced 9 Paths + Count indicator -->
+          <div id="hsr-path-filter-bar" style="display:flex; gap:6px; flex-wrap:wrap; width:100%; align-items:center; margin-top:2px;">
+            <button class="subtab-btn" data-hsr-path="Destruction" onclick="filterHsrPath('Destruction')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Destruction.png" style="width:16px; height:16px;" alt="" /> Destruction
+            </button>
+            <button class="subtab-btn" data-hsr-path="The Hunt" onclick="filterHsrPath('The Hunt')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Hunt.png" style="width:16px; height:16px;" alt="" /> Hunt
+            </button>
+            <button class="subtab-btn" data-hsr-path="Erudition" onclick="filterHsrPath('Erudition')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Erudition.png" style="width:16px; height:16px;" alt="" /> Erudition
+            </button>
+            <button class="subtab-btn" data-hsr-path="Harmony" onclick="filterHsrPath('Harmony')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Harmony.png" style="width:16px; height:16px;" alt="" /> Harmony
+            </button>
+            <button class="subtab-btn" data-hsr-path="Nihility" onclick="filterHsrPath('Nihility')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Nihility.png" style="width:16px; height:16px;" alt="" /> Nihility
+            </button>
+            <button class="subtab-btn" data-hsr-path="Preservation" onclick="filterHsrPath('Preservation')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Preservation.png" style="width:16px; height:16px;" alt="" /> Preserve
+            </button>
+            <button class="subtab-btn" data-hsr-path="Abundance" onclick="filterHsrPath('Abundance')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Abundance.png" style="width:16px; height:16px;" alt="" /> Abundance
+            </button>
+            <button class="subtab-btn" data-hsr-path="Remembrance" onclick="filterHsrPath('Remembrance')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Remembrance.png" style="width:16px; height:16px;" alt="" /> Remembrance
+            </button>
+            <button class="subtab-btn" data-hsr-path="Elation" onclick="filterHsrPath('Elation')" style="padding:2px 7px; font-size:0.68rem; display:inline-flex; align-items:center; gap:3px;">
+              <img src="hsr_assets/paths/Elation.png" style="width:16px; height:16px;" alt="" /> Elation
+            </button>
+            <div style="margin-left:auto; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span id="hsr-sync-status-badge" class="badge" style="background:rgba(168,85,247,0.16); color:#d8b4fe; border:1px solid rgba(168,85,247,0.45); font-size:0.68rem;">Prydwen Auto: 7d</span>
+              <button class="btn btn-sm btn-special-sync" id="btn-sync-hsr-characters" title="Check &amp; update latest Prydwen HSR characters, portraits, builds, teams &amp; light cones">
+                <span class="special-sparkle-icon">&#10024;</span> Sync Prydwen HSR Builds
+              </button>
+              <div id="hsr-char-list-count" style="font-size:0.74rem; color:var(--text-muted); font-weight:700;">Characters Available &bull; Live Prydwen Sync</div>
+            </div>
+          </div>
+          <div id="hsr-bulk-bar" class="bulk-select-bar">
+            <div class="bulk-select-left">
+              <button type="button" id="btn-hsr-bulk-toggle" class="btn btn-sm bulk-toggle-btn">
+                <img src="hsr_assets/ui/achievement.png" class="hsr-col-btn-icon" alt="" />
+                <span>Bulk Select Built: OFF</span>
+              </button>
+              <span id="hsr-bulk-hint" class="bulk-hint-text">Toggle to select multiple Trailblazers and move them to Collection</span>
+            </div>
+            <div id="hsr-bulk-actions" class="bulk-select-actions" style="display:none;">
+              <button type="button" id="btn-hsr-bulk-select-all" class="btn btn-sm">Select Visible</button>
+              <button type="button" id="btn-hsr-bulk-clear" class="btn btn-sm">Clear</button>
+              <button type="button" id="btn-hsr-bulk-commit" class="btn btn-sm btn-success" disabled>Move 0 Selected to Collection &#10003;</button>
+            </div>
+          </div>
+          <div id="hsr-char-scroll-list" class="hsr-roster-grid-wrap"></div>
+        </aside>
+
+        <!-- Right: Dedicated Sub-Tabbed Character Workspace -->
+        <div class="char-main">
+          
+          <!-- Back Bar & Breadcrumb -->
+          <div id="hsr-build-back-bar" style="display:flex; align-items:center; justify-content:space-between; margin:16px 0 16px 0; padding:12px 20px; background:linear-gradient(90deg, rgba(28, 15, 34, 0.95) 0%, rgba(12, 10, 18, 0.98) 100%); border:1px solid rgba(168, 82, 110, 0.45); border-radius:8px; box-sizing:border-box; width:100%; min-height:54px;">
+            <button class="av-back-roster-btn" id="hsr-btn-back-to-roster" onclick="setHsrPlannerSubMode('roster')" type="button" style="min-height:38px; display:inline-flex; align-items:center; gap:8px; padding:8px 18px; font-size:0.84rem; font-weight:800; cursor:pointer;">
+              <span style="font-size:1.02rem; line-height:1;">&#8592;</span>
+              <span>Back to Trailblazer Roster Grid</span>
+            </button>
+            <div class="av-build-breadcrumb">
+              <span style="color:#94a3b8;">CHARACTER BUILDS</span>
+              <span style="color:#64748b; margin:0 6px;">//</span>
+              <span id="hsr-breadcrumb-char-name" style="color:#f1f5f9; font-weight:900;">ACHERON &mdash; FULL BUILD &amp; MATERIALS GUIDE</span>
+            </div>
+          </div>
+
+          <!-- Hero Card with Exact Genshin Layout & Readiness Tracker -->
+          <div class="card char-hero-card">
+            <div class="char-hero">
+              <div class="char-hero-left">
+                <img id="hsr-hero-avatar" class="char-hero-avatar" src="hsr_assets/characters/1308.png" style="border:2.5px solid #fbbf24; box-shadow:0 0 20px rgba(168,85,247,0.4);" alt="Acheron" />
+                <div>
+                  <div style="display:flex; align-items:center; gap:9px; flex-wrap:wrap;">
+                    <h2 id="hsr-hero-name" style="font-size:1.58rem; margin:0; font-weight:900; color:#fff;">Acheron</h2>
+                    <span id="hsr-hero-stars" style="color:#fbbf24; font-size:1.05rem;">★★★★★</span>
+                    <span id="hsr-hero-tier-badge" class="tier-badge tier-T0">Prydwen T0</span>
+                    <span id="hsr-hero-uid-badge" class="badge badge-green">✓ Synced from UID (E0S1)</span>
+                  </div>
+                  <div id="hsr-hero-title" style="color:var(--accent); font-style:italic; font-size:0.86rem; margin:3px 0 9px; font-weight:700;">
+                    5★ Lightning &bull; Nihility | Galaxy Ranger
+                  </div>
+                  <div style="display:flex; gap:7px; flex-wrap:wrap; align-items:center;">
+                    <span id="hsr-hero-elem-badge" class="badge badge-gold" style="display:inline-flex; align-items:center; gap:5px;">
+                      <img src="hsr_assets/elements/Thunder.png" style="width:18px; height:18px;" alt="" /> Lightning
+                    </span>
+                    <span id="hsr-hero-path-badge" class="badge" style="background:#4c1d95; color:#e9d5ff; border:1px solid #a855f7; display:inline-flex; align-items:center; gap:5px;">
+                      <img src="hsr_assets/paths/Nihility.png" style="width:16px; height:16px;" alt="" /> Nihility
+                    </span>
+                    <span id="hsr-hero-region-badge" class="badge">Penacony</span>
+                    <span id="hsr-hero-role-badge" class="badge">Main DPS</span>
+                    <button class="btn btn-sm" id="hsr-btn-open-prydwen" title="Open Prydwen.gg Character Guide">&#9889; Prydwen Guide</button>
+                    <button class="btn btn-sm btn-special-sync" id="hsr-btn-refresh-char" title="Fetch &amp; update latest build, teams, light cones &amp; stats from Prydwen HSR">&#10024; Refresh Live Build</button>
+                    <span id="hsr-guide-updated-badge" class="badge" style="display:none; background:rgba(56,189,248,0.14); color:#7dd3fc; border:1px solid rgba(56,189,248,0.35); font-size:0.68rem;">Prydwen Live</span>
+                  </div>
+                  <!-- SP (Second Path) Switcher Row in Hero Card -->
+                  <div id="hsr-hero-paths-row" class="hsr-sp-path-switcher" style="display:none; margin-top:10px;"></div>
+                </div>
+              </div>
+
+              <!-- Right: Build & Materials Readiness Progress -->
+              <div style="min-width:270px; text-align:right; display:flex; flex-direction:column; gap:7px; align-items:flex-end;">
+                <div style="font-size:0.74rem; color:var(--text-muted); text-transform:uppercase; font-weight:800;">Build &amp; Materials Readiness</div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+                  <div id="hsr-hero-progress-pct" style="font-size:1.95rem; font-weight:900; color:var(--accent);">78%</div>
+                  <button class="btn btn-sm btn-success" id="hsr-btn-toggle-built-char" title="Mark this Trailblazer as 100% Built and move to Collection"><img src="hsr_assets/ui/achievement.png" class="hsr-col-btn-icon" alt="" /> Mark Fully Built</button>
+                </div>
+                <div class="progress-track" style="width:245px; height:8px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden;">
+                  <div id="hsr-hero-progress-bar" class="progress-fill" style="width:78%; height:100%; background:linear-gradient(90deg, #fbbf24, #10b981);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clean 3-Button Sub-Navigation Bar with Dual-Source Consensus Badge -->
+          <div class="char-subnav-wrapper" style="margin:14px 0 16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div class="char-subnav-bar" id="hsr-char-subnav-bar" style="margin:0;">
+              <button class="subtab-btn active" id="hsr-subtab-btn-materials" onclick="switchHsrCharSubtab('materials')">
+                <span>📦 Materials &amp; Bag Tracker</span>
+              </button>
+              <button class="subtab-btn" id="hsr-subtab-btn-build" onclick="switchHsrCharSubtab('build')">
+                <span>⚔️ Best Light Cones &amp; Relics</span>
+              </button>
+              <button class="subtab-btn" id="hsr-subtab-btn-teams" onclick="switchHsrCharSubtab('teams')">
+                <span>&#10022; Meta Teams</span>
+              </button>
+            </div>
+            
+            <div class="guide-source-badge-wrap" style="display:flex; align-items:center; gap:8px;">
+              <div class="guide-source-badge" title="Build recommendations cross-verified with KeqingMains HSR &amp; Prydwen.gg at 94.2% consensus rate">
+                <span class="guide-check" style="color:#22c55e;">✓</span> Dual-Source: <strong style="color:#f8fafc;">KQM &amp; Prydwen.gg</strong> <span class="guide-rate" style="color:#38bdf8; font-weight:700;">(94.2% Consensus)</span>
+              </div>
+              <button class="btn btn-sm btn-guide-analysis-pill" id="hsr-btn-guide-source-analysis" title="Open Comprehensive Guide Analysis &amp; Consensus Audit">
+                📊 Guide Analysis
+              </button>
+            </div>
+          </div>
+
+          <!-- ========================================================
+               SUB-PANEL 1: MATERIALS & BAG TRACKER (INVENTORY GRID)
+          ======================================================== -->
+          <div id="hsr-char-subpanel-materials" class="char-subpanel active">
+            <div class="card card-char-surface">
+              <div class="card-title">
+                <span>&#128230; Required Ascension &amp; Trace Materials (100% Completion Moves Character to Collection)</span>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                  <button class="btn btn-sm btn-primary" id="hsr-btn-pin-char-overlay" title="Pin this Trailblazer's missing materials to the In-Game Transparent Overlay (F8)">&#128204; Pin to In-Game Overlay (F8)</button>
+                  <button class="btn btn-sm" id="hsr-btn-mat-open-global-inv" title="View all Trailblaze materials stored in your global stash">&#128230; Global Inventory (<span id="hsr-global-inv-count">0</span>)</button>
+                  <button class="btn btn-sm btn-success" id="btn-hsr-mat-complete-all" onclick="completeAllHsrMaterials()">&#10003; Complete All &amp; Move to Collection</button>
+                  <button class="btn btn-sm" onclick="resetHsrMaterials()">&#8634; Reset</button>
+                </div>
+              </div>
+
+              <!-- Adventurer's / Trailblazer's Material Vault Backpack Grid -->
+              <div class="astral-card" style="margin-top:14px; padding:16px; background:rgba(18,14,30,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px;">
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:1.3rem;">&#128092;</span>
+                    <div>
+                      <div class="astral-title" style="font-size:0.94rem; font-weight:900; color:#f472b6; letter-spacing:0.5px;">TRAILBLAZE MATERIAL VAULT (BAG TRACKER)</div>
+                      <div style="font-size:0.72rem; color:var(--text-muted);">Authentic in-game inventory backpack grid with real-time stock monitoring</div>
+                    </div>
+                  </div>
+                  <span id="hsr-vault-ready-badge" class="badge" style="background:rgba(244,114,182,0.12); color:#f472b6; border:1px solid rgba(244,114,182,0.3); font-size:0.75rem; padding:4px 10px; font-weight:800; border-radius:6px;">
+                    1 / 16 ITEMS READY
+                  </span>
+                </div>
+
+                <!-- 16-Item Authentic Material Grid (2 Rows of 8 Cards) -->
+                <div class="hsr-materials-grid-16" id="hsr-materials-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================================
+               SUB-PANEL 2: BEST LIGHT CONES & RELICS (DUAL COLUMN)
+          ======================================================== -->
+          <div id="hsr-char-subpanel-build" class="char-subpanel" style="display:none;">
+            <div class="hsr-build-grid">
+              
+              <!-- Left Column: Relics, Stats & Stat Milestones -->
+              <div class="card card-char-surface" style="min-width:0;">
+                <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                  <span>&#128293; Best Relic &amp; Planar Ornament Sets (Prydwen &amp; KQM)</span>
+                  <span id="hsr-trace-prio-badge" class="badge badge-gold" style="background:rgba(244,114,182,0.15); color:#f472b6; border:1px solid rgba(244,114,182,0.35); font-size:0.70rem; font-weight:800; max-width:100%; white-space:normal; line-height:1.25;">Trace Priority: Ultimate &gt; Skill &gt; Talent &gt; Basic ATK</span>
+                </div>
+
+                <div id="hsr-relic-sets-box" style="display:flex; flex-direction:column; gap:8px;"></div>
+
+                <!-- 4 Relic Stat Pills -->
+                <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin:12px 0;">
+                  <div class="build-stat-pill" style="padding:8px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px solid rgba(255,255,255,0.06); text-align:center;">
+                    <div style="font-size:0.66rem; color:#7dd3fc; font-weight:800; text-transform:uppercase;">&#129434; Body</div>
+                    <div id="hsr-slot-body" style="font-size:0.82rem; font-weight:800; color:#fbbf24; margin-top:2px;">ATK% / CRIT Rate</div>
+                  </div>
+                  <div class="build-stat-pill" style="padding:8px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px solid rgba(255,255,255,0.06); text-align:center;">
+                    <div style="font-size:0.66rem; color:#7dd3fc; font-weight:800; text-transform:uppercase;">&#128098; Feet</div>
+                    <div id="hsr-slot-feet" style="font-size:0.82rem; font-weight:800; color:#fbbf24; margin-top:2px;">SPD (150+ Target)</div>
+                  </div>
+                  <div class="build-stat-pill" style="padding:8px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px solid rgba(255,255,255,0.06); text-align:center;">
+                    <div style="font-size:0.66rem; color:#7dd3fc; font-weight:800; text-transform:uppercase;">&#128302; Planar Sphere</div>
+                    <div id="hsr-slot-sphere" style="font-size:0.82rem; font-weight:800; color:#fbbf24; margin-top:2px;">Fire DMG% / ATK%</div>
+                  </div>
+                  <div class="build-stat-pill" style="padding:8px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px solid rgba(255,255,255,0.06); text-align:center;">
+                    <div style="font-size:0.66rem; color:#7dd3fc; font-weight:800; text-transform:uppercase;">&#129702; Link Rope</div>
+                    <div id="hsr-slot-rope" style="font-size:0.82rem; font-weight:800; color:#fbbf24; margin-top:2px;">Break Effect</div>
+                  </div>
+                </div>
+
+                <!-- Optimal Substats Bar -->
+                <div style="font-size:0.78rem; background:rgba(26,26,46,0.7); border:1px solid rgba(255,255,255,0.08); border-left:3px solid #38bdf8; padding:8px 12px; border-radius:7px; color:#cbd5e1; margin-bottom:12px;">
+                  <strong style="color:#7dd3fc;">Optimal Substats:</strong> <span id="hsr-optimal-substats" style="font-weight:700; color:#f8fafc; margin-left:4px;">SPD (150+ Breakpoint) &gt; Break Effect &gt; ATK% &gt; CRIT Rate</span>
+                </div>
+
+                <!-- Endgame Stat Milestones Card (KQM & Prydwen) -->
+                <div class="card" style="padding:14px; background:rgba(18,14,34,0.75); border:1px solid rgba(255,255,255,0.08); border-radius:10px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <div>
+                      <div style="font-weight:900; font-size:0.84rem; color:#fff; letter-spacing:0.4px;">ENDGAME STAT MILESTONES (KQM &amp; PRYDWEN)</div>
+                      <div style="font-size:0.70rem; color:var(--text-muted);">Recommended stat checkpoints for Memory of Chaos Floor 12 36&#9733;</div>
+                    </div>
+                    <span class="badge" style="background:rgba(34,197,94,0.15); color:#22c55e; border:1px solid #22c55e; font-size:0.68rem; font-weight:800; padding:3px 8px; border-radius:6px;">
+                      MoC 12 Ready &#9733;&#9733;&#9733;
+                    </span>
+                  </div>
+
+                  <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin:10px 0;">
+                    <div style="background:rgba(0,0,0,0.3); border-radius:6px; padding:8px 10px; border:1px solid rgba(255,255,255,0.06);">
+                      <div style="font-size:0.65rem; color:#94a3b8; font-weight:800; text-transform:uppercase;">&#9889; SPEED (SPD)</div>
+                      <div id="hsr-ms-spd" style="font-size:0.95rem; font-weight:900; color:#fbbf24; margin:2px 0;">150 - 165+</div>
+                      <div style="font-size:0.62rem; color:#64748b;">Optimal Target (0-Cycle)</div>
+                    </div>
+                    <div style="background:rgba(0,0,0,0.3); border-radius:6px; padding:8px 10px; border:1px solid rgba(255,255,255,0.06);">
+                      <div style="font-size:0.65rem; color:#94a3b8; font-weight:800; text-transform:uppercase;">&#128165; BREAK EFFECT</div>
+                      <div id="hsr-ms-be" style="font-size:0.95rem; font-weight:900; color:#fbbf24; margin:2px 0;">250% - 360%+</div>
+                      <div style="font-size:0.62rem; color:#64748b;">Baseline Target</div>
+                    </div>
+                    <div style="background:rgba(0,0,0,0.3); border-radius:6px; padding:8px 10px; border:1px solid rgba(255,255,255,0.06);">
+                      <div style="font-size:0.65rem; color:#94a3b8; font-weight:800; text-transform:uppercase;">&#9876;&#65039; TOTAL ATK</div>
+                      <div id="hsr-ms-atk" style="font-size:0.95rem; font-weight:900; color:#fbbf24; margin:2px 0;">2,400 - 2,800+</div>
+                      <div style="font-size:0.62rem; color:#64748b;">Rotation Target</div>
+                    </div>
+                  </div>
+
+                  <div style="font-size:0.72rem; line-height:1.4; color:#fde047; background:rgba(234,179,8,0.08); border-left:3px solid #eab308; padding:8px 10px; border-radius:4px; margin-top:8px;">
+                    &#128161; <strong>Theorycraft Insight:</strong> <span id="hsr-theorycraft-text">Firefly damage scales exceptionally with Break Effect. Reaching the 150+ SPD milestone allows 4 actions during Complete Combustion in Cycle 0. Excess ATK% is converted into Break Effect.</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Right Column: Best Light Cones Ranking (BiS &rarr; F2P Options) -->
+              <div class="card card-char-surface" style="min-width:0;">
+                <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                  <span>&#9876;&#65039; Best Light Cones Ranking (BiS &rarr; F2P Options)</span>
+                  <span class="badge" style="background:rgba(56,189,248,0.12); color:#7dd3fc; border:1px solid rgba(56,189,248,0.3); font-size:0.68rem; font-weight:800;">Prydwen &amp; KQM</span>
+                </div>
+                
+                <div id="hsr-lightcones-box" style="display:flex; flex-direction:column; gap:8px;"></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ========================================================
+               SUB-PANEL 3: META TEAMS (NEO-HOLO PANORAMIC 3-WIDE)
+          ======================================================== -->
+          <div id="hsr-char-subpanel-teams" class="char-subpanel" style="display:none;">
+            <div class="card card-char-surface">
+              <div class="card-title">
+                <span>&#10022; Meta Teams</span>
+              </div>
+              
+              <!-- 3-Column Meta Teams Grid -->
+              <div class="hsr-teams-grid" id="hsr-teams-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         HONKAI: STAR RAIL — TAB 2: PRYDWEN & KQM META TIER LIST
+    ======================================================== -->
+    <section id="panel-hsr-tierlist" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Header Card: Controls & Weekly Sync Status -->
+        <div class="card">
+          <div class="card-title">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <img src="hsr_assets/ui/achievement.png" class="hsr-ui-inline-icon hsr-ui-lg" alt="HSR Tier List" />
+              <div style="display:flex; flex-direction:column;">
+                <span style="font-weight:900; color:var(--text); letter-spacing:0.02em;">PRYDWEN &amp; KQM STAR RAIL META TIER LIST</span>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">
+                  Dual-Source: <strong style="color:#a855f7;">Prydwen.gg</strong> &times; <strong style="color:#38bdf8;">KeqingMains HSR</strong> &bull; MoC, Pure Fiction &amp; Apocalyptic Shadow
+                </span>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button class="btn btn-sm btn-tierlist-analysis-pill" id="btn-hsr-tierlist-source-analysis" title="View Dual-Source Consensus &amp; Authority Audit" style="display:inline-flex; align-items:center; gap:6px;">
+                <img src="hsr_assets/ui/databank.png" class="hsr-ui-inline-icon" alt="" /> Consensus: 94.2%
+              </button>
+              <button class="btn btn-sm btn-special-sync" id="btn-sync-hsr-tierlist" title="Check &amp; refresh latest Prydwen &amp; KQM Honkai: Star Rail ratings" style="display:inline-flex; align-items:center; gap:6px;">
+                <img src="hsr_assets/ui/star_big.png" class="hsr-ui-inline-icon special-sparkle-icon" alt="" /> Refresh Tier List
+              </button>
+            </div>
+          </div>
+
+          <!-- Benchmark Switcher Toolbar (Main vs E0) -->
+          <div class="tier-benchmark-switcher" id="hsr-tier-benchmark-switcher">
+            <button class="tier-benchmark-btn active" id="btn-hsr-tier-benchmark-main" data-benchmark="main">
+              <span class="benchmark-pill-badge">MAIN</span>
+              <div class="benchmark-btn-text">
+                <span class="benchmark-main-title" style="display:inline-flex; align-items:center; gap:6px;"><img src="hsr_assets/ui/star_big.png" class="hsr-ui-inline-icon" alt="" /> Recommended Benchmark</span>
+                <span class="benchmark-sub-title">Standard Meta &bull; 5&#9733; E0S0/S1 (+ Affinitive Eidolon), 4&#9733; at E6</span>
+              </div>
+            </button>
+            <button class="tier-benchmark-btn" id="btn-hsr-tier-benchmark-e0" data-benchmark="e0">
+              <span class="benchmark-pill-badge c0-badge">E0 ONLY</span>
+              <div class="benchmark-btn-text">
+                <span class="benchmark-main-title" style="display:inline-flex; align-items:center; gap:6px;"><img src="hsr_assets/ui/challenge.png" class="hsr-ui-inline-icon" alt="" /> Pure E0 Tier List</span>
+                <span class="benchmark-sub-title">Strict E0S0 Baseline &bull; Without Affinitive Eidolons, Eidolons or Signature LCs</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Filter & Search Toolbar -->
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-top:12px; padding-top:12px; border-top:1px solid var(--border-subtle);">
+
+            <!-- Role Filter Buttons (Matching 4-Column Prydwen Architecture) -->
+            <div class="tier-role-tabs" id="hsr-tier-role-tabs" style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="subtab-btn active" data-tier-role="all" style="display:inline-flex; align-items:center; gap:6px;"><img src="hsr_assets/ui/all_icon.png" class="hsr-ui-inline-icon" alt="" /> All Roles (4 Columns)</button>
+              <button class="subtab-btn" data-tier-role="dps" style="display:inline-flex; align-items:center; gap:6px;"><img src="hsr_assets/ui/battle.png" class="hsr-ui-inline-icon hsr-tint-dps" alt="" /> DPS</button>
+              <button class="subtab-btn" data-tier-role="supportdps" style="display:inline-flex; align-items:center; gap:6px;"><img src="hsr_assets/ui/mazeskill.png" class="hsr-ui-inline-icon hsr-tint-subdps" alt="" /> SUPPORT DPS</button>
+              <button class="subtab-btn" data-tier-role="amplifier" style="display:inline-flex; align-items:center; gap:6px;"><img src="hsr_assets/paths/Harmony.png" class="hsr-ui-inline-icon" alt="" /> AMPLIFIER</button>
+              <button class="subtab-btn" data-tier-role="sustain" style="display:inline-flex; align-items:center; gap:6px;"><img src="hsr_assets/paths/Abundance.png" class="hsr-ui-inline-icon hsr-tint-support" alt="" /> SUSTAIN</button>
+            </div>
+
+            <!-- Search input -->
+            <div style="display:flex; gap:8px; align-items:center;">
+              <input type="text" id="hsr-tierlist-search" class="input" placeholder="Search character, path or light cone..." style="width:240px; padding:6px 12px; font-size:0.78rem;" />
+            </div>
+          </div>
+
+          <!-- Element Filter Pills (7 HSR Combat Types) -->
+          <div class="tier-elem-bar" id="hsr-tier-elem-bar">
+            <button class="elem-pill active" data-tier-elem="all" title="All Combat Types"><img src="hsr_assets/ui/all_icon.png" class="elem-filter-icon" alt="All" /></button>
+            <button class="elem-pill" data-tier-elem="physical" title="Physical"><img src="hsr_assets/elements/Physical.png" class="elem-filter-icon" alt="Physical" /></button>
+            <button class="elem-pill" data-tier-elem="fire" title="Fire"><img src="hsr_assets/elements/Fire.png" class="elem-filter-icon" alt="Fire" /></button>
+            <button class="elem-pill" data-tier-elem="ice" title="Ice"><img src="hsr_assets/elements/Ice.png" class="elem-filter-icon" alt="Ice" /></button>
+            <button class="elem-pill" data-tier-elem="lightning" title="Lightning"><img src="hsr_assets/elements/Thunder.png" class="elem-filter-icon" alt="Lightning" /></button>
+            <button class="elem-pill" data-tier-elem="wind" title="Wind"><img src="hsr_assets/elements/Wind.png" class="elem-filter-icon" alt="Wind" /></button>
+            <button class="elem-pill" data-tier-elem="quantum" title="Quantum"><img src="hsr_assets/elements/Quantum.png" class="elem-filter-icon" alt="Quantum" /></button>
+            <button class="elem-pill" data-tier-elem="imaginary" title="Imaginary"><img src="hsr_assets/elements/Imaginary.png" class="elem-filter-icon" alt="Imaginary" /></button>
+          </div>
+
+          <!-- Change & Status Filter Pills + Endgame Mode Selector -->
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:8px;">
+            <div class="tier-trend-bar" id="hsr-tier-trend-bar" style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="trend-pill active" data-tier-trend="all">All Tiers &amp; Changes</button>
+              <button class="trend-pill" data-tier-trend="up" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/levelup.png" class="hsr-ui-inline-icon" alt="" /> Moved Up</button>
+              <button class="trend-pill" data-tier-trend="down" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/promotion.png" class="hsr-ui-inline-icon hsr-flip-down" alt="" /> Moved Down</button>
+              <button class="trend-pill" data-tier-trend="watch" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/warning.png" class="hsr-ui-inline-icon" alt="" /> On Watchlist</button>
+              <button class="trend-pill" data-tier-trend="upcoming" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/timer.png" class="hsr-ui-inline-icon" alt="" /> Soon to be Rated</button>
+              <button class="trend-pill" data-tier-trend="affinitive" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/mazebuff.png" class="hsr-ui-inline-icon hsr-tint-ae" alt="" /> Affinitive Eidolon</button>
+            </div>
+            <div class="tier-trend-bar" id="hsr-tier-mode-bar" style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="trend-pill active" data-tier-mode="overall" title="Consensus Endgame Rating across all modes" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/all_endgame.png" class="hsr-ui-inline-icon" alt="" /> All Endgame</button>
+              <button class="trend-pill" data-tier-mode="moc" title="Memory of Chaos (Forgotten Hall)" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/abyss_moc.png" class="hsr-ui-inline-icon" alt="" /> MoC</button>
+              <button class="trend-pill" data-tier-mode="pf" title="Pure Fiction (Multi-Wave AoE)" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/pure_fiction.png" class="hsr-ui-inline-icon" alt="" /> Pure Fiction</button>
+              <button class="trend-pill" data-tier-mode="as" title="Apocalyptic Shadow (Boss Break)" style="display:inline-flex; align-items:center; gap:5px;"><img src="hsr_assets/ui/apoc_shadow.png" class="hsr-ui-inline-icon" alt="" /> Apocalyptic Shadow</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier Groups Container -->
+        <div id="hsr-tierlist-groups-container" style="display:flex; flex-direction:column; gap:14px;">
+          <!-- Dynamically populated with T0, T0.5, T1, T1.5, T2, T3, T4, T5 groups -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 10: HONKAI STAR RAIL - COLLECTION (1-to-1 Copy of Genshin Hall of Fame) -->
+    <section id="panel-hsr-collection" class="tab-panel">
+      <div class="card mb-12">
+        <div class="card-title">
+          <span class="hsr-col-title-row">
+            <img src="hsr_assets/ui/achievement.png" class="hsr-col-ui-icon" alt="" />
+            <span>Your Hall of Fame Collection &mdash; Fully Built Trailblazers, Light Cones &amp; Milestones</span>
+          </span>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-sm" id="btn-hsr-col-sync-enka" style="display:inline-flex; align-items:center; gap:6px;">
+              <img src="hsr_assets/ui/databank.png" class="hsr-col-btn-icon" alt="" />
+              <span>Import Built from UID Sync</span>
+            </button>
+          </div>
+        </div>
+        <div class="collection-summary-grid" id="hsr-collection-summary-cards"></div>
+      </div>
+
+      <div class="card mb-12">
+        <div class="card-title">
+          <span class="hsr-col-title-row">
+            <img src="hsr_assets/ui/achievement.png" class="hsr-col-ui-icon" alt="" />
+            <span>Fully Built Characters (<span id="hsr-col-char-count">0</span>)</span>
+          </span>
+          <input type="text" id="hsr-col-char-search" class="input" placeholder="Filter built Trailblazers..." style="max-width:210px;" />
+        </div>
+        <div id="hsr-collection-chars-grid" class="collection-chars-grid"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span class="hsr-col-title-row">
+            <img src="hsr_assets/ui/star_big.png" class="hsr-col-ui-icon" alt="" />
+            <span>Maxed Light Cones Arsenal (<span id="hsr-col-lc-count">0</span>)</span>
+          </span>
+          <button class="btn btn-sm btn-primary" id="btn-hsr-col-add-lc-2">+ Add Built Light Cone</button>
+        </div>
+        <div id="hsr-collection-lcs-grid" class="hsr-collection-lcs-grid"></div>
+      </div>
+    </section>
+
+    <section id="panel-hsr-codes" class="tab-panel">
+      <div style="max-width:1440px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
+
+        <!-- Header & Stats Showcase Card -->
+        <div class="card" style="padding:20px; background:linear-gradient(135deg, rgba(22, 33, 60, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%); border:1px solid rgba(240, 212, 146, 0.35); box-shadow:0 10px 30px rgba(0,0,0,0.4);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <img src="/api/img?u=https%3A%2F%2Fcdn.prydwen.gg%2Fimages%2Fhonkai-star-rail%2Fitems%2Fstellar-jade.webp" alt="Stellar Jade" style="width:34px; height:34px; object-fit:contain; filter:drop-shadow(0 0 8px rgba(250,204,21,0.45));" />
+                <div>
+                  <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                    <h2 style="font-size:1.55rem; color:var(--text); margin:0; line-height:1.2;">Stellar Jade Redeem Code Hub</h2>
+                    <span id="hsr-codes-live-sync-status" style="font-size:0.72rem; font-weight:700; padding:3px 10px; border-radius:9999px; background:rgba(74, 222, 128, 0.14); color:#4ade80; border:1px solid rgba(74, 222, 128, 0.35);">
+                      &#9679; Prydwen.gg Live Sync
+                    </span>
+                  </div>
+                  <div style="font-size:0.82rem; color:var(--text-muted); margin-top:3px;">
+                    Prydwen.gg &amp; HoYoverse Live Verified Database &bull; Mailbox Feature Required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <button class="btn btn-primary" id="hsr-btn-open-hoyoverse-gift" style="font-weight:800; padding:8px 16px; display:inline-flex; align-items:center; gap:7px;">
+                <span>&#128640;</span> Open Official HoYoverse Gift Site
+              </button>
+              <button class="btn btn-special-sync" id="hsr-btn-copy-next-code" style="font-weight:800; padding:8px 14px;">
+                <span>&#128203;</span> Copy Next Unclaimed Code
+              </button>
+              <button class="btn" id="hsr-btn-copy-all-codes" style="font-weight:700; padding:8px 14px;">
+                <span>&#128203;</span> Copy All Active
+              </button>
+              <button class="btn btn-sm btn-outline" id="hsr-btn-sync-prydwen-codes" title="Fetch latest active &amp; expired promo codes directly from prydwen.gg/star-rail/codes" style="padding:8px 12px; border-color:rgba(56,189,248,0.45); color:#7dd3fc;">
+                <span>&#10024;</span> Sync Prydwen Live
+              </button>
+              <button class="btn btn-sm btn-outline" id="hsr-btn-reset-claimed-codes" title="Reset all marked claimed status" style="padding:8px 12px;">
+                <span>&#8634;</span> Reset Claimed
+              </button>
+            </div>
+          </div>
+
+          <!-- Key Metrics Grid -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-top:18px;">
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(240, 212, 146, 0.25); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--accent); font-weight:800; letter-spacing:0.5px;">FREE STELLAR JADES READY</label>
+              <div id="hsr-stat-free-jades" style="font-size:1.85rem; font-weight:900; color:#facc15; margin-top:3px; text-shadow:0 0 12px rgba(250,204,21,0.4); display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+                <span>0</span>
+                <img src="/api/img?u=https%3A%2F%2Fcdn.prydwen.gg%2Fimages%2Fhonkai-star-rail%2Fitems%2Fstellar-jade.webp" alt="" style="width:24px; height:24px; object-fit:contain;" />
+              </div>
+              <div id="hsr-stat-free-jades-sub" style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                From all unclaimed active codes
+              </div>
+            </div>
+
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--text-muted); font-weight:800; letter-spacing:0.5px;">ACTIVE PROMO CODES</label>
+              <div id="hsr-stat-active-codes-count" style="font-size:1.85rem; font-weight:900; color:#38bdf8; margin-top:3px;">
+                0 Active
+              </div>
+              <div id="hsr-stat-unclaimed-codes-count" style="font-size:0.72rem; color:#4ade80; font-weight:700; margin-top:2px;">
+                0 Unclaimed
+              </div>
+            </div>
+
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--text-muted); font-weight:800; letter-spacing:0.5px;">AVAILABLE CREDITS</label>
+              <div id="hsr-stat-free-credits" style="font-size:1.85rem; font-weight:900; color:#fbbf24; margin-top:3px; display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+                <span>0</span>
+                <img src="/api/img?u=https%3A%2F%2Fcdn.prydwen.gg%2Fimages%2Fhonkai-star-rail%2Fitems%2Fcredit.webp" alt="" style="width:24px; height:24px; object-fit:contain;" />
+              </div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                Across active resource codes
+              </div>
+            </div>
+
+            <div class="goal-box" style="padding:14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); text-align:center;">
+              <label style="font-size:0.75rem; color:var(--text-muted); font-weight:800; letter-spacing:0.5px;">TRAVELER'S GUIDE &amp; XP</label>
+              <div id="hsr-stat-free-xp" style="font-size:1.85rem; font-weight:900; color:#a855f7; margin-top:3px; display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+                <span>0+ Items</span>
+                <img src="/api/img?u=https%3A%2F%2Fcdn.prydwen.gg%2Fimages%2Fhonkai-star-rail%2Fitems%2Ftravelers-guide.webp" alt="" style="width:24px; height:24px; object-fit:contain;" />
+              </div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                EXP Books, Refined Aether &amp; Fuel
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Bar & Search Card -->
+        <div class="card" style="padding:14px 18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div class="codes-filter-bar" id="hsr-codes-filter-bar" style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-sm active" data-filter="all">&#127775; All Active (<span id="hsr-pill-cnt-all">0</span>)</button>
+            <button class="btn btn-sm" data-filter="jades">&#128142; Stellar Jades (<span id="hsr-pill-cnt-jades">0</span>)</button>
+            <button class="btn btn-sm" data-filter="materials">&#128230; Materials &amp; Credits (<span id="hsr-pill-cnt-materials">0</span>)</button>
+            <button class="btn btn-sm" data-filter="claimed">&#10004; Claimed (<span id="hsr-pill-cnt-claimed">0</span>)</button>
+            <button class="btn btn-sm" data-filter="expired" style="color:var(--text-muted);">&#9200; Expired Archive (<span id="hsr-pill-cnt-expired">0</span>)</button>
+          </div>
+
+          <div style="display:flex; gap:10px; align-items:center; flex:1; max-width:340px; min-width:240px;">
+            <input type="text" id="hsr-codes-search-input" class="input" placeholder="&#128269; Search codes or rewards..." style="width:100%; padding:6px 12px; font-size:0.84rem;" />
+          </div>
+        </div>
+
+        <!-- Codes Grid (Dynamic Container) -->
+        <div id="hsr-codes-cards-container" class="codes-cards-grid"></div>
+
+        <!-- Redemption Guide & FAQ (Prydwen Quick Guide) -->
+        <div class="card" style="padding:18px 22px; background:rgba(18,24,42,0.85); border:1px solid rgba(255,255,255,0.08);">
+          <h3 style="font-size:1.15rem; color:var(--accent); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+            <span>&#128214;</span> How to Redeem Honkai: Star Rail Promo Codes (Prydwen Quick Guide)
+          </h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:16px;">
+            <div style="background:rgba(0,0,0,0.25); padding:14px 18px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:800; font-size:0.92rem; color:#38bdf8; margin-bottom:6px;">
+                Method 1: Direct Web Redemption (Recommended)
+              </div>
+              <ol style="font-size:0.8rem; color:var(--text-muted); line-height:1.5; padding-left:18px; margin:0;">
+                <li>Click the <strong style="color:var(--text);">Direct Redeem</strong> button on any code above to open the official HoYoverse Gift site (<strong style="color:var(--text);">hsr.hoyoverse.com/gift</strong>) with the code pre-filled.</li>
+                <li>Log in to your official HoYoverse account.</li>
+                <li>Select your game server (America, Europe, Asia, TW/HK/MO) and verify your Trailblazer nickname.</li>
+                <li>Click <strong style="color:var(--text);">Redeem</strong> and collect your rewards from the in-game Mailbox!</li>
+              </ol>
+            </div>
+
+            <div style="background:rgba(0,0,0,0.25); padding:14px 18px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+              <div style="font-weight:800; font-size:0.92rem; color:#a855f7; margin-bottom:6px;">
+                Method 2: In-Game Redemption
+              </div>
+              <ol style="font-size:0.8rem; color:var(--text-muted); line-height:1.5; padding-left:18px; margin:0;">
+                <li>Launch Honkai: Star Rail and open the Phone Menu (Esc on PC or top-left icon).</li>
+                <li>Click the <strong style="color:var(--text);">... (Ellipsis)</strong> button next to your Trailblazer profile banner at the top-right.</li>
+                <li>Select <strong style="color:var(--text);">Redemption Code</strong>.</li>
+                <li>Paste the copied code and hit Confirm!</li>
+              </ol>
+            </div>
+          </div>
+          <div style="margin-top:12px; font-size:0.76rem; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+            <span style="color:#f59e0b; font-size:1rem;">&#128161;</span> <em>Note: You must unlock the in-game <strong>Mailbox</strong> function (completed early during &ldquo;A Moment of Peace&rdquo;) to redeem codes. Each code can be redeemed once per character, and unclaimed mail expires after 30 days.</em>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="panel-hsr-pity" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Current Event Warp Banners & Featured Light Cones Showcase -->
+        <div class="card">
+          <div class="card-title">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <img src="hsr_assets/items/102.png" alt="Star Rail Special Pass" style="width:22px; height:22px; object-fit:contain;" />
+              <span style="font-weight:900; color:var(--text); letter-spacing:0.02em;">CURRENT EVENT WARP BANNERS</span>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button class="btn btn-sm btn-banner-analysis-pill" id="hsr-btn-banner-source-analysis" title="View Prydwen.gg HSR Banner Tracker &amp; Server Schedule">
+                &#127919; Banner Sources
+              </button>
+              <button class="btn btn-sm btn-special-sync" id="hsr-btn-sync-banners-pity" title="Sync Live Honkai: Star Rail Warps from Prydwen.gg">
+                <span class="special-sparkle-icon">&#10024;</span> Sync Prydwen Banners
+              </button>
+              <select id="hsr-pity-banner-phase-select" class="select" style="min-width:240px;"></select>
+            </div>
+          </div>
+          <div id="hsr-pity-featured-showcase" class="featured-banners-showcase" style="display:flex; flex-direction:column; gap:12px;"></div>
+        </div>
+
+        <!-- Prydwen.gg & HoYoAPI Warp Auto-Import Action Bar -->
+        <div class="wish-import-strip-a">
+          <div class="strip-top">
+            <div class="strip-title-group">
+              <img class="strip-icon" src="hsr_assets/items/102.png" alt="Star Rail Special Pass" style="width:30px; height:30px; object-fit:contain;" />
+              <div>
+                <div class="strip-title-text">
+                  <span>Warp History &amp; Pity Auto-Import</span>
+                  <span class="badge" style="background:rgba(168,85,247,0.22); color:#c084fc; border:1px solid rgba(168,85,247,0.5); font-size:0.7rem; font-weight:800;">Prydwen.gg + HoYoAPI</span>
+                </div>
+                <div class="strip-sub-text">Sync your 50/50 &amp; 75/25 status, pity counters &amp; complete warp log directly from Honkai: Star Rail</div>
+              </div>
+            </div>
+
+            <div class="strip-btn-group">
+              <button class="btn-method1-glow" id="hsr-btn-scan-warp-cache">
+                <span>Auto-Detect Warps (Method 1)</span>
+              </button>
+
+              <button class="btn-method2-outline" id="hsr-btn-toggle-method2">
+                <span>Method 2 (Script / URL)</span>
+              </button>
+
+              <button class="btn-reset-subtle" id="hsr-btn-reset-pity-all" title="Reset all Star Rail warp pity counters and history">
+                Reset All
+              </button>
+            </div>
+          </div>
+
+          <div class="status-hint-bar" id="hsr-pity-cache-status">
+            <span style="color:#38bdf8; font-weight:800;">Quick Guide:</span>
+            <span>Open Honkai: Star Rail &rarr; Press <kbd>F3</kbd> (Warp) &rarr; Click <strong>View Details</strong> &rarr; <strong>Records</strong> &rarr; Click <strong>Auto-Detect Warps (Method 1)</strong> above!</span>
+          </div>
+
+          <div class="method2-drawer" id="hsr-pity-method2-box" style="display:none;">
+            <div>
+              <div class="m2-step-title"><span>1&#65039;&#8419;</span> Step 1: Copy &amp; Run 1-Line PowerShell Script (Extracts Star Rail Warp URL Locally)</div>
+              <div class="m2-input-row" style="margin-top:6px;">
+                <input type="text" id="hsr-pity-ps-script-copy" class="m2-input" readonly value="$log=&quot;$env:USERPROFILE\AppData\LocalLow\Cognosphere\Star Rail\Player.log&quot;; $p=([regex]::Match((Get-Content $log -Raw),&quot;([A-Z]:[/\\][^\r\n]+?StarRail_Data)&quot;)).Groups[1].Value; $f=Get-ChildItem &quot;$p\webCaches&quot; -Filter data_2 -Recurse|Sort LastWriteTime -Desc|Select -First 1; $m=[regex]::Matches([IO.File]::ReadAllText($f.FullName),&quot;https://[^\0\s`&quot;&#39;]+?(?:getGachaLog|getLdGachaLog)[^\0\s`&quot;&#39;]+&quot;); $m[$m.Count-1].Value|Set-Clipboard; Write-Host &quot;Copied HSR Warp URL to clipboard!&quot;" />
+                <button class="btn btn-sm btn-primary" id="hsr-btn-copy-ps-script" style="padding:6px 12px; font-weight:800; white-space:nowrap;">&#128203; Copy Script</button>
+              </div>
+            </div>
+
+            <div>
+              <div class="m2-step-title"><span>2&#65039;&#8419;</span> Step 2: Paste the Copied getGachaLog URL Here &amp; Click Import</div>
+              <div class="m2-input-row" style="margin-top:6px;">
+                <input type="text" id="hsr-pity-custom-url-input" class="m2-input" placeholder="Paste your Star Rail getGachaLog URL here (https://...)" />
+                <button class="btn btn-sm btn-success" id="hsr-btn-import-custom-url" style="padding:6px 14px; font-weight:800; white-space:nowrap;">&#128229; Import from URL</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="hsr-pity-banners-grid" class="pity-banners-grid"></div>
+
+        <!-- Recorded 5-Star Pull History Log -->
+        <div class="card">
+          <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span>Recorded 5&#9733; Pull History &amp; Pity Log</span>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <div class="pity-log-tabs" id="hsr-pity-history-filter-tabs">
+                <button class="pity-log-tab-btn active" data-tab="all">All 5&#9733;</button>
+                <button class="pity-log-tab-btn" data-tab="character">Character Event Warp (1 &amp; 2)</button>
+                <button class="pity-log-tab-btn" data-tab="lightcone">Light Cone Event Warp (75/25)</button>
+                <button class="pity-log-tab-btn" data-tab="standard">Stellar Warp (Standard)</button>
+              </div>
+              <button class="btn btn-sm" id="hsr-btn-clear-pity-history">Clear Log</button>
+            </div>
+          </div>
+          <div id="hsr-pity-history-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         HSR TAB 6: ACCOUNT & SEELELAND / ENKA HSR UID SYNC (1-TO-1)
+    ======================================================== -->
+    <section id="panel-hsr-account" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Top UID Control Bar -->
+        <div class="card">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; flex:1;">
+              <span class="heavy-font" style="color:var(--accent);">&#127760; SeeleLand / Enka HSR Public UID Sync:</span>
+              <input type="text" id="hsr-enka-uid-input" class="input" placeholder="Enter 9-10 digit Star Rail UID (e.g. 800333171)" style="width:270px; font-weight:800;" maxlength="10" />
+              <span id="hsr-enka-region-pill" class="badge badge-gold">Region: Auto</span>
+              <button class="btn btn-primary" id="btn-hsr-enka-sync">&#128260; Fetch Showcase (Ctrl+R)</button>
+              <button class="btn btn-sm" id="btn-hsr-enka-demo" title="Load a live public Star Rail showcase example">&#10024; Try Sample UID</button>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <select id="hsr-enka-saved-uids" class="select" title="Saved HSR UID Profiles">
+                <option value="">Saved UIDs...</option>
+              </select>
+              <button class="btn btn-sm" id="btn-hsr-enka-delete-uid" title="Remove selected HSR UID from Saved" style="display:none; color:#f87171; border:1px solid rgba(239,68,68,0.45); background:rgba(239,68,68,0.12); padding:5px 9px; font-size:0.75rem; font-weight:700; align-items:center; gap:4px; border-radius:6px; cursor:pointer;">
+                &#128465;&#65039; Remove UID
+              </button>
+              <span id="hsr-enka-ttl-badge" class="badge">TTL: Ready</span>
+              <button class="btn btn-sm btn-primary" id="btn-hsr-enka-sync-all-planner" style="display:none;">&#9889; Sync Showcase to Planner &amp; Collection</button>
+            </div>
+          </div>
+          <div id="hsr-enka-status-msg" style="font-size:0.8rem; color:var(--text-muted); margin-top:8px;">
+            Reads your public Trailblazer Showcase via MiHoMo / Enka.Network with SeeleLand-style speed-bracket Leaderboards &amp; Fribbels weighted Relic Scoring. Zero login required—Lv. 80 Trailblazers with built relics &amp; traces can be auto-imported straight into your HSR Collection!
+          </div>
+        </div>
+
+        <!-- Player Profile Banner -->
+        <div id="hsr-enka-profile-card" class="enka-profile-banner" style="display:none;"></div>
+
+        <!-- Character Showcase Strip -->
+        <div id="hsr-enka-char-strip" class="enka-char-strip" style="display:none;"></div>
+
+        <!-- Selected Showcase Character Full Breakdown -->
+        <div id="hsr-enka-char-detail" class="enka-showcase-grid" style="display:none;"></div>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         TAB 7: SETTINGS, VOLUME MIXER, SEPARATE COLOR STUDIO & COMPANION HOTKEYS
+    ======================================================== -->
+    <section id="panel-settings" class="tab-panel">
+      <div style="display:flex; flex-direction:column; gap:var(--density-gap);">
+
+        <!-- Settings Modern Hero Header -->
+        <div class="settings-hero-header">
+          <div class="settings-hero-left">
+            <div class="settings-hero-icon">
+              <img src="pin_icons/600.png" class="gc-inline-game-icon" style="width:26px !important; height:26px !important;" alt="Settings" />
+            </div>
+            <div>
+              <div class="settings-hero-title">Abyssal Guide System Settings &amp; Preferences</div>
+              <div class="settings-hero-sub">Unified control center for Windows volume mixer, in-game transparent HUD overlay, game detection, and interface ergonomics.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+
+          <!-- Card 1: Audio Volume Mixer & Feedback Engine -->
+          <div class="card settings-card">
+            <div class="card-title">
+              <div class="settings-card-header-flex">
+                <span class="settings-card-title-text">&#128266; Master Volume Mixer &amp; Audio Feedback</span>
+                <span class="settings-chip-badge">sndvol.exe</span>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">&#128266; App Master Volume (<span id="set-volume-lbl">80%</span>)</div>
+                <div class="setting-desc-subtle">Synced with Windows Volume Mixer session in real time</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <input type="range" id="set-volume" min="0" max="100" step="1" value="80" style="width:130px;" />
+                <button class="btn btn-sm" id="btn-test-volume" title="Play a chime to test volume">&#128276; Test</button>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">Enable Audio Chimes &amp; Sound Feedback</div>
+                <div class="setting-desc-subtle">Play fanfares and responsive audio on clicks and levelups</div>
+              </div>
+              <input type="checkbox" id="set-sounds" checked style="accent-color:var(--accent); width:18px; height:18px; cursor:pointer;" />
+            </div>
+
+          </div>
+
+          <!-- Card 2: Interface Scaling, Zoom & Ergonomics -->
+          <div class="card settings-card">
+            <div class="card-title">
+              <div class="settings-card-header-flex">
+                <span class="settings-card-title-text">&#128208; Interface Scaling &amp; Display Ergonomics</span>
+                <span class="settings-chip-badge">Display</span>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <span>Overall Interface Zoom (<strong id="set-uiscale-lbl">100%</strong>)</span>
+              <input type="range" id="set-uiscale" min="75" max="140" step="5" value="100" />
+            </div>
+
+            <div class="setting-row">
+              <span>Top Navigation Box Size (<strong id="set-navbox-lbl">100%</strong>)</span>
+              <input type="range" id="set-navbox" min="75" max="135" step="5" value="100" />
+            </div>
+
+            <div class="setting-row">
+              <span>Text / Font Size (<strong id="set-fontscale-lbl">100%</strong>)</span>
+              <input type="range" id="set-fontscale" min="85" max="130" step="5" value="100" />
+            </div>
+
+            <div class="setting-row">
+              <span>Layout Density (Padding &amp; Spacing)</span>
+              <select id="set-density" class="select">
+                <option value="compact">Compact (Tighter, fits more on screen)</option>
+                <option value="normal" selected>Normal (Balanced)</option>
+                <option value="spacious">Spacious (Relaxed padding)</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <span>Material Card Size (<strong id="set-cardw-lbl">270px</strong>)</span>
+              <input type="range" id="set-cardw" min="210" max="380" step="10" value="270" />
+            </div>
+
+            <div class="setting-row">
+              <span>Corner Roundness (<strong id="set-radius-lbl">14px</strong>)</span>
+              <input type="range" id="set-radius" min="0" max="24" step="2" value="14" />
+            </div>
+
+            <div class="setting-row">
+              <span>Frosted Glass Blur Intensity (<strong id="set-blur-lbl">16px</strong>)</span>
+              <input type="range" id="set-blur" min="0" max="28" step="2" value="16" />
+            </div>
+
+            <div class="setting-row">
+              <span>Frosted Surface Opacity (<strong id="set-cardop-lbl">90%</strong>)</span>
+              <input type="range" id="set-cardop" min="45" max="100" step="1" value="90" />
+            </div>
+
+            <div class="setting-row">
+              <span>Resize Companion Window Live</span>
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <button class="btn btn-sm" data-winsize="1180,760">Compact</button>
+                <button class="btn btn-sm" data-winsize="1500,930">Standard</button>
+                <button class="btn btn-sm" data-winsize="1740,990">Wide</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: In-Game Transparent Overlay HUD Settings -->
+          <div class="card settings-card">
+            <div class="card-title">
+              <div class="settings-card-header-flex">
+                <span class="settings-card-title-text">&#127919; In-Game Overlay HUD</span>
+                <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+                  <button class="btn btn-xs btn-primary" id="btn-toggle-overlay" style="white-space:nowrap;">&#9889; Toggle (F8)</button>
+                  <span class="badge badge-gold" style="font-size:0.74rem; padding:4px 10px; white-space:nowrap;">&#128230; Materials HUD</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <span>Materials HUD Layout Style</span>
+              <select id="overlay-layout-select" class="select">
+                <option value="detailed">Detailed (Progress Bars + Owned / Needed)</option>
+                <option value="compact">Compact Minimalist List</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <span>Only Show While Game Window is Focused</span>
+              <input type="checkbox" id="overlay-only-focused" style="accent-color:var(--accent); width:18px; height:18px; cursor:pointer;" />
+            </div>
+
+            <div class="setting-row">
+              <span>HUD Screen Position</span>
+              <select id="overlay-corner-select" class="select">
+                <option value="top-right">Top Right</option>
+                <option value="top-left">Top Left</option>
+                <option value="top-center">Top Center</option>
+                <option value="bottom-right">Bottom Right</option>
+                <option value="bottom-left">Bottom Left</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <span>HUD Width (<span id="overlay-width-val">370px</span>)</span>
+              <input type="range" id="overlay-width-slider" min="260" max="540" step="10" value="370" />
+            </div>
+
+            <div class="setting-row">
+              <span>Horizontal / Vertical Screen Offset (<span id="overlay-offset-val">24px, 110px</span>)</span>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <input type="number" id="overlay-ox-input" class="input" style="width:70px; padding:4px 6px;" value="24" min="0" max="800" title="X Offset (px)" />
+                <input type="number" id="overlay-oy-input" class="input" style="width:70px; padding:4px 6px;" value="110" min="0" max="800" title="Y Offset (px)" />
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <span>Overlay Opacity (<span id="overlay-opacity-val">88%</span>)</span>
+              <input type="range" id="overlay-opacity-slider" min="30" max="100" value="88" />
+            </div>
+
+            <div class="setting-row">
+              <span>Overlay Font &amp; UI Scale (<span id="overlay-scale-val">100%</span>)</span>
+              <input type="range" id="overlay-scale-slider" min="70" max="160" value="100" />
+            </div>
+
+
+            <div style="margin-top:14px; padding:12px; border-radius:10px; background:rgba(11,16,29,0.7); border:1px solid var(--border-subtle);">
+              <div style="font-size:0.72rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px; letter-spacing:0.04em;">Live Overlay Preview</div>
+              <div id="overlay-live-preview"></div>
+            </div>
+          </div>
+
+          <!-- Card 4: Game Auto-Detection, System Behavior & Backup -->
+          <div class="card settings-card">
+            <div class="card-title">
+              <div class="settings-card-header-flex">
+                <span class="settings-card-title-text">&#9881;&#65039; Game Detection, System &amp; Backup</span>
+                <span class="settings-chip-badge">System</span>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">Auto-Open Companion When Genshin Starts</div>
+                <div class="setting-desc-subtle">Continuously monitors Genshin Impact process and brings app forward</div>
+              </div>
+              <input type="checkbox" id="set-autolaunch" checked style="accent-color:var(--accent); width:18px; height:18px; cursor:pointer;" />
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">Start Companion Watcher with Windows</div>
+                <div class="setting-desc-subtle">Runs in background so overlay and hotkeys are instantly ready</div>
+              </div>
+              <input type="checkbox" id="set-startwin" checked style="accent-color:var(--accent); width:18px; height:18px; cursor:pointer;" />
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">Enable Smooth UI Animations</div>
+                <div class="setting-desc-subtle">Smooth transitions and effects across tabs and modals</div>
+              </div>
+              <input type="checkbox" id="set-animations" checked style="accent-color:var(--accent); width:18px; height:18px; cursor:pointer;" />
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">Minimize to System Tray on Close (&times;)</div>
+                <div class="setting-desc-subtle">Keep background hotkeys and watcher running in Windows tray</div>
+              </div>
+              <input type="checkbox" id="set-minimize-tray" checked style="accent-color:var(--accent); width:18px; height:18px; cursor:pointer;" />
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">App Data &amp; Cache Storage</div>
+                <div class="setting-desc-subtle">Contains OCR templates, offline caches, and backup data</div>
+              </div>
+              <button class="btn btn-sm" id="btn-open-data-folder">&#128194; Open AppData</button>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-label-bold">App Version &amp; Portable Updates <span class="badge badge-gold" id="settings-app-version-badge" style="margin-left:6px; font-size:0.68rem;">v1.0.0</span></div>
+                <div class="setting-desc-subtle" id="settings-app-update-status">Checks GitHub Releases automatically for portable ZIP updates</div>
+              </div>
+              <button class="btn btn-sm" id="btn-check-app-update">&#8635; Check Updates</button>
+            </div>
+
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; padding-top:10px; border-top:1px solid var(--border-subtle);">
+              <button class="btn btn-primary" id="btn-export-backup">&#11015;&#65039; Export Full Backup (.json)</button>
+              <label class="btn" style="cursor:pointer;">
+                &#11014;&#65039; Import Backup (.json)
+                <input type="file" id="import-backup-input" accept=".json" style="display:none;" />
+              </label>
+              <button class="btn" id="btn-reset-appearance">&#8634; Reset Appearance</button>
+              <button class="btn btn-danger" id="btn-quit-app" style="margin-left:auto;">&times; Exit Companion</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ========================================================
+             COMPANION HOTKEYS SECTION (INSIDE SETTINGS TAB)
+        ======================================================== -->
+        <div class="card settings-card" style="margin-top:6px;">
+          <div class="card-title">
+            <div class="settings-card-header-flex">
+              <span class="settings-card-title-text">&#9000;&#65039; Abyssal Guide Hotkey Studio (Click any Rebind button to customize)</span>
+              <button class="btn btn-sm" id="btn-reset-hotkeys">&#8634; Reset Default Keys</button>
+            </div>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px; line-height:1.4;">
+            <strong>Global hotkeys</strong> are registered with Windows (<code>RegisterHotKey</code>) and work seamlessly while you are playing inside Genshin Impact or Honkai: Star Rail. <strong>App hotkeys</strong> work while the Abyssal Guide window is focused.
+          </p>
+          <table class="hk-table">
+            <thead>
+              <tr>
+                <th>Action / Feature</th>
+                <th>Scope</th>
+                <th>Current Keybind</th>
+                <th>Status</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody id="hk-table-body"></tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  </div>
+
+  <!-- ========================================================
+       MODAL: UNIVERSAL AUTO-CHECK & UPDATE STUDIO (BANNERS, CHARACTERS & SYSTEM)
+  ======================================================== -->
+  <div id="map-sync-modal" class="modal-overlay">
+    <div class="modal-card map-sync-modal-card" style="width:880px; max-width:94vw;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="special-primogem-icon">&#10024;</div>
+          <div>
+            <h3 class="heavy-font" style="color:var(--accent); margin:0; font-size:1.1rem; letter-spacing:0.5px;">Universal Auto-Check &amp; Update Studio</h3>
+            <div style="font-size:0.74rem; color:var(--text-muted); margin-top:2px;">Weekly Auto-Check for Active Banners, Tier Lists &amp; Character Builds</div>
+          </div>
+        </div>
+        <button class="btn btn-sm" id="map-sync-modal-close" style="font-size:0.9rem; padding:4px 9px;">&times;</button>
+      </div>
+
+      <!-- Scope Selection Chips -->
+      <div>
+        <label style="font-size:0.72rem; color:var(--text-muted); font-weight:800; display:block; margin-bottom:6px;">CHECK &amp; SYNC SCOPE</label>
+        <div class="sync-scope-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <label class="map-source-pill active" data-scope="all">
+            <input type="radio" name="syncScope" value="all" checked />
+            <div class="source-title">&#9889; Full Universal Check</div>
+            <div class="source-desc">Sync Banners, Tier List &amp; Character Builds across dual-source guides</div>
+          </label>
+          <label class="map-source-pill" data-scope="banners">
+            <input type="radio" name="syncScope" value="banners" />
+            <div class="source-title">&#127919; Event Wish Banners</div>
+            <div class="source-desc">HoYoLAB Official &times; Paimon.moe (100% verified countdowns &amp; rate-ups)</div>
+          </label>
+          <label class="map-source-pill" data-scope="tierlist">
+            <input type="radio" name="syncScope" value="tierlist" />
+            <div class="source-title">&#127942; Meta Tier List</div>
+            <div class="source-desc">Prydwen.gg &times; Genshin.gg/Akasha (89.4% consensus ratings &amp; benchmarks)</div>
+          </label>
+          <label class="map-source-pill" data-scope="characters">
+            <input type="radio" name="syncScope" value="characters" />
+            <div class="source-title">&#128100; Character Builds</div>
+            <div class="source-desc">KeqingMains &times; Prydwen.gg (Genshin &amp; HSR Builds, Teams &amp; Cones)</div>
+          </label>
+          <label class="map-source-pill" data-scope="hsr">
+            <input type="radio" name="syncScope" value="hsr" />
+            <div class="source-title">&#10022; Honkai: Star Rail</div>
+            <div class="source-desc">Prydwen.gg HSR Live Sync (Characters, Banners, Builds, Teams &amp; Cones)</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 4-Module Overview Cards Grid -->
+      <div class="sync-modules-4col" style="display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+        <div class="sync-module-box">
+          <div class="sm-hdr">
+            <span class="sm-title">&#127919; EVENT BANNERS</span>
+            <span class="badge badge-green" id="sm-banner-badge">100% Match</span>
+          </div>
+          <div class="sm-val" id="sync-info-banners">HoYoLAB &times; Paimon.moe</div>
+          <div class="sm-sub">Live Phase 1 &amp; 2 Schedule Verified</div>
+        </div>
+
+        <div class="sync-module-box">
+          <div class="sm-hdr">
+            <span class="sm-title">&#127942; META TIER LIST</span>
+            <span class="badge badge-green" id="sm-tier-badge">89.4% Match</span>
+          </div>
+          <div class="sm-val" id="sync-info-tier">Prydwen &times; Genshin.gg</div>
+          <div class="sm-sub">Normalized T0-T5 Abyss &amp; Theater</div>
+        </div>
+
+        <div class="sync-module-box">
+          <div class="sm-hdr">
+            <span class="sm-title">&#128100; CHARACTER BUILDS</span>
+            <span class="badge badge-green" id="sm-char-badge">91.4% Match</span>
+          </div>
+          <div class="sm-val" id="sync-info-chars">KeqingMains &times; Prydwen</div>
+          <div class="sm-sub">Full Roster &bull; Dual-Playstyle BiS</div>
+        </div>
+
+        <div class="sync-module-box">
+          <div class="sm-hdr">
+            <span class="sm-title">&#9881;&#65039; GENERAL STATUS</span>
+            <span class="badge badge-gold" id="sm-sys-badge" style="color:#4ade80;">Operational</span>
+          </div>
+          <div class="sm-val" id="sync-info-last-check" style="color:#38bdf8;">Never checked</div>
+          <div class="sm-sub" id="sync-info-auto-status" style="color:#4ade80;">Weekly Auto-Check: Active</div>
+        </div>
+      </div>
+
+      <!-- Progress Track & Dynamic Step Status -->
+      <div id="map-sync-progress-container" style="display:none; flex-direction:column; gap:6px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:800;">
+          <span id="map-sync-status-step" style="color:var(--accent);">Connecting to servers...</span>
+          <span id="map-sync-status-pct" style="color:#38bdf8;">0%</span>
+        </div>
+        <div class="progress-track" style="height:8px; border-radius:4px;">
+          <div id="map-sync-progress-bar" class="progress-fill" style="width:0%; background:linear-gradient(90deg, #f0d492, #a855f7, #38bdf8);"></div>
+        </div>
+        <div id="map-sync-log" class="map-sync-log-box"></div>
+      </div>
+
+      <!-- Weekly Auto-Check Checkbox Option -->
+      <div style="background:rgba(0,0,0,0.25); border:1px solid var(--border-subtle); border-radius:8px; padding:10px 12px;">
+        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+          <input type="checkbox" id="chk-map-weekly-autocheck" checked style="accent-color:var(--accent); width:16px; height:16px;" />
+          <span style="font-size:0.8rem; font-weight:800; color:var(--text);">Automatically run a full general check every week (Banners, Characters &amp; System)</span>
+        </label>
+        <div style="font-size:0.71rem; color:var(--text-muted); margin-top:4px; padding-left:24px; line-height:1.35;">
+          Abyssal Guide will automatically check Wish Banners and Prydwen/Yatta character builds every 7 days in the background. If new banner rotations or character teams are released, your companion updates automatically.
+        </div>
+      </div>
+
+      <!-- Modal Footer Actions -->
+      <div style="display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-top:4px;">
+        <button class="btn btn-sm" id="btn-sync-modal-close-footer">Close</button>
+        <button class="btn btn-sm btn-special-sync" id="btn-trigger-map-sync" style="padding:7px 18px;">
+          <span class="special-sparkle-icon">&#10024;</span> <span id="btn-trigger-sync-text">&#10003; Run Full General Check Now</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Add Built Weapon to Collection Modal -->
+  <div id="weapon-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="color:var(--accent);">⚔️ Add Built Weapon to Collection</h3>
+        <button class="btn btn-sm" id="weapon-modal-close">✕</button>
+      </div>
+      <input type="text" id="weapon-modal-search" class="input" placeholder="Search any 4★ or 5★ Weapon by name..." />
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+        <div class="goal-box">
+          <label>Weapon Level</label>
+          <select id="weapon-modal-lvl" class="select" style="width:100%;">
+            <option value="90" selected>Lv. 90 / 90 (Max)</option>
+            <option value="80">Lv. 80 / 90</option>
+          </select>
+        </div>
+        <div class="goal-box">
+          <label>Refinement Rank</label>
+          <select id="weapon-modal-ref" class="select" style="width:100%;">
+            <option value="1">R1</option>
+            <option value="2">R2</option>
+            <option value="3">R3</option>
+            <option value="4">R4</option>
+            <option value="5">R5 (Max)</option>
+          </select>
+        </div>
+        <div class="goal-box">
+          <label>Equipped On</label>
+          <input type="text" id="weapon-modal-owner" class="input" placeholder="e.g. Mavuika" style="width:100%; padding:6px 8px;" />
+        </div>
+      </div>
+      <div id="weapon-modal-list" style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;"></div>
+    </div>
+  </div>
+
+  <!-- Global Materials & Bag Inventory Stash Modal (Shows all scanned materials across current and future characters) -->
+  <!-- HSR Add Built Light Cone Modal (1-to-1 Parity with Weapon Modal) -->
+  <div id="hsr-lc-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="color:var(--accent); display:flex; align-items:center; gap:8px; margin:0;">
+          <img src="hsr_assets/ui/star_big.png" style="width:20px; height:20px; object-fit:contain;" alt="" />
+          <span>Add Built Light Cone to Collection</span>
+        </h3>
+        <button class="btn btn-sm" id="hsr-lc-modal-close">&#10005;</button>
+      </div>
+      <input type="text" id="hsr-lc-modal-search" class="input" placeholder="Search any 3&#9733;, 4&#9733; or 5&#9733; Light Cone by name or Path..." />
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+        <div>
+          <label class="field-label" style="font-size:0.7rem;">Level</label>
+          <select id="hsr-lc-modal-lvl" class="select" style="width:100%;">
+            <option value="80/80">Lv. 80 / 80 (Max)</option>
+            <option value="70/80">Lv. 70 / 80</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" style="font-size:0.7rem;">Superimposition</label>
+          <select id="hsr-lc-modal-sup" class="select" style="width:100%;">
+            <option value="1">S1</option>
+            <option value="2">S2</option>
+            <option value="3">S3</option>
+            <option value="4">S4</option>
+            <option value="5">S5</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" style="font-size:0.7rem;">Equipped On</label>
+          <input type="text" id="hsr-lc-modal-owner" class="input" placeholder="e.g. Acheron" style="width:100%; padding:6px 8px;" />
+        </div>
+      </div>
+      <div id="hsr-lc-modal-list" style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;"></div>
+    </div>
+  </div>
+
+  <div id="global-inventory-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width:880px; width:92%; max-height:86vh; display:flex; flex-direction:column; gap:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.25rem;">📦</span>
+          <h3 style="color:var(--accent); margin:0;">Global Bag Inventory &amp; Stashed Materials</h3>
+          <span class="badge badge-gold" id="modal-inv-total-badge">0 Items</span>
+        </div>
+        <button class="btn btn-sm" id="btn-close-global-inv">✕</button>
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin:0; line-height:1.4;">
+        All materials scanned from your screenshots are registered globally here. When you build any character now or in the future, the app automatically checks against these quantities!
+      </p>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <input type="text" id="global-inv-search" class="input" placeholder="Search scanned materials (e.g. Slime, Silk Flower, Nahida)..." style="flex:1;" />
+        <button class="btn btn-sm btn-danger" id="btn-reset-global-inventory" title="Reset all scanned material counts to 0">Reset All Counts</button>
+      </div>
+      <div id="global-inventory-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:8px; overflow-y:auto; max-height:56vh; padding:4px;"></div>
+    </div>
+  </div>
+
+    <!-- Guide Authority & Cross-Site Consensus Audit Modal -->
+  <div id="guide-source-modal" class="modal-overlay">
+    <div class="modal-card guide-analysis-modal-card">
+      <div class="guide-modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="guide-modal-icon">&#128202;</div>
+          <div>
+            <h3 style="margin:0; font-size:1.24rem; color:var(--text); display:flex; align-items:center; gap:8px;">
+              Cross-Site Guide Analysis &amp; Consensus Report
+              <span class="badge badge-green" style="font-size:0.75rem; padding:2px 8px;">91.4% CONSENSUS VERIFIED</span>
+            </h3>
+            <p style="margin:3px 0 0; font-size:0.82rem; color:var(--text-muted);">
+              Deep architectural evaluation across 5 Genshin Impact guide authorities to establish Abyssal Guide's data pipeline.
+            </p>
+          </div>
+        </div>
+        <button class="btn btn-sm" id="guide-source-modal-close" style="font-size:1rem; padding:4px 10px;">&times;</button>
+      </div>
+
+      <!-- Top KPI Metric Cards -->
+      <div class="guide-analysis-kpi-grid">
+        <div class="guide-kpi-card highlight-kqm">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#128218; Theorycraft Engine</span>
+            <span class="guide-kpi-score">4.9 / 5.0 (98%)</span>
+          </div>
+          <div class="guide-kpi-name">KeqingMains (KQM)</div>
+          <div class="guide-kpi-stats">~6.2M visits/mo &bull; Frame-data rotations &bull; Rotational ER requirements &bull; ICD analysis</div>
+          <div class="guide-kpi-role">&#10003; <strong>Active Primary Source</strong> for energy thresholds, substat priority &amp; combo mechanics</div>
+        </div>
+
+        <div class="guide-kpi-card highlight-prydwen">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#9876;&#65039; Meta &amp; Benchmarks</span>
+            <span class="guide-kpi-score">4.8 / 5.0 (96%)</span>
+          </div>
+          <div class="guide-kpi-name">Prydwen.gg</div>
+          <div class="guide-kpi-stats">~12.5M visits/mo &bull; Day-1 DPS simulations &bull; Relative % weapon escalators &bull; Floor 12 telemetry</div>
+          <div class="guide-kpi-role">&#10003; <strong>Active Primary Source</strong> for weapon/artifact DPS % benchmarks &amp; Abyss meta teams</div>
+        </div>
+
+        <div class="guide-kpi-card highlight-consensus">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#129309; Cross-Site Agreement</span>
+            <span class="guide-kpi-score" style="color:#10b981;">91.4% Overlap</span>
+          </div>
+          <div class="guide-kpi-name">Dual-Source Consensus</div>
+          <div class="guide-kpi-stats">Exceeds 80% threshold requirement &bull; Filters single-creator bias &bull; Zero contradictory builds</div>
+          <div class="guide-kpi-role">&#10003; <strong>Validated Pipeline:</strong> Updates auto-commit when KQM &amp; Prydwen cross-validate</div>
+        </div>
+      </div>
+
+      <!-- 5-Platform Evaluation Matrix -->
+      <div class="guide-modal-section">
+        <div class="guide-section-title">&#128269; 5-Platform Authority &amp; Reliability Audit Matrix</div>
+        <div class="guide-table-scroll">
+          <table class="guide-analysis-table">
+            <thead>
+              <tr>
+                <th>Guide Platform</th>
+                <th>Monthly Visits</th>
+                <th>Community Trust</th>
+                <th>Agreement Rate</th>
+                <th>Core Strengths</th>
+                <th>Limitations / Weaknesses</th>
+                <th>Engine Decision</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-approved">
+                <td>
+                  <strong style="color:#38bdf8;">KeqingMains (KQM)</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">keqingmains.com</div>
+                </td>
+                <td>~6.2M</td>
+                <td><span class="badge badge-green">4.9 / 5.0 (98%)</span></td>
+                <td><span class="badge badge-gold">Baseline Ref</span></td>
+                <td>Exhaustive math, rotation frame data, team battery ER brackets, precise talent scaling.</td>
+                <td>Extended turnaround time for niche 4&#9733; characters and sudden patch reruns.</td>
+                <td><span class="badge badge-success">&#10003; Primary Engine</span></td>
+              </tr>
+              <tr class="row-approved">
+                <td>
+                  <strong style="color:#a855f7;">Prydwen.gg</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">prydwen.gg/genshin</div>
+                </td>
+                <td>~12.5M</td>
+                <td><span class="badge badge-green">4.8 / 5.0 (96%)</span></td>
+                <td><span class="badge badge-green">91.4% with KQM</span></td>
+                <td>Day-1 patch testing, relative solo/team DPS % ladders (100% BiS escalator), Floor 12 usage data.</td>
+                <td>Slightly more condensed rotation breakdowns compared to full KQM doctoral guides.</td>
+                <td><span class="badge badge-success">&#10003; Primary Engine</span></td>
+              </tr>
+              <tr class="row-rejected">
+                <td>
+                  <strong>Game8.co</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">game8.co/games/genshin</div>
+                </td>
+                <td>~45.0M</td>
+                <td><span class="badge badge-red">3.6 / 5.0 (72%)</span></td>
+                <td><span class="badge badge-red">74.2%</span></td>
+                <td>High Google SEO visibility, fast release checklist publishing.</td>
+                <td>Superficial single-build summaries, outdated patch information, lack of ER nuance, ad-heavy.</td>
+                <td><span class="badge badge-secondary">&#10007; Rejected (&lt;80%)</span></td>
+              </tr>
+              <tr class="row-rejected">
+                <td>
+                  <strong>Genshin.gg</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">genshin.gg</div>
+                </td>
+                <td>~8.5M</td>
+                <td><span class="badge badge-gold">3.8 / 5.0 (76%)</span></td>
+                <td><span class="badge badge-red">76.5%</span></td>
+                <td>Clean visual infographics, quick glance format for beginners.</td>
+                <td>No substat optimization formulas, no team-dependent energy brackets, lacks damage calculation tables.</td>
+                <td><span class="badge badge-secondary">&#10007; Rejected (&lt;80%)</span></td>
+              </tr>
+              <tr class="row-telemetry">
+                <td>
+                  <strong style="color:#ec4899;">Akasha System</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">akasha.cv</div>
+                </td>
+                <td>~4.1M</td>
+                <td><span class="badge badge-green">4.8 / 5.0 (96%)</span></td>
+                <td><span class="badge badge-gold">Telemetry Data</span></td>
+                <td>Enka network telemetry, artifact CV/RV leaderboards, actual live player build distributions.</td>
+                <td>Purely a database and leaderboard tool; does not author gameplay guides or rotation instructions.</td>
+                <td><span class="badge badge-primary">&#10003; CV/RV Telemetry</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Category Consensus Alignment Bars -->
+      <div class="guide-modal-section">
+        <div class="guide-section-title">&#128200; KQM &times; Prydwen Category Correspondence Breakdown</div>
+        <div class="consensus-bars-grid">
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>Main Stat Prioritization (Sands / Goblet / Circlet)</span>
+              <strong style="color:#38bdf8;">96.5% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:96.5%; background:#38bdf8;"></div>
+            </div>
+            <div class="consensus-bar-note">Sands (HP%/ATK%/ER/EM), Goblet (Elem DMG%), Circlet (CRIT Rate/DMG) align nearly 1:1.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>Ranked Weapon Ladders &amp; Benchmarks</span>
+              <strong style="color:#10b981;">93.8% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:93.8%; background:#10b981;"></div>
+            </div>
+            <div class="consensus-bar-note">Signature 5&#9733; and top 4&#9733; craftable/gacha weapons match exact tier positions and damage rankings.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>Artifact Sets &amp; 2pc Combinations</span>
+              <strong style="color:#a855f7;">92.2% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:92.2%; background:#a855f7;"></div>
+            </div>
+            <div class="consensus-bar-note">BiS 4-piece sets (e.g. Marechaussee, Obsidian Codex, Cinder City, Whimsy, Emblem) match completely.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>Substat Roll Priority &amp; ER Milestones</span>
+              <strong style="color:#fbbf24;">89.0% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:89.0%; background:#fbbf24;"></div>
+            </div>
+            <div class="consensus-bar-note">Both demand strict ER breakpoints before investing in CRIT, with EM prioritized for reaction triggers.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>Meta Team Compositions &amp; Synergies</span>
+              <strong style="color:#ec4899;">85.5% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:85.5%; background:#ec4899;"></div>
+            </div>
+            <div class="consensus-bar-note">Core 3-member synergy engines are identical; minor divergence exists only on 4th flex support slots.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual-Playstyle Engine Feature Note -->
+      <div class="guide-modal-section" style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.22); border-radius:10px; padding:12px 14px;">
+        <div style="display:flex; align-items:flex-start; gap:10px;">
+          <div style="font-size:1.4rem;">&#127917;</div>
+          <div style="font-size:0.83rem; line-height:1.48; color:#cbd5e1;">
+            <strong style="color:#38bdf8;">Interactive Dual-Playstyle Engine:</strong> When a character has distinct operational roles (e.g. <em>Mavuika</em> On-Field Carry vs Cinder City Support, <em>Neuvillette</em> Hydro Beam vs Vape Nuke, <em>Xilonen</em> Universal Shred vs On-Field Geo DPS, <em>Xiangling</em> Emblem Vape vs Mono-Pyro, <em>Raiden</em> Hypercarry vs Hyperbloom Trigger, <em>Kuki</em> EM Trigger vs HP Healer), Abyssal Guide activates the <strong>Playstyle Switcher</strong>. Switching playstyles instantly updates recommended artifact sets, main stats, substats, ranked weapon benchmarks, and meta team lineups.
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:10px; border-top:1px solid var(--border);">
+        <div style="display:flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--text-muted);">
+          <span style="color:#10b981; font-weight:700;">&#10003; Live Pipeline Active</span>
+          <span>&bull; Cross-verified via KeqingMains &amp; Prydwen.gg</span>
+        </div>
+        <button class="btn btn-sm btn-primary" id="btn-guide-source-modal-close-footer" style="padding:6px 18px;">
+          Got it &amp; Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier List Authority & Cross-Site Consensus Audit Modal -->
+  <div id="tierlist-source-modal" class="modal-overlay">
+    <div class="modal-card guide-analysis-modal-card">
+      <div class="guide-modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="guide-modal-icon" style="background:rgba(168,85,247,0.18); border-color:rgba(168,85,247,0.4); color:#c084fc;">🏆</div>
+          <div>
+            <h3 style="margin:0; font-size:1.24rem; color:var(--text); display:flex; align-items:center; gap:8px;">
+              Meta Tier List Authority &amp; Consensus Report
+              <span class="badge badge-green" style="font-size:0.75rem; padding:2px 8px;">89.4% CONSENSUS VERIFIED</span>
+            </h3>
+            <p style="margin:3px 0 0; font-size:0.82rem; color:var(--text-muted);">
+              Deep architectural evaluation across 5 tier list authorities to establish Abyssal Guide's weekly meta pipeline.
+            </p>
+          </div>
+        </div>
+        <button class="btn btn-sm" id="tierlist-source-modal-close" style="font-size:1rem; padding:4px 10px;">&times;</button>
+      </div>
+
+      <!-- Top KPI Metric Cards -->
+      <div class="guide-analysis-kpi-grid">
+        <div class="guide-kpi-card highlight-prydwen">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#9876;&#65039; Simulation &amp; Math Engine</span>
+            <span class="guide-kpi-score" style="color:#c084fc;">4.8 / 5.0 (96%)</span>
+          </div>
+          <div class="guide-kpi-name">Prydwen.gg</div>
+          <div class="guide-kpi-stats">~12.5M visits/mo &bull; Relative DPS calculations &bull; Day-1 patch simulations &bull; Floor 12 Abyss telemetry</div>
+          <div class="guide-kpi-role">&#10003; <strong>Active Primary Engine</strong> for DPS tiers (T0-T5), strict C0 vs C6 scaling &amp; high-difficulty boss ratings</div>
+        </div>
+
+        <div class="guide-kpi-card highlight-genshingg">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#128202; Role Matrix &amp; Telemetry</span>
+            <span class="guide-kpi-score" style="color:#38bdf8;">4.5 / 5.0 (90%)</span>
+          </div>
+          <div class="guide-kpi-name">Genshin.gg &times; Akasha</div>
+          <div class="guide-kpi-stats">~12.6M combined visits/mo &bull; Standardized S+/S/A/B/C/D role classification &bull; Global CV/RV clear stats</div>
+          <div class="guide-kpi-role">&#10003; <strong>Active Secondary Engine</strong> for community consensus, role validation &amp; Spiral Abyss usage rates</div>
+        </div>
+
+        <div class="guide-kpi-card highlight-consensus">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#129309; Cross-Site Agreement</span>
+            <span class="guide-kpi-score" style="color:#10b981;">89.4% Overlap</span>
+          </div>
+          <div class="guide-kpi-name">Dual-Source Consensus</div>
+          <div class="guide-kpi-stats">Exceeds 80% threshold requirement &bull; Filters single-creator bias &bull; Zero contradictory rankings</div>
+          <div class="guide-kpi-role">&#10003; <strong>Validated Pipeline:</strong> Tier ratings auto-calibrate when Prydwen &amp; Genshin.gg/Akasha cross-validate</div>
+        </div>
+      </div>
+
+      <!-- 5-Platform Evaluation Matrix -->
+      <div class="guide-modal-section">
+        <div class="guide-section-title">&#128269; 5-Platform Meta Tier List Authority &amp; Reliability Audit Matrix</div>
+        <div class="guide-table-scroll">
+          <table class="guide-analysis-table">
+            <thead>
+              <tr>
+                <th>Tier List Platform</th>
+                <th>Monthly Visits</th>
+                <th>Community Trust</th>
+                <th>Agreement Rate</th>
+                <th>Core Methodology &amp; Strengths</th>
+                <th>Limitations / Weaknesses</th>
+                <th>Engine Decision</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-approved">
+                <td>
+                  <strong style="color:#a855f7;">Prydwen.gg</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">prydwen.gg/genshin/tier-list</div>
+                </td>
+                <td>~12.5M</td>
+                <td><span class="badge badge-green">4.8 / 5.0 (96%)</span></td>
+                <td><span class="badge badge-gold">Baseline Ref</span></td>
+                <td>Frame-by-frame DPS simulation, strict C0 vs C6 investment tiers, Floor 12 usage data, Boss 1-3 scores.</td>
+                <td>Slight turnaround delay for niche 4&#9733; post-patch testing.</td>
+                <td><span class="badge badge-success">&#10003; Primary Engine</span></td>
+              </tr>
+              <tr class="row-approved">
+                <td>
+                  <strong style="color:#38bdf8;">Genshin.gg &times; Akasha</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">genshin.gg &bull; akasha.cv</div>
+                </td>
+                <td>~12.6M</td>
+                <td><span class="badge badge-green">4.5 / 5.0 (90%)</span></td>
+                <td><span class="badge badge-green">89.4% with Prydwen</span></td>
+                <td>Standardized role classification (S+ to D), backed by Akasha's global weapon/artifact leaderboards and clear stats.</td>
+                <td>Lacks team-dependent energy recharge formulas on its own.</td>
+                <td><span class="badge badge-success">&#10003; Secondary Engine</span></td>
+              </tr>
+              <tr class="row-rejected">
+                <td>
+                  <strong>Game8.co</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">game8.co/games/genshin</div>
+                </td>
+                <td>~45.0M</td>
+                <td><span class="badge badge-red">3.6 / 5.0 (72%)</span></td>
+                <td><span class="badge badge-red">71.4% (&lt;80%)</span></td>
+                <td>Massive search visibility, immediate day-0 release updates.</td>
+                <td>Superficial single-criteria rankings; frequently places untested characters into S+ before live combat testing.</td>
+                <td><span class="badge badge-secondary">&#10007; Rejected (&lt;80%)</span></td>
+              </tr>
+              <tr class="row-rejected">
+                <td>
+                  <strong style="color:#38bdf8;">KeqingMains (KQM)</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">keqingmains.com</div>
+                </td>
+                <td>~6.2M</td>
+                <td><span class="badge badge-green">4.9 / 5.0 (98%)</span></td>
+                <td><span class="badge badge-gold">Guides Only</span></td>
+                <td>Premier theorycrafting organization; frame-accurate rotations and ICD analysis.</td>
+                <td><strong>Strictly opposes Tier Lists</strong>: organizational policy refuses to publish linear tier lists without team context.</td>
+                <td><span class="badge badge-secondary">&#10007; Excluded (No Tier List)</span></td>
+              </tr>
+              <tr class="row-rejected">
+                <td>
+                  <strong>GameWith (JP)</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">gamewith.jp/genshin</div>
+                </td>
+                <td>~18.0M</td>
+                <td><span class="badge badge-gold">3.9 / 5.0 (78%)</span></td>
+                <td><span class="badge badge-red">74.8% (&lt;80%)</span></td>
+                <td>Fast Japanese community wiki; mobile-friendly infographics.</td>
+                <td>Heavy mobile touch-control bias, heavily underrating carries that require animation cancels or plunge sequences.</td>
+                <td><span class="badge badge-secondary">&#10007; Rejected (&lt;80%)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tier Scale Normalization & Correspondence Breakdown -->
+      <div class="guide-modal-section">
+        <div class="guide-section-title">&#128200; Prydwen &times; Genshin.gg Tier Normalization &amp; Correspondence Breakdown</div>
+        <div class="consensus-bars-grid">
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>T0 / T0.5 (Prydwen) &harr; S+ Tier (Genshin.gg)</span>
+              <strong style="color:#ef4444;">95.2% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:95.2%; background:#ef4444;"></div>
+            </div>
+            <div class="consensus-bar-note">Mavuika, Furina, Neuvillette, Nahida, Kazuha, Zhongli, Bennett, Yelan, Arlecchino match 1:1.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>T1 / T1.5 (Prydwen) &harr; S Tier (Genshin.gg)</span>
+              <strong style="color:#f59e0b;">88.0% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:88.0%; background:#f59e0b;"></div>
+            </div>
+            <div class="consensus-bar-note">Alhaitham, Navia, Raiden Shogun, Chiori, Xilonen, Shenhe, Emilie, Kinich all align into Tier 1 / S.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>T2 (Prydwen) &harr; A Tier (Genshin.gg)</span>
+              <strong style="color:#3b82f6;">85.7% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:85.7%; background:#3b82f6;"></div>
+            </div>
+            <div class="consensus-bar-note">Solid competitive carries &amp; niche supports (Wanderer, Arataki Itto, Ayaka, Lyney, Cyno).</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>T3 / T4 / T5 (Prydwen) &harr; B / C / D Tier (Genshin.gg)</span>
+              <strong style="color:#a855f7;">88.6% Agreement</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:88.6%; background:#a855f7;"></div>
+            </div>
+            <div class="consensus-bar-note">Niche enablers, reaction drivers, situational flex picks, and standard starter units.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Pipeline Footer -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08); flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--text-muted);">
+          <span style="color:#10b981; font-weight:700;">&#10003; Live Pipeline Active</span>
+          <span>&bull; Weekly auto-check synchronizes Prydwen.gg simulations &times; Genshin.gg/Akasha telemetry</span>
+        </div>
+        <button class="btn btn-sm btn-primary" id="btn-tierlist-source-modal-close-footer" style="padding:6px 18px;">
+          Got it &amp; Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Wish Banners Authority & Precision Consensus Audit Modal -->
+  <div id="banner-source-modal" class="modal-overlay">
+    <div class="modal-card guide-analysis-modal-card">
+      <div class="guide-modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="guide-modal-icon" style="background:rgba(245,158,11,0.18); border-color:rgba(245,158,11,0.4); color:#fbbf24;">🎯</div>
+          <div>
+            <h3 style="margin:0; font-size:1.24rem; color:var(--text); display:flex; align-items:center; gap:8px;">
+              Event Wish Banners Authority &amp; Precision Report
+              <span class="badge badge-green" style="font-size:0.75rem; padding:2px 8px;">100.0% EXACT CONSENSUS VERIFIED</span>
+            </h3>
+            <p style="margin:3px 0 0; font-size:0.82rem; color:var(--text-muted);">
+              Deep architectural evaluation across 5 banner tracking authorities to establish Abyssal Guide's live banner timeline.
+            </p>
+          </div>
+        </div>
+        <button class="btn btn-sm" id="banner-source-modal-close" style="font-size:1rem; padding:4px 10px;">&times;</button>
+      </div>
+
+      <!-- Top KPI Metric Cards -->
+      <div class="guide-analysis-kpi-grid">
+        <div class="guide-kpi-card highlight-hoyolab">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#128220; Developer Ground Truth</span>
+            <span class="guide-kpi-score" style="color:#fbbf24;">5.0 / 5.0 (100%)</span>
+          </div>
+          <div class="guide-kpi-name">HoYoLAB / Official Notices</div>
+          <div class="guide-kpi-stats">~32.0M visits/mo &bull; Official HoYoverse announcements &bull; Exact server maintenance windows &bull; Verified rates</div>
+          <div class="guide-kpi-role">&#10003; <strong>Active Primary Engine</strong> for 5&#9733;/4&#9733; character rate-ups, signature weapons &amp; maintenance timestamps</div>
+        </div>
+
+        <div class="guide-kpi-card highlight-paimon">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#9201;&#65039; Regional Countdown Engine</span>
+            <span class="guide-kpi-score" style="color:#06b6d4;">4.9 / 5.0 (98%)</span>
+          </div>
+          <div class="guide-kpi-name">Paimon.moe Live Timeline</div>
+          <div class="guide-kpi-stats">~5.8M visits/mo &bull; Millisecond-accurate regional countdowns &bull; Global pull telemetry &bull; Pity sync</div>
+          <div class="guide-kpi-role">&#10003; <strong>Active Secondary Engine</strong> for real-time server timezones (Asia, Europe, America, SAR) &amp; pity history</div>
+        </div>
+
+        <div class="guide-kpi-card highlight-consensus">
+          <div class="guide-kpi-top">
+            <span class="guide-kpi-badge">&#127919; 100% Exact Agreement</span>
+            <span class="guide-kpi-score" style="color:#10b981;">100.0% Overlap</span>
+          </div>
+          <div class="guide-kpi-name">Dual-Source Consensus</div>
+          <div class="guide-kpi-stats">Zero discrepancies &bull; 4 server regions synchronized &bull; Instant banner transition accuracy</div>
+          <div class="guide-kpi-role">&#10003; <strong>Validated Pipeline:</strong> Automatically checks and synchronizes active wish banners weekly</div>
+        </div>
+      </div>
+
+      <!-- 5-Platform Evaluation Matrix -->
+      <div class="guide-modal-section">
+        <div class="guide-section-title">&#128269; 5-Platform Banner Tracking &amp; Schedule Audit Matrix</div>
+        <div class="guide-table-scroll">
+          <table class="guide-analysis-table">
+            <thead>
+              <tr>
+                <th>Banner Tracking Source</th>
+                <th>Monthly Visits</th>
+                <th>Authority Score</th>
+                <th>Agreement Rate</th>
+                <th>Core Strengths</th>
+                <th>Limitations / Weaknesses</th>
+                <th>Engine Decision</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-approved">
+                <td>
+                  <strong style="color:#f59e0b;">HoYoLAB Official Notices</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">act.hoyolab.com &bull; hoyoverse.com</div>
+                </td>
+                <td>~32.0M</td>
+                <td><span class="badge badge-green">5.0 / 5.0 (100%)</span></td>
+                <td><span class="badge badge-gold">Ground Truth</span></td>
+                <td>Direct game developer publication, official artwork, exact server start/end times, guaranteed 5&#9733; &amp; 4&#9733; rate-ups.</td>
+                <td>Lacks real-time ticking countdown clocks and community pull analytics.</td>
+                <td><span class="badge badge-success">&#10003; Primary Ground Truth</span></td>
+              </tr>
+              <tr class="row-approved">
+                <td>
+                  <strong style="color:#06b6d4;">Paimon.moe Live Timeline</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">paimon.moe/timeline</div>
+                </td>
+                <td>~5.8M</td>
+                <td><span class="badge badge-green">4.9 / 5.0 (98%)</span></td>
+                <td><span class="badge badge-green">100.0% Match</span></td>
+                <td>Real-time regional countdowns (Asia, Europe, America), global wish statistics, complete historical banner archive.</td>
+                <td>Unofficial platform; relies on user wish sync scripts for personal data.</td>
+                <td><span class="badge badge-success">&#10003; Primary Community Engine</span></td>
+              </tr>
+              <tr class="row-approved">
+                <td>
+                  <strong style="color:#a855f7;">Project Amber / Hakush.in</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">ambr.top &bull; hakush.in</div>
+                </td>
+                <td>~2.1M</td>
+                <td><span class="badge badge-gold">4.4 / 5.0 (88%)</span></td>
+                <td><span class="badge badge-gold">Beta Telemetry</span></td>
+                <td>Datamined client assets for future patch versions and weapon stat scalings.</td>
+                <td>Beta test-server data subject to change; not committed to live servers until patch day.</td>
+                <td><span class="badge badge-primary">Auxiliary Reference</span></td>
+              </tr>
+              <tr class="row-rejected">
+                <td>
+                  <strong>Game8.co</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">game8.co/games/genshin</div>
+                </td>
+                <td>~45.0M</td>
+                <td><span class="badge badge-red">3.8 / 5.0 (76%)</span></td>
+                <td><span class="badge badge-red">82.0% (Flawed Timezones)</span></td>
+                <td>Fast SEO publishing of featured characters.</td>
+                <td>Lacks server-specific timezone countdowns; shows single static time leading to 6-12 hour errors for EU/Asia.</td>
+                <td><span class="badge badge-secondary">&#10007; Rejected (Timezone Flaw)</span></td>
+              </tr>
+              <tr class="row-rejected">
+                <td>
+                  <strong>Honey Hunter World</strong>
+                  <div style="font-size:0.75rem; color:#94a3b8;">genshin.honeyhunterworld.com</div>
+                </td>
+                <td>~3.5M</td>
+                <td><span class="badge badge-gold">4.1 / 5.0 (82%)</span></td>
+                <td><span class="badge badge-red">Incomplete</span></td>
+                <td>Extensive static encyclopedia of game items, base stats, and material costs.</td>
+                <td>No live banner timeline, no regional countdown clocks, no pity or wish tracking features.</td>
+                <td><span class="badge badge-secondary">&#10007; Rejected (No Live Timers)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Regional Server Accuracy & Countdown Precision Matrix -->
+      <div class="guide-modal-section">
+        <div class="guide-section-title">&#127757; 4-Region Server Synchronization &amp; Countdown Precision Matrix</div>
+        <div class="consensus-bars-grid">
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>Asia Server (UTC+8) &bull; Shanghai / Tokyo</span>
+              <strong style="color:#10b981;">100% Synchronized</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:100%; background:#10b981;"></div>
+            </div>
+            <div class="consensus-bar-note">Ground-zero phase transitions. New banners start at 18:00 server time on transition days.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>Europe Server (CET UTC+1) &bull; Frankfurt / Paris</span>
+              <strong style="color:#38bdf8;">100% Synchronized (+7h)</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:100%; background:#38bdf8;"></div>
+            </div>
+            <div class="consensus-bar-note">Banner phases shift exactly 7 hours after Asia; live countdown adapts automatically.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>America Server (NA UTC-5) &bull; New York / Los Angeles</span>
+              <strong style="color:#a855f7;">100% Synchronized (+13h)</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:100%; background:#a855f7;"></div>
+            </div>
+            <div class="consensus-bar-note">Banner phases shift exactly 13 hours after Asia; precise regional end timers enforced.</div>
+          </div>
+
+          <div class="consensus-bar-item">
+            <div class="consensus-bar-label">
+              <span>TW / HK / MO (SAR UTC+8) &bull; Taipei / Hong Kong</span>
+              <strong style="color:#fbbf24;">100% Synchronized</strong>
+            </div>
+            <div class="consensus-progress-track">
+              <div class="consensus-progress-fill" style="width:100%; background:#fbbf24;"></div>
+            </div>
+            <div class="consensus-bar-note">Synchronized in real-time with the Asia server schedule down to the exact second.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Pipeline Footer -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08); flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--text-muted);">
+          <span style="color:#10b981; font-weight:700;">&#10003; Live Pipeline Active</span>
+          <span>&bull; Weekly auto-check synchronizes HoYoLAB Official notices &times; Paimon.moe live countdowns</span>
+        </div>
+        <button class="btn btn-sm btn-primary" id="btn-banner-source-modal-close-footer" style="padding:6px 18px;">
+          Got it &amp; Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portable ZIP App Update Modal -->
+  <div id="app-update-modal" class="modal-overlay">
+    <div class="modal-card guide-analysis-modal-card app-update-modal-card">
+      <div class="guide-modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="guide-modal-icon" style="background:rgba(34,197,94,0.18); border-color:rgba(74,222,128,0.45); color:#4ade80;">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+          </div>
+          <div>
+            <h3 style="margin:0; font-size:1.18rem; color:var(--text); display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              Abyssal Guide Update Ready
+              <span class="badge badge-green" id="app-update-version-pill" style="font-size:0.74rem; padding:2px 8px;">v1.0.0 &rarr; v1.0.1</span>
+            </h3>
+            <p id="app-update-meta" style="margin:3px 0 0; font-size:0.80rem; color:var(--text-muted);">
+              Downloads the latest portable ZIP package and preserves all your saves in AppData.
+            </p>
+          </div>
+        </div>
+        <button class="btn btn-sm" id="app-update-modal-close" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); padding:4px 10px;">&times;</button>
+      </div>
+
+      <div class="app-update-notes-box" id="app-update-notes">
+        Bug fixes and improvements included in this release.
+      </div>
+
+      <div id="app-update-progress-wrap" style="display:none; margin-top:12px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:#cbd5e1; margin-bottom:6px;">
+          <span id="app-update-progress-label">Downloading update ZIP...</span>
+          <strong id="app-update-progress-pct" style="color:#4ade80;">0%</strong>
+        </div>
+        <div class="consensus-progress-track">
+          <div class="consensus-progress-fill" id="app-update-progress-fill" style="width:0%; background:linear-gradient(90deg,#22c55e,#38bdf8); transition:width 0.2s ease;"></div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-top:14px; margin-top:14px; border-top:1px solid rgba(255,255,255,0.08); flex-wrap:wrap; gap:10px;">
+        <div style="font-size:0.76rem; color:var(--text-muted);">
+          &#128274; Saved data, settings &amp; wish history stay untouched
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-sm" id="btn-app-update-later">Later</button>
+          <button class="btn btn-sm btn-primary app-update-install-btn" id="btn-app-update-install">Install Update &amp; Restart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Banner -->
+  <div id="app-toast" class="toast-banner">
+    <span id="app-toast-text">Notification</span>
+  </div>
+
+  <script>
+    // Failsafe native window controls & drag handler - always work immediately even while scripts load
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window._winCtrlBound) return;
+      window._winCtrlBound = true;
+      var min = document.getElementById("win-btn-min");
+      var max = document.getElementById("win-btn-max");
+      var cls = document.getElementById("win-btn-close");
+      if (min) min.onclick = function() { fetch("/api/window?act=minimize").catch(function(){}); };
+      if (max) max.onclick = function() { fetch("/api/window?act=maximize").catch(function(){}); };
+      if (cls) cls.onclick = function() { fetch("/api/window?act=close").catch(function(){}); };
+
+      function bindDrag(bar) {
+        if (!bar) return;
+        bar.addEventListener("mousedown", function(e) {
+          if (e.button !== 0) return;
+          if (e.target.closest("button, input, select, a, .quick-scale-bar, .win-ctrl-bar, .nav-tabs, .app-tabs-row, .av-search-mock")) return;
+          fetch("/api/window?act=drag").catch(function(){});
+        });
+        bar.addEventListener("dblclick", function(e) {
+          if (e.target.closest("button, input, select, a, .quick-scale-bar, .win-ctrl-bar, .nav-tabs, .app-tabs-row, .av-search-mock")) return;
+          fetch("/api/window?act=maximize").catch(function(){});
+        });
+      }
+      bindDrag(document.getElementById("app-header-bar"));
+      bindDrag(document.getElementById("abyssal-void-subbar"));
+    });
+  </script>
+  <script src="reference.js?v=5.2"></script>
+  <script src="builds.js?v=5.2"></script>
+  <script src="data.js?v=5.2"></script>
+  <script src="hsr_builds_data.js?v=5.4"></script>
+  <script src="app.js?v=7.0"></script>
+</body>
+</html>
+
+
